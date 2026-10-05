@@ -260,3 +260,92 @@ body {
     transform: translateX(-100%);
     opacity: 0;
 }
+
+/* =========================================
+   FIRST ARTWORK
+   ========================================= */
+
+.artwork-screen {
+    min-height: 100vh;
+
+    position: relative;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 10vh 8vw;
+
+    background: var(--background);
+}
+
+.first-artwork {
+    display: block;
+
+    width: min(78vw, 1100px);
+    max-height: 78vh;
+
+    object-fit: contain;
+
+    opacity: 0;
+
+    transform: scale(0.96);
+
+    transition:
+        opacity 1.8s ease,
+        transform 2.2s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.artwork-meta {
+    position: absolute;
+
+    left: 42px;
+    bottom: 38px;
+
+    display: flex;
+    gap: 28px;
+
+    font-size: 9px;
+    letter-spacing: 0.18em;
+
+    color: var(--muted);
+
+    opacity: 0;
+
+    transition: opacity 1.5s ease;
+}
+
+
+/* When the artwork enters */
+
+.artwork-screen.visible .first-artwork {
+    opacity: 1;
+    transform: scale(1);
+}
+
+.artwork-screen.visible .artwork-meta {
+    opacity: 0.7;
+}
+
+
+/* MOBILE */
+
+@media (max-width: 600px) {
+
+    .artwork-screen {
+        padding: 12vh 7vw;
+    }
+
+    .first-artwork {
+        width: 88vw;
+        max-height: 70vh;
+    }
+
+    .artwork-meta {
+        left: 22px;
+        bottom: 24px;
+
+        font-size: 8px;
+        gap: 18px;
+    }
+}
