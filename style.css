@@ -1,17 +1,17 @@
 /* =========================================
    ODDITY REALM
-   Main visual language
    ========================================= */
 
 :root {
     --background: #11110F;
     --text: #E8E4DA;
     --muted: #8F8B82;
-    --accent: #E8E4DA;
 }
 
 
-/* RESET */
+/* =========================================
+   RESET
+   ========================================= */
 
 * {
     margin: 0;
@@ -19,29 +19,62 @@
     box-sizing: border-box;
 }
 
-html {
-    background: var(--background);
-}
 
+html,
 body {
-    min-height: 100vh;
+    width: 100%;
+    height: 100%;
+
     background: var(--background);
     color: var(--text);
 
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
 
-    overflow-x: hidden;
+    overflow: hidden;
 }
 
 
-/* TOP BAR */
+/* =========================================
+   LANDING
+   ========================================= */
+
+.landing {
+    position: fixed;
+
+    inset: 0;
+
+    width: 100vw;
+    height: 100vh;
+
+    background: var(--background);
+
+    z-index: 10;
+
+    transition:
+        transform 1.7s cubic-bezier(0.76, 0, 0.24, 1),
+        opacity 1.2s ease;
+}
+
+
+.landing.opening {
+    transform: translateX(-100vw);
+
+    opacity: 0;
+}
+
+
+/* =========================================
+   TOP BAR
+   ========================================= */
 
 .top-bar {
-    position: fixed;
+    position: absolute;
+
     top: 0;
     left: 0;
 
     width: 100%;
+
     height: 80px;
 
     padding: 0 42px;
@@ -49,75 +82,111 @@ body {
     display: flex;
     align-items: center;
     justify-content: space-between;
-
-    z-index: 10;
 }
 
-.realm-mark,
-.enter-link {
+
+/* LEFT MARK */
+
+.realm-mark {
     font-size: 11px;
+
     letter-spacing: 0.16em;
+
     text-transform: uppercase;
+
+    opacity: 0.78;
+}
+
+
+/* ENTER */
+
+.enter-link {
+    appearance: none;
+
+    border: none;
+
+    background: none;
 
     color: var(--text);
 
-    text-decoration: none;
-}
+    font-family: inherit;
 
-.realm-mark {
-    opacity: 0.8;
-}
+    font-size: 11px;
 
-.enter-link {
-    opacity: 0.65;
+    letter-spacing: 0.16em;
+
+    cursor: pointer;
+
+    padding: 8px;
+
+    opacity: 0.62;
 
     transition:
         opacity 0.4s ease,
-        transform 0.4s ease;
+        letter-spacing 0.4s ease;
 }
+
 
 .enter-link:hover {
     opacity: 1;
-    transform: translateX(4px);
+
+    letter-spacing: 0.2em;
 }
 
 
-/* LANDING */
+.enter-link.hint {
+    opacity: 1;
 
-.landing {
-    min-height: 100vh;
-
-    position: relative;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    letter-spacing: 0.12em;
 }
 
 
-/* HERO */
+/* =========================================
+   HERO
+   ========================================= */
 
 .hero {
-    text-align: center;
+    position: absolute;
 
-    transform: translateY(-2vh);
+    top: 50%;
+    left: 50%;
+
+    transform: translate(-50%, -50%);
+
+    width: max-content;
+
+    text-align: center;
 }
 
 
-/* TITLE */
+/* =========================================
+   ODDITY SYMBOL
+   ========================================= */
+
 .oddity-symbol {
     display: block;
 
-    width: clamp(38px, 4vw, 58px);
-    height: auto;
+    width: 30px;
+    height: 42px;
 
-    margin: 0 auto 28px;
+    object-fit: contain;
 
-    opacity: 0.9;
+    margin: 0 auto 24px;
+
+    opacity: 0.88;
 }
+
+
+/* =========================================
+   TITLE
+   ========================================= */
+
 .realm-title {
     display: flex;
+
     flex-direction: column;
+
+    align-items: center;
 
     font-size: clamp(64px, 11vw, 170px);
 
@@ -130,31 +199,37 @@ body {
     user-select: none;
 }
 
+
 .realm-title span:first-child {
     transform: translateX(-0.04em);
 }
+
 
 .realm-title span:last-child {
     transform: translateX(0.035em);
 }
 
 
-/* SUBTITLE */
+/* =========================================
+   SUBTITLE
+   ========================================= */
 
 .subtitle {
-    margin-top: 38px;
+    margin-top: 34px;
 
     font-size: 10px;
 
     letter-spacing: 0.22em;
 
-    text-transform: lowercase;
-
     color: var(--muted);
+
+    text-transform: lowercase;
 }
 
 
-/* CURIOUS */
+/* =========================================
+   CURIOUS?
+   ========================================= */
 
 .curious {
     position: absolute;
@@ -164,8 +239,9 @@ body {
 
     transform: translateX(-50%);
 
-    background: none;
     border: none;
+
+    background: none;
 
     color: var(--text);
 
@@ -180,9 +256,11 @@ body {
     padding: 10px;
 
     transition:
-        opacity 0.5s ease,
-        transform 0.5s ease;
+        transform 0.5s ease,
+        letter-spacing 0.5s ease,
+        opacity 0.5s ease;
 }
+
 
 .curious::after {
     content: "";
@@ -191,6 +269,7 @@ body {
 
     left: 10px;
     right: 10px;
+
     bottom: 5px;
 
     height: 1px;
@@ -198,57 +277,30 @@ body {
     background: var(--text);
 
     transform: scaleX(0);
+
     transform-origin: center;
 
-    transition: transform 0.5s ease;
+    transition:
+        transform 0.5s ease;
 }
 
+
 .curious:hover {
-    transform: translateX(-50%) translateY(-3px);
+    transform:
+        translateX(-50%)
+        translateY(-3px);
 }
+
 
 .curious:hover::after {
     transform: scaleX(1);
 }
 
 
-/* MOBILE */
-
-@media (max-width: 600px) {
-
-    .top-bar {
-        height: 64px;
-        padding: 0 22px;
-    }
-
-    .realm-mark,
-    .enter-link {
-        font-size: 9px;
-        letter-spacing: 0.14em;
-    }
-
-    .realm-title {
-        font-size: clamp(54px, 18vw, 100px);
-    }
-
-    .subtitle {
-        margin-top: 28px;
-        font-size: 8px;
-        letter-spacing: 0.18em;
-    }
-
-    .curious {
-        bottom: 28px;
-        font-size: 9px;
-    }
-}/* =========================================
-   CURIOUS? RESPONSE
-   ========================================= */
-
 .curious.answered {
     letter-spacing: 0.28em;
-    transform: translateX(-50%) translateY(-3px);
 }
+
 
 .curious.answered::after {
     transform: scaleX(1);
@@ -256,108 +308,106 @@ body {
 
 
 /* =========================================
-   THE REALM OPENS
-   ========================================= */
-
-.landing {
-    transition:
-        transform 1.8s cubic-bezier(0.76, 0, 0.24, 1),
-        opacity 1.8s ease;
-}
-
-.landing.opening {
-    transform: translateX(-100%);
-    opacity: 0;
-}
-
-/* =========================================
-   FIRST ARTWORK
-   BOOM → LUXURY
+   ARTWORK SCREEN
    ========================================= */
 
 .artwork-screen {
-    min-height: 100vh;
+    position: fixed;
 
-    position: relative;
+    inset: 0;
+
+    width: 100vw;
+    height: 100vh;
 
     display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    background: var(--background);
+
+    overflow: hidden;
+
+    z-index: 1;
+
+    opacity: 0;
+
+    visibility: hidden;
+
+    transition:
+        opacity 0.8s ease,
+        visibility 0s linear 1s;
+}
+
+
+.artwork-screen.revealed {
+    opacity: 1;
+
+    visibility: visible;
+
+    transition:
+        opacity 0.8s ease;
+}
+
+
+/* =========================================
+   ARTWORK FRAME
+   ========================================= */
+
+.artwork-frame {
+    width: 100vw;
+    height: 100vh;
+
+    display: flex;
+
     align-items: center;
     justify-content: center;
 
     overflow: hidden;
-
-    background: var(--background);
-
-    opacity: 0;
-
-    transition: opacity 0.8s ease;
-}
-
-.artwork-screen.revealed {
-    opacity: 1;
 }
 
 
-/* IMAGE */
+/* =========================================
+   FIRST ARTWORK
+   ========================================= */
 
 .first-artwork {
     display: block;
 
     width: 100%;
-    height: 100vh;
+    height: 100%;
 
     object-fit: contain;
 
     opacity: 0;
 
-    transform: scale(1.18);
+    transform: scale(1.75);
+
+    will-change: transform, opacity;
 
     transition:
-        opacity 0.9s ease,
-        transform 2.8s cubic-bezier(0.16, 1, 0.3, 1);
+        opacity 0.45s ease,
+        transform 2.7s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 
-/* THE IMAGE ARRIVES BIG */
+/* =========================================
+   BOOM
+   ========================================= */
 
-.artwork-screen.visible .first-artwork {
+.artwork-screen.boom .first-artwork {
     opacity: 1;
 
-    transform: scale(1);
+    transform: scale(1.75);
 }
 
 
-/* THEN IT SETTLES INTO THE GALLERY */
+/* =========================================
+   SETTLED GALLERY STATE
+   ========================================= */
 
 .artwork-screen.settled .first-artwork {
     transform: scale(0.72);
-}
-
-
-/* INFORMATION APPEARS LAST */
-
-.artwork-meta {
-    position: absolute;
-
-    left: 42px;
-    bottom: 38px;
-
-    display: flex;
-    gap: 28px;
-
-    font-size: 9px;
-    letter-spacing: 0.18em;
-
-    color: var(--muted);
-
-    opacity: 0;
-
-    transition:
-        opacity 1.4s ease;
-}
-
-.artwork-screen.settled .artwork-meta {
-    opacity: 0.7;
 }
 
 
@@ -367,42 +417,61 @@ body {
 
 @media (max-width: 600px) {
 
-    .first-artwork {
-        width: 100%;
-        height: 100vh;
+    .top-bar {
+        height: 64px;
 
-        transform: scale(1.12);
+        padding: 0 22px;
     }
 
-    .artwork-screen {
-    position: relative;
 
-    width: 100%;
-    min-height: 100vh;
+    .realm-mark,
+    .enter-link {
+        font-size: 9px;
 
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    overflow: hidden;
-
-    background: var(--background);
-
-    opacity: 0;
-
-    transition: opacity 0.8s ease;
-}
-
-.artwork-screen.revealed {
-    opacity: 1;
-}
+        letter-spacing: 0.14em;
     }
 
-    .artwork-meta {
-        left: 22px;
-        bottom: 24px;
+
+    .oddity-symbol {
+        width: 23px;
+        height: 34px;
+
+        margin-bottom: 20px;
+    }
+
+
+    .realm-title {
+        font-size: clamp(54px, 18vw, 100px);
+    }
+
+
+    .subtitle {
+        margin-top: 27px;
 
         font-size: 8px;
-        gap: 18px;
+
+        letter-spacing: 0.18em;
+    }
+
+
+    .curious {
+        bottom: 28px;
+
+        font-size: 9px;
+    }
+
+
+    .first-artwork {
+        transform: scale(1.9);
+    }
+
+
+    .artwork-screen.boom .first-artwork {
+        transform: scale(1.9);
+    }
+
+
+    .artwork-screen.settled .first-artwork {
+        transform: scale(0.82);
     }
 }
