@@ -365,8 +365,28 @@ body {
         transform: scale(1.12);
     }
 
-    .artwork-screen.settled .first-artwork {
-        transform: scale(0.82);
+    .artwork-screen {
+    position: relative;
+
+    width: 100%;
+    min-height: 100vh;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    overflow: hidden;
+
+    background: var(--background);
+
+    opacity: 0;
+
+    transition: opacity 0.8s ease;
+}
+
+.artwork-screen.revealed {
+    opacity: 1;
+}
     }
 
     .artwork-meta {
