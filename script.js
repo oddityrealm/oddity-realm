@@ -1,27 +1,80 @@
+/* =========================================
+   ODDITY REALM
+   Main interaction
+   ========================================= */
+
 const curiousButton = document.getElementById("curiousButton");
-const landing = document.querySelector(".landing");
-const artworkScreen = document.querySelector(".artwork-screen");
+const enterHint = document.getElementById("enterHint");
+
+const landing = document.getElementById("landing");
+const artworkScreen = document.getElementById("artworkScreen");
+
+
+/* =========================================
+   ENTER
+   A LITTLE WARNING
+   ========================================= */
+
+enterHint.addEventListener("click", () => {
+
+    enterHint.textContent = "YOU SHOULD BE MORE CURIOUS.";
+
+    enterHint.classList.add("hint");
+
+});
+
+
+/* =========================================
+   CURIOUS?
+   ========================================= */
 
 curiousButton.addEventListener("click", () => {
 
+    if (curiousButton.classList.contains("answered")) {
+        return;
+    }
+
+
+    /* First response */
+
     curiousButton.textContent = "GOOD.";
+
     curiousButton.classList.add("answered");
 
+
+    /* Let the word sit there for a moment */
+
     setTimeout(() => {
+
         landing.classList.add("opening");
-    }, 1000);
+
+    }, 950);
+
+
+    /* Reveal the artwork screen */
 
     setTimeout(() => {
+
         artworkScreen.classList.add("revealed");
-        artworkScreen.classList.add("visible");
-    }, 1800);
+
+    }, 1050);
+
+
+    /* BOOM */
 
     setTimeout(() => {
+
+        artworkScreen.classList.add("boom");
+
+    }, 1500);
+
+
+    /* Then slowly settle */
+
+    setTimeout(() => {
+
         artworkScreen.classList.add("settled");
-    }, 4000);
 
-    setTimeout(() => {
-        curiousButton.style.opacity = "0";
-    }, 1300);
+    }, 3100);
 
 });
