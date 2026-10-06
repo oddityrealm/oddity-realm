@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,32 +10,43 @@
     <link rel="stylesheet" href="style.css">
 </head>
 
+
 <body>
 
-    <header class="top-bar">
-        <div class="realm-mark">ODDITY REALM</div>
+    <!-- =========================================
+         LANDING
+         ========================================= -->
 
-        <a href="#" class="enter-link">ENTER ↗</a>
-    </header>
+    <main class="landing" id="landing">
 
+        <header class="top-bar">
 
-    <main class="landing">
+            <div class="realm-mark">
+                ODDITY REALM
+            </div>
+
+            <button class="enter-link" id="enterHint">
+                ENTER ↗
+            </button>
+
+        </header>
+
 
         <section class="hero">
 
-<div class="realm-title">
+            <img
+                src="images/oddity-symbol.png"
+                alt="Oddity symbol"
+                class="oddity-symbol"
+            >
 
-    <img
-        src="images/oddity-symbol.png"
-        alt="Oddity symbol"
-        class="oddity-symbol"
-    >
+            <div class="realm-title">
 
-    <span>ODDITY</span>
-    <span>REALM</span>
+                <span>ODDITY</span>
+                <span>REALM</span>
 
-</div>
-            
+            </div>
+
 
             <p class="subtitle">
                 a collection of strange things
@@ -49,22 +61,29 @@
 
     </main>
 
-        <section class="artwork-screen">
 
-        <div class="artwork-meta">
-            <span>01 / 17</span>
-            <span>PAINTING</span>
+    <!-- =========================================
+         FIRST ARTWORK
+         ========================================= -->
+
+    <section class="artwork-screen" id="artworkScreen">
+
+        <div class="artwork-frame">
+
+            <img
+                src="images/first-painting.jpg"
+                alt="Artwork"
+                class="first-artwork"
+                id="firstArtwork"
+            >
+
         </div>
 
-        <img
-            src="images/first-painting.jpg"
-            alt="First artwork"
-            class="first-artwork"
-        >
+    </section>
 
-        </section>
 
     <script src="script.js"></script>
 
 </body>
+
 </html>
