@@ -263,6 +263,7 @@ body {
 
 /* =========================================
    FIRST ARTWORK
+   BOOM → LUXURY
    ========================================= */
 
 .artwork-screen {
@@ -274,27 +275,57 @@ body {
     align-items: center;
     justify-content: center;
 
-    padding: 10vh 8vw;
+    overflow: hidden;
 
     background: var(--background);
+
+    opacity: 0;
+
+    transition: opacity 0.8s ease;
 }
+
+.artwork-screen.revealed {
+    opacity: 1;
+}
+
+
+/* IMAGE */
 
 .first-artwork {
     display: block;
 
-    width: min(78vw, 1100px);
-    max-height: 78vh;
+    width: 100%;
+    height: 100vh;
 
     object-fit: contain;
 
     opacity: 0;
 
-    transform: scale(0.96);
+    transform: scale(1.18);
 
     transition:
-        opacity 1.8s ease,
-        transform 2.2s cubic-bezier(0.22, 1, 0.36, 1);
+        opacity 0.9s ease,
+        transform 2.8s cubic-bezier(0.16, 1, 0.3, 1);
 }
+
+
+/* THE IMAGE ARRIVES BIG */
+
+.artwork-screen.visible .first-artwork {
+    opacity: 1;
+
+    transform: scale(1);
+}
+
+
+/* THEN IT SETTLES INTO THE GALLERY */
+
+.artwork-screen.settled .first-artwork {
+    transform: scale(0.72);
+}
+
+
+/* INFORMATION APPEARS LAST */
 
 .artwork-meta {
     position: absolute;
@@ -312,33 +343,30 @@ body {
 
     opacity: 0;
 
-    transition: opacity 1.5s ease;
+    transition:
+        opacity 1.4s ease;
 }
 
-
-/* When the artwork enters */
-
-.artwork-screen.visible .first-artwork {
-    opacity: 1;
-    transform: scale(1);
-}
-
-.artwork-screen.visible .artwork-meta {
+.artwork-screen.settled .artwork-meta {
     opacity: 0.7;
 }
 
 
-/* MOBILE */
+/* =========================================
+   MOBILE
+   ========================================= */
 
 @media (max-width: 600px) {
 
-    .artwork-screen {
-        padding: 12vh 7vw;
+    .first-artwork {
+        width: 100%;
+        height: 100vh;
+
+        transform: scale(1.12);
     }
 
-    .first-artwork {
-        width: 88vw;
-        max-height: 70vh;
+    .artwork-screen.settled .first-artwork {
+        transform: scale(0.82);
     }
 
     .artwork-meta {
