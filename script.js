@@ -7,6 +7,7 @@ const curiousButton = document.getElementById("curiousButton");
 const enterHint = document.getElementById("enterHint");
 
 const realmMark = document.getElementById("realmMark");
+const realmMarkWrap = document.querySelector(".realm-mark-wrap");
 const realmReaction = document.getElementById("realmReaction");
 
 const landing = document.getElementById("landing");
@@ -29,14 +30,10 @@ enterHint.addEventListener("click", () => {
     enterHint.classList.add("waiting");
 
 
-    /* Let the visitor wonder what they just did */
-
     setTimeout(() => {
 
         enterHint.classList.add("hidden-text");
 
-
-        /* Fade the new message in */
 
         setTimeout(() => {
 
@@ -62,18 +59,19 @@ enterHint.addEventListener("click", () => {
 
 realmMark.addEventListener("click", () => {
 
-    realmReaction.classList.remove("show");
-
-    void realmReaction.offsetWidth;
-
     realmReaction.classList.add("show");
 
+});
 
-    setTimeout(() => {
 
-        realmReaction.classList.remove("show");
+/* =========================================
+   LEAVING THE ODDITY REALM MARK
+   MAKES THE MESSAGE DISAPPEAR
+   ========================================= */
 
-    }, 2200);
+realmMarkWrap.addEventListener("mouseleave", () => {
+
+    realmReaction.classList.remove("show");
 
 });
 
