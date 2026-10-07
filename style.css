@@ -535,8 +535,8 @@ body {
 
     font-weight: 400;
 
-    color: var(--accent);
-
+color: #C9B47A;
+   
     white-space: nowrap;
 }
 
@@ -617,14 +617,22 @@ body {
    LOOK AGAIN ARRIVES AFTER A MOMENT
    ========================================= */
 
-.artwork-screen.settled .first-artwork:hover + .artwork-info .look-again {
-    opacity: 0.95;
-
-    transform: translateY(0);
-
-    transition-delay: 0.9s;
+.look-again {
+    margin-top: 15px;
+    font-size: 18px;
+    letter-spacing: 0.24em;
+    color: #E3D4B2;
+    opacity: 0;
+    transform: translateY(7px);
+    transition:
+        opacity 0.7s ease,
+        transform 0.7s ease;
 }
 
+.look-again.show {
+    opacity: 0.95;
+    transform: translateY(0);
+}
 
 /* =========================================
    MOBILE
