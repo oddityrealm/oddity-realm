@@ -6,6 +6,9 @@
 const curiousButton = document.getElementById("curiousButton");
 const enterHint = document.getElementById("enterHint");
 
+const realmMark = document.getElementById("realmMark");
+const realmReaction = document.getElementById("realmReaction");
+
 const landing = document.getElementById("landing");
 const artworkScreen = document.getElementById("artworkScreen");
 
@@ -17,9 +20,60 @@ const artworkScreen = document.getElementById("artworkScreen");
 
 enterHint.addEventListener("click", () => {
 
-    enterHint.textContent = "YOU SHOULD BE MORE CURIOUS.";
+    if (enterHint.dataset.reacted === "true") {
+        return;
+    }
 
-    enterHint.classList.add("hint");
+    enterHint.dataset.reacted = "true";
+
+    enterHint.classList.add("waiting");
+
+
+    /* Let the visitor wonder what they just did */
+
+    setTimeout(() => {
+
+        enterHint.classList.add("hidden-text");
+
+
+        /* Fade the new message in */
+
+        setTimeout(() => {
+
+            enterHint.textContent =
+                "YOU SHOULD BE MORE CURIOUS.";
+
+            enterHint.classList.remove("waiting");
+            enterHint.classList.remove("hidden-text");
+
+            enterHint.classList.add("hint");
+
+        }, 350);
+
+    }, 1800);
+
+});
+
+
+/* =========================================
+   ODDITY REALM
+   I FELT THAT.
+   ========================================= */
+
+realmMark.addEventListener("click", () => {
+
+    realmReaction.classList.remove("show");
+
+    void realmReaction.offsetWidth;
+
+    realmReaction.classList.add("show");
+
+
+    setTimeout(() => {
+
+        realmReaction.classList.remove("show");
+
+    }, 2200);
 
 });
 
