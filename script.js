@@ -130,3 +130,43 @@ curiousButton.addEventListener("click", () => {
     }, 3100);
 
 });
+/* =========================================
+   LOOK AGAIN.
+   Appears after 3 seconds of hovering
+   and disappears after 1.5 seconds
+   ========================================= */
+
+const firstArtwork = document.getElementById("firstArtwork");
+const lookAgain = document.querySelector(".look-again");
+
+let lookTimer;
+let hideLookTimer;
+
+firstArtwork.addEventListener("mouseenter", () => {
+
+    clearTimeout(lookTimer);
+    clearTimeout(hideLookTimer);
+
+    lookTimer = setTimeout(() => {
+
+        lookAgain.classList.add("show");
+
+        hideLookTimer = setTimeout(() => {
+
+            lookAgain.classList.remove("show");
+
+        }, 1500);
+
+    }, 3000);
+
+});
+
+
+firstArtwork.addEventListener("mouseleave", () => {
+
+    clearTimeout(lookTimer);
+    clearTimeout(hideLookTimer);
+
+    lookAgain.classList.remove("show");
+
+});
