@@ -75,7 +75,6 @@ body {
     left: 0;
 
     width: 100%;
-
     height: 80px;
 
     padding: 0 42px;
@@ -99,7 +98,6 @@ body {
     appearance: none;
 
     border: none;
-
     background: none;
 
     color: var(--text);
@@ -131,19 +129,27 @@ body {
 }
 
 
+/* =========================================
+   I FELT THAT.
+   ========================================= */
+
 .realm-reaction {
     position: absolute;
 
-    top: calc(100% + 5px);
+    top: calc(100% + 6px);
     left: 0;
 
     white-space: nowrap;
 
-    font-size: 8px;
+    font-family: Georgia, "Times New Roman", serif;
 
-    letter-spacing: 0.13em;
+    font-size: 10px;
 
-    color: var(--muted);
+    font-style: italic;
+
+    letter-spacing: 0.04em;
+
+    color: var(--accent);
 
     opacity: 0;
 
@@ -152,13 +158,13 @@ body {
     pointer-events: none;
 
     transition:
-        opacity 0.4s ease,
-        transform 0.4s ease;
+        opacity 0.45s ease,
+        transform 0.45s ease;
 }
 
 
 .realm-reaction.show {
-    opacity: 0.8;
+    opacity: 0.9;
 
     transform: translateY(0);
 }
@@ -172,7 +178,6 @@ body {
     appearance: none;
 
     border: none;
-
     background: none;
 
     color: var(--text);
@@ -244,8 +249,8 @@ body {
 .oddity-symbol {
     display: block;
 
-    width: 58px;
-    height: 72px;
+    width: 92px;
+    height: 120px;
 
     object-fit: contain;
 
@@ -318,7 +323,6 @@ body {
     transform: translateX(-50%);
 
     border: none;
-
     background: none;
 
     color: var(--text);
@@ -433,6 +437,8 @@ body {
    ========================================= */
 
 .artwork-frame {
+    position: relative;
+
     width: 100vw;
     height: 100vh;
 
@@ -442,8 +448,6 @@ body {
     justify-content: center;
 
     overflow: hidden;
-
-    position: relative;
 }
 
 
@@ -454,8 +458,8 @@ body {
 .first-artwork {
     display: block;
 
-    width: 100%;
-    height: 100%;
+    width: 100vmin;
+    height: 100vmin;
 
     object-fit: contain;
 
@@ -465,11 +469,11 @@ body {
 
     will-change: transform, opacity;
 
+    cursor: crosshair;
+
     transition:
         opacity 0.45s ease,
         transform 2.7s cubic-bezier(0.16, 1, 0.3, 1);
-
-    cursor: crosshair;
 }
 
 
@@ -501,7 +505,8 @@ body {
     position: absolute;
 
     left: 50%;
-    bottom: 7%;
+
+    top: calc(50% + 37vmin);
 
     transform:
         translateX(-50%)
@@ -514,27 +519,35 @@ body {
     opacity: 0;
 
     transition:
-        opacity 0.5s ease,
-        transform 0.5s ease;
+        opacity 0.7s ease,
+        transform 0.7s ease;
 }
 
 
-/* Title */
+/* =========================================
+   TITLE
+   ========================================= */
 
 .artwork-title {
-    font-size: 12px;
+    font-size: 13px;
 
-    letter-spacing: 0.18em;
+    letter-spacing: 0.2em;
 
     font-weight: 400;
 
-    margin-bottom: 8px;
+    color: var(--accent);
+
+    white-space: nowrap;
 }
 
 
-/* Material + size */
+/* =========================================
+   MATERIAL + SIZE
+   ========================================= */
 
 .artwork-details {
+    margin-top: 8px;
+
     font-size: 9px;
 
     letter-spacing: 0.15em;
@@ -542,23 +555,10 @@ body {
     color: var(--muted);
 
     text-transform: lowercase;
-}
-
-
-/* LOOK AGAIN */
-
-.look-again {
-    margin-top: 16px;
-
-    font-size: 14px;
-
-    letter-spacing: 0.2em;
-
-    color: var(--accent);
 
     opacity: 0;
 
-    transform: translateY(5px);
+    transform: translateY(4px);
 
     transition:
         opacity 0.5s ease,
@@ -567,10 +567,33 @@ body {
 
 
 /* =========================================
-   HOVER
+   LOOK AGAIN
    ========================================= */
 
-.artwork-screen.settled:hover .artwork-info {
+.look-again {
+    margin-top: 15px;
+
+    font-size: 15px;
+
+    letter-spacing: 0.22em;
+
+    color: var(--accent);
+
+    opacity: 0;
+
+    transform: translateY(7px);
+
+    transition:
+        opacity 0.6s ease,
+        transform 0.6s ease;
+}
+
+
+/* =========================================
+   TITLE APPEARS AFTER THE BOOM
+   ========================================= */
+
+.artwork-screen.settled .artwork-info {
     opacity: 1;
 
     transform:
@@ -579,9 +602,22 @@ body {
 }
 
 
-/* LOOK AGAIN arrives later */
+/* =========================================
+   HOVER THE ACTUAL PAINTING
+   ========================================= */
 
-.artwork-screen.settled:hover .look-again {
+.artwork-screen.settled .first-artwork:hover + .artwork-info .artwork-details {
+    opacity: 1;
+
+    transform: translateY(0);
+}
+
+
+/* =========================================
+   LOOK AGAIN ARRIVES AFTER A MOMENT
+   ========================================= */
+
+.artwork-screen.settled .first-artwork:hover + .artwork-info .look-again {
     opacity: 0.95;
 
     transform: translateY(0);
@@ -612,13 +648,13 @@ body {
 
 
     .realm-reaction {
-        font-size: 7px;
+        font-size: 9px;
     }
 
 
     .oddity-symbol {
-        width: 46px;
-        height: 56px;
+        width: 65px;
+        height: 82px;
 
         margin-bottom: 20px;
     }
@@ -661,12 +697,12 @@ body {
 
 
     .artwork-info {
-        bottom: 5%;
+        top: calc(50% + 43vmin);
     }
 
 
     .artwork-title {
-        font-size: 10px;
+        font-size: 11px;
     }
 
 
@@ -676,6 +712,6 @@ body {
 
 
     .look-again {
-        font-size: 12px;
+        font-size: 13px;
     }
 }
