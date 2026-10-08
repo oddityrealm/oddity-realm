@@ -2,59 +2,295 @@
 <html lang="en">
 
 <head>
+
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Oddity Realm</title>
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
 
-    <link rel="stylesheet" href="style.css">
+    <title>
+        Oddity Realm | Surreal Paintings & Digital Art
+    </title>
+
+    <meta
+        name="description"
+        content="Oddity Realm is a surreal art world by Oddity, gathering strange paintings, digital works, mysterious places and curious things."
+    >
+
+    <meta
+        name="author"
+        content="Oddity"
+    >
+
+    <meta
+        name="robots"
+        content="index, follow"
+    >
+
+    <meta
+        name="theme-color"
+        content="#11110F"
+    >
+
+    <link
+        rel="canonical"
+        href="https://oddityrealm.art/"
+    >
+
+
+    <!-- =========================================
+         OPEN GRAPH
+         ========================================= -->
+
+    <meta
+        property="og:type"
+        content="website"
+    >
+
+    <meta
+        property="og:title"
+        content="Oddity Realm | Surreal Paintings & Digital Art"
+    >
+
+    <meta
+        property="og:description"
+        content="A collection of strange things."
+    >
+
+    <meta
+        property="og:url"
+        content="https://oddityrealm.art/"
+    >
+
+    <meta
+        property="og:site_name"
+        content="Oddity Realm"
+    >
+
+    <meta
+        property="og:image"
+        content="https://oddityrealm.art/images/the-way-in.jpg"
+    >
+
+    <meta
+        property="og:image:alt"
+        content="The Way In, original surreal acrylic painting by Oddity"
+    >
+
+
+    <!-- =========================================
+         TWITTER / X
+         ========================================= -->
+
+    <meta
+        name="twitter:card"
+        content="summary_large_image"
+    >
+
+    <meta
+        name="twitter:title"
+        content="Oddity Realm | Surreal Paintings & Digital Art"
+    >
+
+    <meta
+        name="twitter:description"
+        content="A collection of strange things."
+    >
+
+    <meta
+        name="twitter:image"
+        content="https://oddityrealm.art/images/the-way-in.jpg"
+    >
+
+
+    <!-- =========================================
+         FAVICON
+         ========================================= -->
+
+    <link
+        rel="icon"
+        href="images/oddity-symbol.png"
+        type="image/png"
+    >
+
+
+    <!-- =========================================
+         STRUCTURED DATA
+         Hidden semantic layer for search engines
+         ========================================= -->
+
+    <script type="application/ld+json">
+
+    {
+        "@context": "https://schema.org",
+
+        "@graph": [
+
+            {
+                "@type": "WebSite",
+
+                "@id": "https://oddityrealm.art/#website",
+
+                "url": "https://oddityrealm.art/",
+
+                "name": "Oddity Realm",
+
+                "description": "A surreal art world by Oddity, gathering strange paintings, digital works, mysterious places and curious things.",
+
+                "creator": {
+                    "@id": "https://oddityrealm.art/#oddity"
+                }
+            },
+
+
+            {
+                "@type": "Person",
+
+                "@id": "https://oddityrealm.art/#oddity",
+
+                "name": "Oddity",
+
+                "description": "Independent self-taught artist creating surreal paintings and digital works."
+            },
+
+
+            {
+                "@type": "VisualArtwork",
+
+                "@id": "https://oddityrealm.art/#the-way-in",
+
+                "name": "The Way In",
+
+                "alternateName": "THE WAY IN",
+
+                "creator": {
+                    "@id": "https://oddityrealm.art/#oddity"
+                },
+
+                "artform": "Painting",
+
+                "artMedium": "Acrylic on canvas",
+
+                "image": "https://oddityrealm.art/images/the-way-in.jpg",
+
+                "description": "The Way In is an original surreal acrylic painting by Oddity. A vivid yellow, orange, pink and blue landscape surrounds a dark central geometric form resembling a threshold or portal, with an eye-like blue symbol above a winding turquoise path.",
+
+                "width": {
+                    "@type": "QuantitativeValue",
+                    "value": 50,
+                    "unitText": "cm"
+                },
+
+                "height": {
+                    "@type": "QuantitativeValue",
+                    "value": 50,
+                    "unitText": "cm"
+                }
+            },
+
+
+            {
+                "@type": "VisualArtwork",
+
+                "@id": "https://oddityrealm.art/#the-garden-between",
+
+                "name": "The Garden Between",
+
+                "alternateName": "THE GARDEN BETWEEN",
+
+                "creator": {
+                    "@id": "https://oddityrealm.art/#oddity"
+                },
+
+                "artform": "Painting",
+
+                "image": "https://oddityrealm.art/images/the-garden-between.jpg",
+
+                "description": "The Garden Between is a surreal painting by Oddity depicting a mysterious garden with a giant eye, a tree, a moon, red and white mushrooms, a keyhole and stone steps leading into it. The painting functions as a portal into another place within Oddity Realm."
+            }
+
+        ]
+    }
+
+    </script>
+
+
+    <link
+        rel="stylesheet"
+        href="style.css"
+    >
+
 </head>
 
 
 <body>
 
+
     <!-- =========================================
          LANDING
          ========================================= -->
 
-    <main class="landing" id="landing">
+    <main
+        class="landing"
+        id="landing"
+    >
 
         <header class="top-bar">
 
+
             <div class="realm-mark-wrap">
 
-                <button class="realm-mark" id="realmMark">
+                <button
+                    class="realm-mark"
+                    id="realmMark"
+                >
                     ODDITY REALM
                 </button>
 
-                <span class="realm-reaction" id="realmReaction">
+
+                <span
+                    class="realm-reaction"
+                    id="realmReaction"
+                >
                     I felt that.
                 </span>
 
             </div>
 
 
-            <button class="enter-link" id="enterHint">
+            <button
+                class="enter-link"
+                id="enterHint"
+            >
                 ENTER ↗
             </button>
 
         </header>
 
 
-        <section class="hero">
+        <section
+            class="hero"
+            aria-labelledby="realm-title"
+        >
 
             <img
                 src="images/oddity-symbol.png"
-                alt="Oddity symbol"
+                alt="Oddity Realm symbol"
                 class="oddity-symbol"
             >
 
-            <div class="realm-title">
+
+            <h1
+                class="realm-title"
+                id="realm-title"
+            >
 
                 <span>ODDITY</span>
                 <span>REALM</span>
 
-            </div>
+            </h1>
 
 
             <p class="subtitle">
@@ -64,38 +300,55 @@
         </section>
 
 
-        <button class="curious" id="curiousButton">
+        <button
+            class="curious"
+            id="curiousButton"
+        >
             CURIOUS?
         </button>
 
     </main>
 
 
+
     <!-- =========================================
-         FIRST ARTWORK
+         THE WAY IN
          ========================================= -->
 
-    <section class="artwork-screen" id="artworkScreen">
+    <section
+        class="artwork-screen"
+        id="artworkScreen"
+        aria-label="The Way In"
+    >
 
         <div class="artwork-frame">
 
+
             <img
-                src="images/first-painting.jpg"
-                alt="The Way In"
+                src="images/the-way-in.jpg"
+
+                alt="The Way In, original surreal acrylic painting by Oddity, 50 by 50 centimetres"
+
                 class="first-artwork"
+
                 id="firstArtwork"
             >
 
 
-            <div class="artwork-info" id="artworkInfo">
+            <div
+                class="artwork-info"
+                id="artworkInfo"
+            >
 
                 <div class="artwork-title">
                     THE WAY IN
                 </div>
 
+
                 <div class="artwork-details">
                     acrylic on canvas · 50 × 50 cm
                 </div>
+
 
                 <div class="look-again">
                     LOOK AGAIN.
@@ -103,9 +356,170 @@
 
             </div>
 
+
+            <!-- CONTACT -->
+
+            <button
+                class="contact-link"
+                id="contactLink"
+            >
+                CONTACT
+            </button>
+
+
+            <!-- GARDEN PORTAL -->
+
+            <button
+                class="garden-portal"
+                id="gardenPortal"
+                aria-label="Enter The Garden Between"
+            >
+                →
+            </button>
+
+
         </div>
 
     </section>
+
+
+
+    <!-- =========================================
+         THE GARDEN BETWEEN
+         ========================================= -->
+
+    <section
+        class="garden-screen"
+        id="gardenScreen"
+        aria-label="The Garden Between"
+    >
+
+        <div class="garden-frame">
+
+
+            <img
+                src="images/the-garden-between.jpg"
+
+                alt="The Garden Between, surreal painting by Oddity showing a giant eye, tree, moon, mushrooms, keyhole and stone steps"
+
+                class="garden-artwork"
+
+                id="gardenArtwork"
+            >
+
+
+            <div
+                class="garden-title"
+                id="gardenTitle"
+            >
+                THE GARDEN BETWEEN
+            </div>
+
+
+            <div
+                class="garden-message"
+                id="gardenMessage"
+            >
+                YOU HAVE THE KEY...
+            </div>
+
+
+            <!--
+                Invisible clickable area positioned
+                directly over the keyhole.
+            -->
+
+            <button
+                class="garden-keyhole"
+                id="gardenKeyhole"
+                aria-label="Enter through the keyhole"
+            >
+                <span></span>
+            </button>
+
+
+            <button
+                class="garden-back"
+                id="gardenBack"
+                aria-label="Return to The Way In"
+            >
+                ←
+            </button>
+
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =========================================
+         CONTACT ROOM
+         ========================================= -->
+
+    <section
+        class="contact-screen"
+        id="contactScreen"
+        aria-label="Contact Oddity"
+    >
+
+
+        <button
+            class="contact-back"
+            id="contactBack"
+            aria-label="Return to The Way In"
+        >
+            ←
+        </button>
+
+
+        <div class="contact-content">
+
+            <div class="contact-label">
+                ODDITY REALM
+            </div>
+
+
+            <h2>
+                COME CLOSER.
+            </h2>
+
+
+            <button
+                class="contact-email"
+                id="contactEmail"
+            >
+                YOUR EMAIL WILL GO HERE
+            </button>
+
+
+            <button
+                class="dont-push"
+                id="dontPush"
+            >
+                DON'T PUSH
+            </button>
+
+
+            <div
+                class="push-message"
+                id="pushMessage"
+            >
+                I KNEW YOU'D PUSH.
+            </div>
+
+
+            <div
+                class="push-message-second"
+                id="pushMessageSecond"
+            >
+                you always do.
+            </div>
+
+        </div>
+
+    </section>
+
 
 
     <script src="script.js"></script>
