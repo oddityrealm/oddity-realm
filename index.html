@@ -10,29 +10,35 @@
         content="width=device-width, initial-scale=1.0"
     >
 
+
     <title>
         Oddity Realm | Surreal Paintings & Digital Art
     </title>
+
 
     <meta
         name="description"
         content="Oddity Realm is a surreal art world by Oddity, gathering strange paintings, digital works, mysterious places and curious things."
     >
 
+
     <meta
         name="author"
         content="Oddity"
     >
+
 
     <meta
         name="robots"
         content="index, follow"
     >
 
+
     <meta
         name="theme-color"
         content="#11110F"
     >
+
 
     <link
         rel="canonical"
@@ -76,7 +82,7 @@
 
     <meta
         property="og:image:alt"
-        content="The Way In, original surreal acrylic painting by Oddity"
+        content="The Way In, an original surreal acrylic painting by Oddity"
     >
 
 
@@ -118,7 +124,6 @@
 
     <!-- =========================================
          STRUCTURED DATA
-         Hidden semantic layer for search engines
          ========================================= -->
 
     <script type="application/ld+json">
@@ -208,10 +213,53 @@
 
                 "image": "https://oddityrealm.art/images/the-garden-between.jpg",
 
-                "description": "The Garden Between is a surreal painting by Oddity depicting a mysterious garden with a giant eye, a tree, a moon, red and white mushrooms, a keyhole and stone steps leading into it. The painting functions as a portal into another place within Oddity Realm."
+                "description": "The Garden Between is a surreal painting by Oddity depicting a mysterious garden with a giant eye, a tree, a moon, mushrooms, a keyhole and stone steps. The painting functions as a portal into another place within Oddity Realm."
+            },
+
+
+            {
+                "@type": "VisualArtwork",
+
+                "@id": "https://oddityrealm.art/#the-first-thing-that-grew-here",
+
+                "name": "The First Thing That Grew Here",
+
+                "alternateName": "THE FIRST THING THAT GREW HERE",
+
+                "creator": {
+                    "@id": "https://oddityrealm.art/#oddity"
+                },
+
+                "artform": "Painting",
+
+                "image": "https://oddityrealm.art/images/the-first-thing-that-grew-here.jpg",
+
+                "description": "The First Thing That Grew Here is a surreal painting by Oddity featuring mushrooms emerging within a circular frame, presented as the first living thing to appear within Oddity Realm."
+            },
+
+
+            {
+                "@type": "VisualArtwork",
+
+                "@id": "https://oddityrealm.art/#handle-with-care",
+
+                "name": "Handle With Care",
+
+                "alternateName": "HANDLE WITH CARE",
+
+                "creator": {
+                    "@id": "https://oddityrealm.art/#oddity"
+                },
+
+                "artform": "Painting",
+
+                "image": "https://oddityrealm.art/images/handle-with-care.jpg",
+
+                "description": "Handle With Care is a surreal painting by Oddity depicting a blue hand holding an eyeball against a spiralling background."
             }
 
         ]
+
     }
 
     </script>
@@ -326,11 +374,8 @@
 
             <img
                 src="images/the-way-in.jpg"
-
                 alt="The Way In, original surreal acrylic painting by Oddity, 50 by 50 centimetres"
-
                 class="first-artwork"
-
                 id="firstArtwork"
             >
 
@@ -364,23 +409,36 @@
                 id="gardenPortal"
                 aria-label="Enter The Garden Between"
             >
-                →
+                ↓
             </button>
-
 
         </div>
 
     </section>
 
 
-            <!-- CONTACT -->
 
-            <button
-                class="contact-link"
-                id="contactLink"
-            >
-                CONTACT
-            </button>
+    <!-- =========================================
+         CONTACT LINK
+         ========================================= -->
+
+    <button
+        class="contact-link"
+        id="contactLink"
+    >
+        CONTACT
+    </button>
+
+
+    <div
+        class="contact-whisper"
+        id="contactWhisper"
+        aria-live="polite"
+    >
+        I can't stop thinking about you either.
+    </div>
+
+
 
     <!-- =========================================
          THE GARDEN BETWEEN
@@ -397,11 +455,8 @@
 
             <img
                 src="images/the-garden-between.jpg"
-
                 alt="The Garden Between, surreal painting by Oddity showing a giant eye, tree, moon, mushrooms, keyhole and stone steps"
-
                 class="garden-artwork"
-
                 id="gardenArtwork"
             >
 
@@ -422,11 +477,6 @@
             </div>
 
 
-            <!--
-                Invisible clickable area positioned
-                directly over the keyhole.
-            -->
-
             <button
                 class="garden-keyhole"
                 id="gardenKeyhole"
@@ -444,6 +494,90 @@
                 ←
             </button>
 
+        </div>
+
+    </section>
+
+
+
+    <!-- =========================================
+         THE FIRST THING THAT GREW HERE
+         ========================================= -->
+
+    <section
+        class="growth-screen"
+        id="growthScreen"
+        aria-labelledby="growthTitle"
+    >
+
+        <div class="growth-frame">
+
+
+            <img
+                src="images/the-first-thing-that-grew-here.jpg"
+                alt="The First Thing That Grew Here, surreal painting by Oddity featuring mushrooms growing within a circular frame"
+                class="growth-artwork"
+                id="growthArtwork"
+            >
+
+
+            <div
+                class="growth-title"
+                id="growthTitle"
+            >
+                THE FIRST THING THAT GREW HERE
+            </div>
+
+
+            <button
+                class="growth-portal"
+                id="growthPortal"
+                aria-label="Continue deeper into Oddity Realm"
+            >
+                ↓
+            </button>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =========================================
+         HANDLE WITH CARE
+         ========================================= -->
+
+    <section
+        class="care-screen"
+        id="careScreen"
+        aria-labelledby="careTitle"
+    >
+
+        <div class="care-frame">
+
+
+            <img
+                src="images/handle-with-care.jpg"
+                alt="Handle With Care, surreal painting by Oddity showing a blue hand holding an eyeball against a spiralling background"
+                class="care-artwork"
+                id="careArtwork"
+            >
+
+
+            <div
+                class="care-title"
+                id="careTitle"
+            >
+                HANDLE WITH CARE
+            </div>
+
+
+            <div
+                class="care-message"
+                id="careMessage"
+            >
+                please.
+            </div>
 
         </div>
 
@@ -462,6 +596,33 @@
     >
 
 
+        <!-- FOUR CORNER SYMBOLS -->
+
+        <div
+            class="contact-corner-logo contact-logo-top-left"
+            aria-hidden="true"
+        ></div>
+
+
+        <div
+            class="contact-corner-logo contact-logo-top-right"
+            aria-hidden="true"
+        ></div>
+
+
+        <div
+            class="contact-corner-logo contact-logo-bottom-left"
+            aria-hidden="true"
+        ></div>
+
+
+        <div
+            class="contact-corner-logo contact-logo-bottom-right"
+            aria-hidden="true"
+        ></div>
+
+
+
         <button
             class="contact-back"
             id="contactBack"
@@ -478,42 +639,38 @@
             </div>
 
 
-            <h2>
-                COME CLOSER.
-            </h2>
-
-
-            <button
+            <a
                 class="contact-email"
                 id="contactEmail"
+                href="mailto:oddityrealmstudio@gmail.com"
             >
-                YOUR EMAIL WILL GO HERE
-            </button>
+                oddityrealmstudio@gmail.com
+            </a>
+
+        </div>
 
 
-            <button
-                class="dont-push"
-                id="dontPush"
-            >
-                DON'T PUSH
-            </button>
+        <button
+            class="dont-push"
+            id="dontPush"
+        >
+            DON'T PUSH
+        </button>
 
 
-            <div
-                class="push-message"
-                id="pushMessage"
-            >
-                I KNEW YOU'D PUSH.
-            </div>
+        <div
+            class="push-message"
+            id="pushMessage"
+        >
+            I KNEW YOU'D PUSH.
+        </div>
 
 
-            <div
-                class="push-message-second"
-                id="pushMessageSecond"
-            >
-                you always do.
-            </div>
-
+        <div
+            class="push-message-second"
+            id="pushMessageSecond"
+        >
+            you always do.
         </div>
 
     </section>
