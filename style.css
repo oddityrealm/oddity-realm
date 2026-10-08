@@ -1,18 +1,11 @@
-/* =========================================
-   ODDITY REALM
-   ========================================= */
-
 :root {
     --background: #11110F;
     --text: #E8E4DA;
     --muted: #8F8B82;
     --accent: #C6A96B;
+    --champagne: #E3D4B2;
+    --gold: #C9B47A;
 }
-
-
-/* =========================================
-   RESET
-   ========================================= */
 
 * {
     margin: 0;
@@ -20,18 +13,23 @@
     box-sizing: border-box;
 }
 
-
 html,
 body {
     width: 100%;
-    height: 100%;
-
+    min-height: 100%;
     background: var(--background);
     color: var(--text);
-
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-
     overflow: hidden;
+}
+
+button {
+    appearance: none;
+    border: none;
+    background: none;
+    color: inherit;
+    font-family: inherit;
+    cursor: pointer;
 }
 
 
@@ -41,7 +39,6 @@ body {
 
 .landing {
     position: fixed;
-
     inset: 0;
 
     width: 100vw;
@@ -56,10 +53,8 @@ body {
         opacity 1.2s ease;
 }
 
-
 .landing.opening {
     transform: translateX(-100vw);
-
     opacity: 0;
 }
 
@@ -85,32 +80,18 @@ body {
 }
 
 
-/* =========================================
-   ODDITY REALM MARK
-   ========================================= */
-
 .realm-mark-wrap {
     position: relative;
 }
 
 
 .realm-mark {
-    appearance: none;
-
-    border: none;
-    background: none;
-
     color: var(--text);
 
-    font-family: inherit;
-
     font-size: 11px;
-
     letter-spacing: 0.16em;
 
     text-transform: uppercase;
-
-    cursor: pointer;
 
     padding: 8px 0;
 
@@ -121,17 +102,11 @@ body {
         letter-spacing 0.4s ease;
 }
 
-
 .realm-mark:hover {
     opacity: 1;
-
     letter-spacing: 0.19em;
 }
 
-
-/* =========================================
-   I FELT THAT.
-   ========================================= */
 
 .realm-reaction {
     position: absolute;
@@ -144,9 +119,7 @@ body {
     font-family: Georgia, "Times New Roman", serif;
 
     font-size: 10px;
-
     font-style: italic;
-
     letter-spacing: 0.04em;
 
     color: var(--accent);
@@ -162,33 +135,15 @@ body {
         transform 0.45s ease;
 }
 
-
 .realm-reaction.show {
     opacity: 0.9;
-
     transform: translateY(0);
 }
 
 
-/* =========================================
-   ENTER
-   ========================================= */
-
 .enter-link {
-    appearance: none;
-
-    border: none;
-    background: none;
-
-    color: var(--text);
-
-    font-family: inherit;
-
     font-size: 11px;
-
     letter-spacing: 0.16em;
-
-    cursor: pointer;
 
     padding: 8px;
 
@@ -199,27 +154,21 @@ body {
         letter-spacing 0.4s ease;
 }
 
-
 .enter-link:hover {
     opacity: 1;
-
     letter-spacing: 0.2em;
 }
-
 
 .enter-link.waiting {
     opacity: 0.35;
 }
 
-
 .enter-link.hidden-text {
     opacity: 0;
 }
 
-
 .enter-link.hint {
     opacity: 1;
-
     letter-spacing: 0.12em;
 }
 
@@ -242,10 +191,6 @@ body {
 }
 
 
-/* =========================================
-   ODDITY SYMBOL
-   ========================================= */
-
 .oddity-symbol {
     display: block;
 
@@ -260,15 +205,9 @@ body {
 }
 
 
-/* =========================================
-   TITLE
-   ========================================= */
-
 .realm-title {
     display: flex;
-
     flex-direction: column;
-
     align-items: center;
 
     font-size: clamp(64px, 11vw, 170px);
@@ -287,15 +226,10 @@ body {
     transform: translateX(-0.04em);
 }
 
-
 .realm-title span:last-child {
     transform: translateX(0.035em);
 }
 
-
-/* =========================================
-   SUBTITLE
-   ========================================= */
 
 .subtitle {
     margin-top: 34px;
@@ -311,7 +245,7 @@ body {
 
 
 /* =========================================
-   CURIOUS?
+   CURIOUS
    ========================================= */
 
 .curious {
@@ -322,18 +256,9 @@ body {
 
     transform: translateX(-50%);
 
-    border: none;
-    background: none;
-
-    color: var(--text);
-
-    font-family: inherit;
-
     font-size: 11px;
 
     letter-spacing: 0.18em;
-
-    cursor: pointer;
 
     padding: 10px;
 
@@ -351,7 +276,6 @@ body {
 
     left: 10px;
     right: 10px;
-
     bottom: 5px;
 
     height: 1px;
@@ -383,26 +307,23 @@ body {
     letter-spacing: 0.28em;
 }
 
-
 .curious.answered::after {
     transform: scaleX(1);
 }
 
 
 /* =========================================
-   ARTWORK SCREEN
+   THE WAY IN
    ========================================= */
 
 .artwork-screen {
     position: fixed;
-
     inset: 0;
 
     width: 100vw;
     height: 100vh;
 
     display: flex;
-
     align-items: center;
     justify-content: center;
 
@@ -413,7 +334,6 @@ body {
     z-index: 1;
 
     opacity: 0;
-
     visibility: hidden;
 
     transition:
@@ -424,17 +344,12 @@ body {
 
 .artwork-screen.revealed {
     opacity: 1;
-
     visibility: visible;
 
     transition:
         opacity 0.8s ease;
 }
 
-
-/* =========================================
-   ARTWORK FRAME
-   ========================================= */
 
 .artwork-frame {
     position: relative;
@@ -443,17 +358,12 @@ body {
     height: 100vh;
 
     display: flex;
-
     align-items: center;
     justify-content: center;
 
     overflow: hidden;
 }
 
-
-/* =========================================
-   FIRST ARTWORK
-   ========================================= */
 
 .first-artwork {
     display: block;
@@ -477,10 +387,6 @@ body {
 }
 
 
-/* =========================================
-   BOOM
-   ========================================= */
-
 .artwork-screen.boom .first-artwork {
     opacity: 1;
 
@@ -488,24 +394,19 @@ body {
 }
 
 
-/* =========================================
-   SETTLED GALLERY STATE
-   ========================================= */
-
 .artwork-screen.settled .first-artwork {
     transform: scale(0.72);
 }
 
 
 /* =========================================
-   ARTWORK INFORMATION
+   ARTWORK INFO
    ========================================= */
 
 .artwork-info {
     position: absolute;
 
     left: 50%;
-
     top: calc(50% + 37vmin);
 
     transform:
@@ -524,10 +425,6 @@ body {
 }
 
 
-/* =========================================
-   TITLE
-   ========================================= */
-
 .artwork-title {
     font-size: 13px;
 
@@ -535,15 +432,11 @@ body {
 
     font-weight: 400;
 
-color: #C9B47A;
-   
+    color: var(--gold);
+
     white-space: nowrap;
 }
 
-
-/* =========================================
-   MATERIAL + SIZE
-   ========================================= */
 
 .artwork-details {
     margin-top: 8px;
@@ -566,33 +459,6 @@ color: #C9B47A;
 }
 
 
-/* =========================================
-   LOOK AGAIN
-   ========================================= */
-
-.look-again {
-    margin-top: 15px;
-
-    font-size: 15px;
-
-    letter-spacing: 0.22em;
-
-    color: var(--accent);
-
-    opacity: 0;
-
-    transform: translateY(7px);
-
-    transition:
-        opacity 0.6s ease,
-        transform 0.6s ease;
-}
-
-
-/* =========================================
-   TITLE APPEARS AFTER THE BOOM
-   ========================================= */
-
 .artwork-screen.settled .artwork-info {
     opacity: 1;
 
@@ -602,11 +468,11 @@ color: #C9B47A;
 }
 
 
-/* =========================================
-   HOVER THE ACTUAL PAINTING
-   ========================================= */
+.artwork-screen.settled
+.first-artwork:hover
++ .artwork-info
+.artwork-details {
 
-.artwork-screen.settled .first-artwork:hover + .artwork-info .artwork-details {
     opacity: 1;
 
     transform: translateY(0);
@@ -614,25 +480,550 @@ color: #C9B47A;
 
 
 /* =========================================
-   LOOK AGAIN ARRIVES AFTER A MOMENT
+   LOOK AGAIN
    ========================================= */
 
 .look-again {
     margin-top: 15px;
+
     font-size: 18px;
+
     letter-spacing: 0.24em;
-    color: #E3D4B2;
+
+    color: var(--champagne);
+
     opacity: 0;
+
     transform: translateY(7px);
+
     transition:
         opacity 0.7s ease,
         transform 0.7s ease;
 }
 
+
 .look-again.show {
     opacity: 0.95;
+
     transform: translateY(0);
 }
+
+
+/* =========================================
+   CONTACT LINK
+   ========================================= */
+
+.contact-link {
+    position: absolute;
+
+    top: 28px;
+    left: 42px;
+
+    font-size: 10px;
+
+    letter-spacing: 0.16em;
+
+    color: var(--text);
+
+    opacity: 0.72;
+
+    transition:
+        opacity 0.4s ease,
+        letter-spacing 0.4s ease;
+}
+
+
+.contact-link:hover {
+    opacity: 1;
+
+    letter-spacing: 0.2em;
+}
+
+
+/* =========================================
+   GARDEN PORTAL LINK
+   ========================================= */
+
+.garden-portal {
+    position: absolute;
+
+    right: 34px;
+    bottom: 32px;
+
+    width: 44px;
+    height: 44px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 18px;
+
+    color: var(--champagne);
+
+    opacity: 0;
+
+    pointer-events: none;
+
+    transition:
+        opacity 0.8s ease,
+        transform 0.6s ease;
+}
+
+
+.artwork-screen.settled
+.garden-portal {
+
+    opacity: 0.72;
+
+    pointer-events: auto;
+}
+
+
+.garden-portal:hover {
+    opacity: 1;
+
+    transform: translateX(5px);
+}
+
+
+/* =========================================
+   GARDEN SCREEN
+   ========================================= */
+
+.garden-screen {
+    position: fixed;
+    inset: 0;
+
+    width: 100vw;
+    height: 100vh;
+
+    background: #11110F;
+
+    z-index: 20;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    overflow: hidden;
+
+    opacity: 0;
+    visibility: hidden;
+
+    transform: scale(1.08);
+
+    transition:
+        opacity 1s ease,
+        transform 1.5s cubic-bezier(0.16, 1, 0.3, 1),
+        visibility 0s linear 1.5s;
+}
+
+
+.garden-screen.open {
+    opacity: 1;
+
+    visibility: visible;
+
+    transform: scale(1);
+
+    transition:
+        opacity 1s ease,
+        transform 1.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+
+.garden-frame {
+    position: relative;
+
+    width: 100vw;
+    height: 100vh;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+/* =========================================
+   GARDEN ARTWORK
+   ========================================= */
+
+.garden-artwork {
+    width: 100vmin;
+    height: 100vmin;
+
+    object-fit: contain;
+
+    transform: scale(1);
+
+    transition:
+        transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+
+.garden-screen.key-opening
+.garden-artwork {
+
+    transform:
+        scale(1.08)
+        rotate(2deg);
+}
+
+
+/* =========================================
+   GARDEN TITLE
+   ========================================= */
+
+.garden-title {
+    position: absolute;
+
+    left: 50%;
+    bottom: 38px;
+
+    transform: translateX(-50%);
+
+    font-size: 12px;
+
+    letter-spacing: 0.22em;
+
+    color: var(--gold);
+
+    white-space: nowrap;
+
+    opacity: 0;
+
+    transition:
+        opacity 1s ease;
+}
+
+
+.garden-screen.open
+.garden-title {
+
+    opacity: 1;
+}
+
+
+/* =========================================
+   GARDEN MESSAGE
+   ========================================= */
+
+.garden-message {
+    position: absolute;
+
+    left: 50%;
+    top: 12%;
+
+    transform: translateX(-50%);
+
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+    font-size: 15px;
+
+    font-style: italic;
+
+    letter-spacing: 0.08em;
+
+    color: var(--champagne);
+
+    white-space: nowrap;
+
+    opacity: 0;
+
+    transition:
+        opacity 1s ease 1.2s;
+}
+
+
+.garden-screen.open
+.garden-message {
+
+    opacity: 0.92;
+}
+
+
+/* =========================================
+   INVISIBLE KEYHOLE HOTSPOT
+   =========================================
+
+   The actual keyhole is almost exactly
+   in the visual centre of the painting.
+
+   The painting is landscape and is contained
+   inside a square area, so the hotspot sits
+   slightly above the screen centre.
+   ========================================= */
+
+.garden-keyhole {
+    position: absolute;
+
+    width: 78px;
+    height: 105px;
+
+    left: 50%;
+
+    top: calc(50% - 6vmin);
+
+    transform: translate(-50%, -50%);
+
+    border-radius:
+        50% 50% 45% 45%;
+
+    opacity: 0;
+
+    z-index: 5;
+}
+
+
+/* =========================================
+   GARDEN BACK
+   ========================================= */
+
+.garden-back {
+    position: absolute;
+
+    top: 28px;
+    left: 28px;
+
+    width: 44px;
+    height: 44px;
+
+    font-size: 17px;
+
+    color: var(--champagne);
+
+    opacity: 0.6;
+
+    z-index: 10;
+
+    transition:
+        opacity 0.4s ease,
+        transform 0.4s ease;
+}
+
+
+.garden-back:hover {
+    opacity: 1;
+
+    transform: translateX(-4px);
+}
+
+
+/* =========================================
+   PORTAL TRANSITION
+   ========================================= */
+
+.garden-screen.portal {
+    transition:
+        transform 1.7s cubic-bezier(0.7, 0, 0.2, 1),
+        opacity 1.2s ease;
+}
+
+
+.garden-screen.portal
+.garden-frame {
+
+    animation:
+        portalSpin
+        1.7s
+        cubic-bezier(0.7, 0, 0.2, 1)
+        forwards;
+}
+
+
+@keyframes portalSpin {
+
+    0% {
+        transform:
+            scale(1)
+            rotate(0deg);
+    }
+
+    100% {
+        transform:
+            scale(9)
+            rotate(18deg);
+    }
+
+}
+
+
+/* =========================================
+   CONTACT ROOM
+   ========================================= */
+
+.contact-screen {
+    position: fixed;
+    inset: 0;
+
+    width: 100vw;
+    height: 100vh;
+
+    z-index: 30;
+
+    background: #11110F;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    opacity: 0;
+    visibility: hidden;
+
+    transition:
+        opacity 1s ease;
+}
+
+
+.contact-screen.open {
+    opacity: 1;
+
+    visibility: visible;
+}
+
+
+.contact-content {
+    text-align: center;
+}
+
+
+.contact-label {
+    font-size: 10px;
+
+    letter-spacing: 0.2em;
+
+    color: var(--muted);
+
+    margin-bottom: 40px;
+}
+
+
+.contact-content h2 {
+    font-size:
+        clamp(
+            38px,
+            7vw,
+            88px
+        );
+
+    font-weight: 400;
+
+    letter-spacing: -0.04em;
+}
+
+
+.contact-email {
+    margin-top: 30px;
+
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+    font-size: 16px;
+
+    font-style: italic;
+
+    color: var(--champagne);
+
+    text-decoration: underline;
+
+    text-decoration-color: transparent;
+
+    transition:
+        text-decoration-color 0.4s ease;
+}
+
+
+.contact-email:hover {
+    text-decoration-color: var(--champagne);
+}
+
+
+.dont-push {
+    margin-top: 100px;
+
+    padding: 16px 22px;
+
+    background: #8E2424;
+
+    color: #F2E7D5;
+
+    font-size: 10px;
+
+    letter-spacing: 0.14em;
+
+    transition:
+        transform 0.4s ease,
+        background 0.4s ease;
+}
+
+
+.dont-push:hover {
+    transform: translateY(-3px);
+
+    background: #A62D2D;
+}
+
+
+.push-message,
+.push-message-second {
+
+    margin-top: 25px;
+
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+    font-style: italic;
+
+    color: var(--champagne);
+
+    opacity: 0;
+
+    transform: translateY(8px);
+
+    transition:
+        opacity 0.7s ease,
+        transform 0.7s ease;
+}
+
+
+.push-message.show,
+.push-message-second.show {
+
+    opacity: 1;
+
+    transform: translateY(0);
+}
+
+
+.contact-back {
+    position: absolute;
+
+    top: 28px;
+    left: 28px;
+
+    width: 44px;
+    height: 44px;
+
+    color: var(--champagne);
+
+    font-size: 17px;
+
+    opacity: 0.6;
+}
+
+
+.contact-back:hover {
+    opacity: 1;
+}
+
 
 /* =========================================
    MOBILE
@@ -649,6 +1040,7 @@ color: #C9B47A;
 
     .realm-mark,
     .enter-link {
+
         font-size: 9px;
 
         letter-spacing: 0.14em;
@@ -661,6 +1053,7 @@ color: #C9B47A;
 
 
     .oddity-symbol {
+
         width: 65px;
         height: 82px;
 
@@ -669,7 +1062,12 @@ color: #C9B47A;
 
 
     .realm-title {
-        font-size: clamp(54px, 18vw, 100px);
+        font-size:
+            clamp(
+                54px,
+                18vw,
+                100px
+            );
     }
 
 
@@ -694,12 +1092,16 @@ color: #C9B47A;
     }
 
 
-    .artwork-screen.boom .first-artwork {
+    .artwork-screen.boom
+    .first-artwork {
+
         transform: scale(1.9);
     }
 
 
-    .artwork-screen.settled .first-artwork {
+    .artwork-screen.settled
+    .first-artwork {
+
         transform: scale(0.82);
     }
 
@@ -722,4 +1124,54 @@ color: #C9B47A;
     .look-again {
         font-size: 13px;
     }
+
+
+    .contact-link {
+        top: 22px;
+        left: 22px;
+
+        font-size: 9px;
+    }
+
+
+    .garden-portal {
+        right: 18px;
+        bottom: 18px;
+    }
+
+
+    .garden-message {
+        top: 10%;
+
+        font-size: 13px;
+    }
+
+
+    .garden-title {
+        bottom: 24px;
+
+        font-size: 9px;
+    }
+
+
+    .garden-back {
+        top: 18px;
+        left: 18px;
+    }
+
+
+    .contact-content h2 {
+        font-size: 42px;
+    }
+
+
+    .contact-email {
+        font-size: 14px;
+    }
+
+
+    .dont-push {
+        margin-top: 70px;
+    }
+
 }
