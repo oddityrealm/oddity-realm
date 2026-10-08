@@ -827,3 +827,353 @@ dontPush.addEventListener(
 
     }
 );
+/* =========================================================
+   CONTACT ROOM
+   FOUR ODDITY SYMBOLS
+   ========================================================= */
+
+.contact-corner-logo {
+    position: absolute;
+
+    width: 64px;
+    height: 64px;
+
+    background-color: #E8E4DA;
+
+    background-image: none;
+
+    -webkit-mask-image: url("images/oddity-symbol.png");
+    mask-image: url("images/oddity-symbol.png");
+
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+
+    -webkit-mask-position: center;
+    mask-position: center;
+
+    -webkit-mask-size: contain;
+    mask-size: contain;
+
+    opacity: 0.18;
+
+    pointer-events: none;
+
+    z-index: 5;
+}
+
+
+/* almost invisible */
+
+.contact-logo-top-left {
+    top: 24px;
+    left: 28px;
+
+    background-color: #E8E4DA;
+
+    opacity: 0.11;
+}
+
+
+/* muted violet */
+
+.contact-logo-top-right {
+    top: 24px;
+    right: 28px;
+
+    background-color: #81708F;
+
+    opacity: 0.22;
+}
+
+
+/* cool blue */
+
+.contact-logo-bottom-left {
+    bottom: 24px;
+    left: 28px;
+
+    background-color: #6D8A9D;
+
+    opacity: 0.22;
+}
+
+
+/* warm pink-gold */
+
+.contact-logo-bottom-right {
+    bottom: 24px;
+    right: 28px;
+
+    background-color: #B58A87;
+
+    opacity: 0.23;
+}
+
+
+/* =========================================================
+   THE FIRST THING THAT GREW HERE
+   CONTINUE
+   ========================================================= */
+
+.growth-portal {
+    position: absolute;
+
+    left: 50%;
+    bottom: 24px;
+
+    transform: translateX(-50%);
+
+    width: 48px;
+    height: 42px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    padding: 0;
+
+    color: var(--champagne);
+
+    font-size: 20px;
+
+    opacity: 0;
+
+    pointer-events: none;
+
+    transition:
+        opacity 0.8s ease,
+        transform 0.5s ease;
+
+    z-index: 20;
+}
+
+
+.growth-screen.ready .growth-portal {
+    opacity: 0.72;
+
+    pointer-events: auto;
+}
+
+
+.growth-portal:hover {
+    opacity: 1;
+
+    transform:
+        translateX(-50%)
+        translateY(4px);
+}
+
+
+/* =========================================================
+   HANDLE WITH CARE
+   ========================================================= */
+
+.care-screen {
+    position: fixed;
+
+    inset: 0;
+
+    width: 100vw;
+    height: 100vh;
+
+    z-index: 50;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    overflow: hidden;
+
+    background: #11110F;
+
+    opacity: 0;
+    visibility: hidden;
+
+    transition:
+        opacity 0.8s ease,
+        visibility 0s linear 0.8s;
+}
+
+
+.care-screen.open {
+    opacity: 1;
+    visibility: visible;
+
+    transition:
+        opacity 0.8s ease;
+}
+
+
+.care-frame {
+    position: relative;
+
+    width: 100vw;
+    height: 100vh;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    overflow: hidden;
+}
+
+
+.care-artwork {
+    width: 100vmin;
+    height: 100vmin;
+
+    object-fit: contain;
+
+    opacity: 0;
+
+    transform:
+        scale(0.025);
+
+    transform-origin: center;
+
+    transition:
+        opacity 0.8s ease,
+        transform 1.9s cubic-bezier(0.16, 1, 0.3, 1);
+
+    z-index: 2;
+}
+
+
+.care-screen.growing .care-artwork {
+    opacity: 1;
+
+    transform:
+        scale(1);
+}
+
+
+.care-title {
+    position: absolute;
+
+    left: 50%;
+    top: 7%;
+
+    transform:
+        translate(-50%, -8px);
+
+    z-index: 10;
+
+    color: var(--gold);
+
+    font-size: clamp(12px, 1.8vw, 18px);
+
+    letter-spacing: 0.22em;
+
+    text-align: center;
+
+    white-space: nowrap;
+
+    opacity: 0;
+
+    transition:
+        opacity 0.8s ease,
+        transform 0.8s ease;
+}
+
+
+.care-screen.ready .care-title {
+    opacity: 1;
+
+    transform:
+        translate(-50%, 0);
+}
+
+
+.care-message {
+    position: absolute;
+
+    left: 50%;
+    bottom: 8%;
+
+    transform:
+        translate(-50%, 8px);
+
+    z-index: 10;
+
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+    font-size: 16px;
+
+    font-style: italic;
+
+    letter-spacing: 0.06em;
+
+    color: var(--champagne);
+
+    opacity: 0;
+
+    transition:
+        opacity 0.8s ease,
+        transform 0.8s ease;
+}
+
+
+.care-screen.message .care-message {
+    opacity: 0.9;
+
+    transform:
+        translate(-50%, 0);
+}
+
+
+/* =========================================================
+   CONTACT ROOM LOGO SCALE ON SMALL SCREENS
+   ========================================================= */
+
+@media (max-width: 600px) {
+
+    .contact-corner-logo {
+        width: 54px;
+        height: 54px;
+    }
+
+    .contact-logo-top-left {
+        top: 18px;
+        left: 18px;
+    }
+
+    .contact-logo-top-right {
+        top: 18px;
+        right: 18px;
+    }
+
+    .contact-logo-bottom-left {
+        bottom: 18px;
+        left: 18px;
+    }
+
+    .contact-logo-bottom-right {
+        bottom: 18px;
+        right: 18px;
+    }
+
+    .growth-portal {
+        bottom: 18px;
+    }
+
+    .care-title {
+        width: 88vw;
+
+        white-space: normal;
+
+        line-height: 1.5;
+
+        font-size: 11px;
+    }
+
+    .care-message {
+        font-size: 14px;
+    }
+
+}
