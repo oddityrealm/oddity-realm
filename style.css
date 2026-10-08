@@ -2336,6 +2336,89 @@ button {
     .dont-push {
         margin-top: 70px;
     }
+/* =========================================
+   CONTACT - INDEPENDENT SCREEN POSITION
+   ========================================= */
+
+#contactLink {
+    position: fixed !important;
+
+    top: 28px !important;
+    left: 42px !important;
+
+    right: auto !important;
+    bottom: auto !important;
+
+    width: auto !important;
+    height: auto !important;
+
+    margin: 0 !important;
+    padding: 8px 0 !important;
+
+    transform: none !important;
+
+    z-index: 99999 !important;
+
+    display: none !important;
+
+    pointer-events: none !important;
+
+    border: 0 !important;
+    background: none !important;
+
+    color: #E8E4DA !important;
+
+    font-family:
+        "Helvetica Neue",
+        Helvetica,
+        Arial,
+        sans-serif !important;
+
+    font-size: 10px !important;
+
+    font-weight: 400 !important;
+
+    letter-spacing: 0.16em !important;
+
+    line-height: 1 !important;
+
+    opacity: 0 !important;
+
+    cursor: pointer !important;
+
+    transition:
+        opacity 0.4s ease,
+        letter-spacing 0.4s ease !important;
+}
+
+
+/* CONTACT appears only after THE WAY IN settles */
+
+#artworkScreen.settled ~ #contactLink {
+    display: block !important;
+    pointer-events: auto !important;
+    opacity: 0.72 !important;
+}
+
+
+/* subtle interaction */
+
+#artworkScreen.settled ~ #contactLink:hover {
+    opacity: 1 !important;
+    letter-spacing: 0.20em !important;
+}
+
+
+/* tablet / mobile */
+
+@media (max-width: 600px) {
+
+    #contactLink {
+        top: 18px !important;
+        left: 22px !important;
+        font-size: 9px !important;
+    }
 
 }
+    
 }
