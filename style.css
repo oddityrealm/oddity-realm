@@ -2420,5 +2420,804 @@ button {
     }
 
 }
-    
+    /* =========================================================
+   ODDITY REALM
+   CURRENT WORLD / INTERACTION OVERRIDES
+   ========================================================= */
+
+
+/* =========================================================
+   CONTACT LINK
+   Only visible on THE WAY IN
+   ========================================================= */
+
+#contactLink {
+    position: fixed !important;
+
+    top: 28px !important;
+    left: 42px !important;
+
+    right: auto !important;
+    bottom: auto !important;
+
+    z-index: 9999 !important;
+
+    display: block !important;
+
+    margin: 0 !important;
+    padding: 8px 0 !important;
+
+    width: auto !important;
+    height: auto !important;
+
+    opacity: 0 !important;
+    visibility: hidden !important;
+    pointer-events: none !important;
+
+    color: var(--text) !important;
+
+    font-size: 10px !important;
+    letter-spacing: 0.16em !important;
+    line-height: 1 !important;
+
+    transition:
+        opacity 0.5s ease,
+        letter-spacing 0.4s ease,
+        visibility 0s linear 0.5s !important;
+}
+
+
+#contactLink.is-visible {
+    opacity: 0.72 !important;
+    visibility: visible !important;
+    pointer-events: auto !important;
+
+    transition:
+        opacity 0.5s ease,
+        letter-spacing 0.4s ease !important;
+}
+
+
+#contactLink:hover {
+    opacity: 1 !important;
+    letter-spacing: 0.20em !important;
+}
+
+
+/* =========================================================
+   CONTACT WHISPER
+   ========================================================= */
+
+.contact-whisper {
+    position: fixed;
+
+    inset: 0;
+
+    z-index: 10000;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    padding: 30px;
+
+    text-align: center;
+
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+    font-size: clamp(18px, 3vw, 28px);
+
+    font-style: italic;
+
+    letter-spacing: 0.03em;
+
+    color: var(--champagne);
+
+    background: var(--background);
+
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+
+    transition:
+        opacity 0.9s ease,
+        visibility 0s linear 0.9s;
+}
+
+
+.contact-whisper.show {
+    opacity: 1;
+    visibility: visible;
+
+    transition:
+        opacity 0.9s ease;
+}
+
+
+/* =========================================================
+   GARDEN ARROW
+   ========================================================= */
+
+.garden-portal {
+    position: absolute !important;
+
+    left: 50% !important;
+    right: auto !important;
+
+    bottom: 12px !important;
+
+    transform:
+        translateX(-50%) !important;
+
+    width: 44px !important;
+    height: 36px !important;
+
+    z-index: 30 !important;
+
+    display: flex !important;
+
+    align-items: center;
+    justify-content: center;
+
+    padding: 0 !important;
+
+    font-size: 22px !important;
+
+    color: var(--champagne) !important;
+
+    opacity: 0 !important;
+
+    pointer-events: none !important;
+
+    transition:
+        opacity 0.8s ease,
+        transform 0.5s ease !important;
+}
+
+
+.artwork-screen.settled .garden-portal {
+    opacity: 0.72 !important;
+    pointer-events: auto !important;
+}
+
+
+.garden-portal:hover {
+    opacity: 1 !important;
+
+    transform:
+        translateX(-50%)
+        translateY(4px) !important;
+}
+
+
+/* =========================================================
+   GARDEN
+   Entrance is staged:
+   1. title in centre
+   2. title moves upward
+   3. artwork rises from below
+   4. message appears
+   5. key becomes active
+   ========================================================= */
+
+.garden-screen {
+    opacity: 0 !important;
+    visibility: hidden !important;
+
+    transform: none !important;
+
+    transition:
+        opacity 0.8s ease,
+        visibility 0s linear 1s !important;
+}
+
+
+.garden-screen.open {
+    opacity: 1 !important;
+    visibility: visible !important;
+
+    transition:
+        opacity 0.8s ease !important;
+}
+
+
+/* artwork starts below the screen */
+
+.garden-artwork {
+    opacity: 0 !important;
+
+    transform:
+        translateY(115vh)
+        scale(0.92) !important;
+
+    transition:
+        transform 1.5s cubic-bezier(0.16, 1, 0.3, 1),
+        opacity 0.9s ease !important;
+}
+
+
+/* title begins in centre */
+
+.garden-title {
+    left: 50% !important;
+
+    top: 50% !important;
+    bottom: auto !important;
+
+    transform:
+        translate(-50%, -50%)
+        scale(0.94) !important;
+
+    opacity: 0 !important;
+
+    font-size: clamp(16px, 2.5vw, 24px) !important;
+
+    letter-spacing: 0.22em !important;
+
+    transition:
+        top 1.15s cubic-bezier(0.16, 1, 0.3, 1),
+        transform 1.15s cubic-bezier(0.16, 1, 0.3, 1),
+        opacity 0.8s ease !important;
+}
+
+
+/* title appears in centre */
+
+.garden-screen.title-in .garden-title {
+    opacity: 1 !important;
+
+    transform:
+        translate(-50%, -50%)
+        scale(1) !important;
+}
+
+
+/* title travels upward */
+
+.garden-screen.title-up .garden-title {
+    top: 9% !important;
+
+    transform:
+        translate(-50%, -50%)
+        scale(0.78) !important;
+
+    opacity: 0.95 !important;
+}
+
+
+/* artwork enters from below */
+
+.garden-screen.art-in .garden-artwork {
+    opacity: 1 !important;
+
+    transform:
+        translateY(0)
+        scale(1) !important;
+}
+
+
+/* message waits until artwork has arrived */
+
+.garden-message {
+    top: auto !important;
+    bottom: 7% !important;
+
+    opacity: 0 !important;
+
+    transform:
+        translate(-50%, 8px) !important;
+
+    transition:
+        opacity 0.8s ease,
+        transform 0.8s ease !important;
+}
+
+
+.garden-screen.ready .garden-message {
+    opacity: 0.92 !important;
+
+    transform:
+        translate(-50%, 0) !important;
+}
+
+
+/* key is not active until the scene is ready */
+
+.garden-keyhole {
+    pointer-events: none !important;
+}
+
+
+.garden-screen.ready .garden-keyhole {
+    pointer-events: auto !important;
+}
+
+
+/* back arrow only appears once Garden has fully arrived */
+
+.garden-back {
+    opacity: 0 !important;
+    pointer-events: none !important;
+
+    transition:
+        opacity 0.6s ease !important;
+}
+
+
+.garden-screen.ready .garden-back {
+    opacity: 0.6 !important;
+    pointer-events: auto !important;
+}
+
+
+/* =========================================================
+   GARDEN PORTAL
+   The whole Garden is swallowed into the keyhole
+   ========================================================= */
+
+.garden-screen.portal .garden-frame {
+    animation:
+        portalSpin
+        1.65s
+        cubic-bezier(0.7, 0, 0.2, 1)
+        forwards;
+}
+
+
+@keyframes portalSpin {
+
+    0% {
+        transform:
+            scale(1)
+            rotate(0deg);
+    }
+
+    100% {
+        transform:
+            scale(12)
+            rotate(28deg);
+    }
+
+}
+
+
+/* =========================================================
+   THE FIRST THING THAT GREW HERE
+   ========================================================= */
+
+.growth-screen {
+    position: fixed;
+
+    inset: 0;
+
+    width: 100vw;
+    height: 100vh;
+
+    z-index: 40;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    overflow: hidden;
+
+    background: #11110F;
+
+    opacity: 0;
+    visibility: hidden;
+
+    transition:
+        opacity 0.7s ease,
+        visibility 0s linear 0.7s;
+}
+
+
+.growth-screen.open {
+    opacity: 1;
+    visibility: visible;
+
+    transition:
+        opacity 0.7s ease;
+}
+
+
+.growth-frame {
+    position: relative;
+
+    width: 100vw;
+    height: 100vh;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    overflow: hidden;
+}
+
+
+/* black nothingness first */
+
+.growth-artwork {
+    display: block;
+
+    width: 100vmin;
+    height: 100vmin;
+
+    object-fit: contain;
+
+    opacity: 0;
+
+    transform:
+        scale(0.035);
+
+    transform-origin: center center;
+
+    transition:
+        transform 1.7s cubic-bezier(0.16, 1, 0.3, 1),
+        opacity 0.8s ease;
+
+    z-index: 2;
+}
+
+
+/* the artwork grows out of nothing */
+
+.growth-screen.growing .growth-artwork {
+    opacity: 1;
+
+    transform:
+        scale(1);
+}
+
+
+/* title appears only after growth */
+
+.growth-title {
+    position: absolute;
+
+    left: 50%;
+    top: 7%;
+
+    z-index: 10;
+
+    width: max-content;
+
+    transform:
+        translate(-50%, -8px);
+
+    opacity: 0;
+
+    color: var(--gold);
+
+    font-size: clamp(12px, 1.8vw, 18px);
+
+    letter-spacing: 0.22em;
+
+    text-align: center;
+
+    white-space: nowrap;
+
+    transition:
+        opacity 0.8s ease,
+        transform 0.8s ease;
+}
+
+
+.growth-screen.ready .growth-title {
+    opacity: 1;
+
+    transform:
+        translate(-50%, 0);
+}
+
+
+/* =========================================================
+   CONTACT ROOM
+   ========================================================= */
+
+.contact-screen {
+    z-index: 100 !important;
+
+    background: #11110F !important;
+
+    opacity: 0 !important;
+    visibility: hidden !important;
+
+    transition:
+        opacity 0.9s ease,
+        visibility 0s linear 0.9s !important;
+}
+
+
+.contact-screen.open {
+    opacity: 1 !important;
+    visibility: visible !important;
+
+    transition:
+        opacity 0.9s ease !important;
+}
+
+
+.contact-content {
+    position: absolute !important;
+
+    left: 50%;
+    top: 50%;
+
+    transform:
+        translate(-50%, -50%) !important;
+
+    width: min(90vw, 900px);
+
+    text-align: center !important;
+
+    z-index: 10;
+}
+
+
+.contact-label {
+    margin: 0 0 28px !important;
+
+    font-size: 9px !important;
+
+    letter-spacing: 0.24em !important;
+
+    color: var(--muted) !important;
+}
+
+
+.contact-email {
+    display: inline-block;
+
+    margin: 0 !important;
+
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+    font-size:
+        clamp(20px, 3.5vw, 38px);
+
+    font-style: italic;
+
+    letter-spacing: 0.02em;
+
+    color: var(--champagne);
+
+    text-decoration: none;
+
+    transition:
+        opacity 0.4s ease,
+        letter-spacing 0.4s ease;
+}
+
+
+.contact-email:hover {
+    opacity: 1;
+
+    letter-spacing: 0.04em;
+}
+
+
+/* =========================================================
+   DON'T PUSH
+   Bottom centre, completely independent of contact content
+   ========================================================= */
+
+.dont-push {
+    position: absolute !important;
+
+    left: 50% !important;
+    bottom: 34px !important;
+
+    transform:
+        translateX(-50%) rotate(-1deg) !important;
+
+    margin: 0 !important;
+
+    padding: 14px 25px !important;
+
+    min-width: 120px;
+
+    background: #8E2424 !important;
+
+    color: #F2E7D5 !important;
+
+    border-radius: 3px;
+
+    font-size: 10px !important;
+
+    letter-spacing: 0.16em !important;
+
+    z-index: 20 !important;
+
+    opacity: 1;
+
+    transition:
+        opacity 0.5s ease,
+        transform 0.4s ease;
+}
+
+
+.dont-push:hover {
+    transform:
+        translateX(-50%)
+        translateY(-3px)
+        rotate(-1deg) !important;
+
+    background: #A62D2D !important;
+}
+
+
+.dont-push.gone {
+    opacity: 0 !important;
+    pointer-events: none !important;
+
+    transform:
+        translateX(-50%)
+        scale(0.85) !important;
+}
+
+
+/* =========================================================
+   CONTACT MESSAGES
+   One message at a time
+   ========================================================= */
+
+.push-message,
+.push-message-second {
+    position: absolute;
+
+    left: 50%;
+    top: 50%;
+
+    margin: 0 !important;
+
+    transform:
+        translate(-50%, -50%)
+        translateY(8px) !important;
+
+    width: 90vw;
+
+    text-align: center;
+
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+    font-size:
+        clamp(20px, 3.5vw, 34px);
+
+    font-style: italic;
+
+    letter-spacing: 0.03em;
+
+    color: var(--champagne);
+
+    opacity: 0 !important;
+
+    pointer-events: none;
+
+    transition:
+        opacity 0.7s ease,
+        transform 0.7s ease;
+}
+
+
+.push-message.show,
+.push-message-second.show {
+    opacity: 1 !important;
+
+    transform:
+        translate(-50%, -50%)
+        translateY(0) !important;
+}
+
+
+/* =========================================================
+   CONTACT BACK
+   ========================================================= */
+
+.contact-back {
+    position: absolute !important;
+
+    top: 28px !important;
+    left: 28px !important;
+
+    z-index: 30 !important;
+
+    width: 44px !important;
+    height: 44px !important;
+
+    font-size: 17px !important;
+
+    color: var(--champagne) !important;
+
+    opacity: 0.6;
+}
+
+
+.contact-back:hover {
+    opacity: 1;
+}
+
+
+/* =========================================================
+   MOBILE / TABLET
+   ========================================================= */
+
+@media (max-width: 600px) {
+
+    #contactLink {
+        top: 18px !important;
+        left: 22px !important;
+
+        font-size: 9px !important;
+    }
+
+
+    .garden-title {
+        font-size: 12px !important;
+
+        max-width: 90vw;
+
+        text-align: center;
+
+        white-space: normal;
+    }
+
+
+    .garden-screen.title-up .garden-title {
+        top: 8% !important;
+
+        transform:
+            translate(-50%, -50%)
+            scale(0.82) !important;
+    }
+
+
+    .garden-message {
+        bottom: 8% !important;
+
+        font-size: 13px !important;
+    }
+
+
+    .growth-title {
+        top: 8%;
+
+        width: 88vw;
+
+        white-space: normal;
+
+        font-size: 11px;
+
+        line-height: 1.5;
+    }
+
+
+    .contact-email {
+        font-size: 20px;
+    }
+
+
+    .dont-push {
+        bottom: 25px !important;
+    }
+
+
+    .contact-back {
+        top: 16px !important;
+        left: 18px !important;
+    }
+
+}
 }
