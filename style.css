@@ -1,3223 +1,829 @@
-:root {
-    --background: #11110F;
-    --text: #E8E4DA;
-    --muted: #8F8B82;
-    --accent: #C6A96B;
-    --champagne: #E3D4B2;
-    --gold: #C9B47A;
-}
-
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-html,
-body {
-    width: 100%;
-    min-height: 100%;
-    background: var(--background);
-    color: var(--text);
-    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-    overflow: hidden;
-}
-
-button {
-    appearance: none;
-    border: none;
-    background: none;
-    color: inherit;
-    font-family: inherit;
-    cursor: pointer;
-}
-
-
 /* =========================================
-   LANDING
-   ========================================= */
-
-.landing {
-    position: fixed;
-    inset: 0;
-
-    width: 100vw;
-    height: 100vh;
-
-    background: var(--background);
-
-    z-index: 10;
-
-    transition:
-        transform 1.7s cubic-bezier(0.76, 0, 0.24, 1),
-        opacity 1.2s ease;
-}
-
-.landing.opening {
-    transform: translateX(-100vw);
-    opacity: 0;
-}
-
-
-/* =========================================
-   TOP BAR
-   ========================================= */
-
-.top-bar {
-    position: absolute;
-
-    top: 0;
-    left: 0;
-
-    width: 100%;
-    height: 80px;
-
-    padding: 0 42px;
-
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-
-    z-index: 50;
-}
-
-.realm-mark-wrap {
-    position: relative;
-}
-
-.realm-mark {
-    color: var(--text);
-
-    font-size: 11px;
-    letter-spacing: 0.16em;
-
-    text-transform: uppercase;
-
-    padding: 8px 0;
-
-    opacity: 0.78;
-
-    transition:
-        opacity 0.4s ease,
-        letter-spacing 0.4s ease;
-}
-
-.realm-mark:hover {
-    opacity: 1;
-    letter-spacing: 0.19em;
-}
-
-.realm-reaction {
-    position: absolute;
-
-    top: calc(100% + 6px);
-    left: 0;
-
-    white-space: nowrap;
-
-    font-family: Georgia, "Times New Roman", serif;
-
-    font-size: 10px;
-    font-style: italic;
-    letter-spacing: 0.04em;
-
-    color: var(--accent);
-
-    opacity: 0;
-
-    transform: translateY(-4px);
-
-    pointer-events: none;
-
-    transition:
-        opacity 0.45s ease,
-        transform 0.45s ease;
-}
-
-.realm-reaction.show {
-    opacity: 0.9;
-    transform: translateY(0);
-}
-
-.enter-link {
-    font-size: 11px;
-    letter-spacing: 0.16em;
-
-    padding: 8px;
-
-    opacity: 0.62;
-
-    transition:
-        opacity 0.4s ease,
-        letter-spacing 0.4s ease;
-}
-
-.enter-link:hover {
-    opacity: 1;
-    letter-spacing: 0.2em;
-}
-
-.enter-link.waiting {
-    opacity: 0.35;
-}
-
-.enter-link.hidden-text {
-    opacity: 0;
-}
-
-.enter-link.hint {
-    opacity: 1;
-    letter-spacing: 0.12em;
-}
-
-
-/* =========================================
-   HERO
-   ========================================= */
-
-.hero {
-    position: absolute;
-
-    top: 50%;
-    left: 50%;
-
-    transform: translate(-50%, -50%);
-
-    width: max-content;
-
-    text-align: center;
-}
-
-.oddity-symbol {
-    display: block;
-
-    width: 92px;
-    height: 120px;
-
-    object-fit: contain;
-
-    margin: 0 auto 24px;
-
-    opacity: 0.88;
-}
-
-.realm-title {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-
-    font-size: clamp(64px, 11vw, 170px);
-
-    font-weight: 400;
-
-    line-height: 0.82;
-
-    letter-spacing: -0.055em;
-
-    user-select: none;
-}
-
-.realm-title span:first-child {
-    transform: translateX(-0.04em);
-}
-
-.realm-title span:last-child {
-    transform: translateX(0.035em);
-}
-
-.subtitle {
-    margin-top: 34px;
-
-    font-size: 10px;
-
-    letter-spacing: 0.22em;
-
-    color: var(--muted);
-
-    text-transform: lowercase;
-}
-
-
-/* =========================================
-   CURIOUS
-   ========================================= */
-
-.curious {
-    position: absolute;
-
-    left: 50%;
-    bottom: 42px;
-
-    transform: translateX(-50%);
-
-    font-size: 11px;
-
-    letter-spacing: 0.18em;
-
-    padding: 10px;
-
-    transition:
-        transform 0.5s ease,
-        letter-spacing 0.5s ease,
-        opacity 0.5s ease;
-
-    z-index: 50;
-}
-
-.curious::after {
-    content: "";
-
-    position: absolute;
-
-    left: 10px;
-    right: 10px;
-    bottom: 5px;
-
-    height: 1px;
-
-    background: var(--text);
-
-    transform: scaleX(0);
-
-    transform-origin: center;
-
-    transition:
-        transform 0.5s ease;
-}
-
-.curious:hover {
-    transform:
-        translateX(-50%)
-        translateY(-3px);
-}
-
-.curious:hover::after {
-    transform: scaleX(1);
-}
-
-.curious.answered {
-    letter-spacing: 0.28em;
-}
-
-.curious.answered::after {
-    transform: scaleX(1);
-}
-
-
-/* =========================================
-   THE WAY IN
-   ========================================= */
-
-.artwork-screen {
-    position: fixed;
-    inset: 0;
-
-    width: 100vw;
-    height: 100vh;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    background: var(--background);
-
-    overflow: hidden;
-
-    z-index: 1;
-
-    opacity: 0;
-    visibility: hidden;
-
-    transition:
-        opacity 0.8s ease,
-        visibility 0s linear 1s;
-}
-
-.artwork-screen.revealed {
-    opacity: 1;
-    visibility: visible;
-
-    transition:
-        opacity 0.8s ease;
-}
-
-.artwork-frame {
-    position: relative;
-
-    width: 100vw;
-    height: 100vh;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    overflow: hidden;
-}
-
-
-/* =========================================
-   FIRST ARTWORK
-   ========================================= */
-
-.first-artwork {
-    display: block;
-
-    width: 100vmin;
-    height: 100vmin;
-
-    object-fit: contain;
-
-    opacity: 0;
-
-    transform: scale(1.75);
-
-    will-change: transform, opacity;
-
-    cursor: crosshair;
-
-    position: relative;
-
-    z-index: 2;
-
-    transition:
-        opacity 0.45s ease,
-        transform 2.7s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.artwork-screen.boom .first-artwork {
-    opacity: 1;
-
-    transform: scale(1.75);
-}
-
-.artwork-screen.settled .first-artwork {
-    transform: scale(0.72);
-}
-
-
-/* =========================================
-   ARTWORK INFORMATION
-   ========================================= */
-
-.artwork-info {
-    position: absolute;
-
-    left: 50%;
-
-    top: calc(50% + 37vmin);
-
-    transform:
-        translateX(-50%)
-        translateY(8px);
-
-    width: max-content;
-
-    text-align: center;
-
-    pointer-events: none;
-
-    z-index: 10;
-
-    opacity: 0;
-
-    transition:
-        opacity 0.7s ease,
-        transform 0.7s ease;
-}
-
-.artwork-title {
-    font-size: 13px;
-
-    letter-spacing: 0.2em;
-
-    font-weight: 400;
-
-    color: var(--gold);
-
-    white-space: nowrap;
-}
-
-.artwork-details {
-    margin-top: 8px;
-
-    font-size: 9px;
-
-    letter-spacing: 0.15em;
-
-    color: var(--muted);
-
-    text-transform: lowercase;
-
-    opacity: 0;
-
-    transform: translateY(4px);
-
-    transition:
-        opacity 0.5s ease,
-        transform 0.5s ease;
-}
-
-.artwork-screen.settled .artwork-info {
-    opacity: 1;
-
-    transform:
-        translateX(-50%)
-        translateY(0);
-}
-
-.artwork-screen.settled
-.first-artwork:hover
-+ .artwork-info
-.artwork-details {
-
-    opacity: 1;
-
-    transform: translateY(0);
-}
-
-
-/* =========================================
-   LOOK AGAIN
-   ========================================= */
-
-.look-again {
-    margin-top: 15px;
-
-    font-size: 18px;
-
-    letter-spacing: 0.24em;
-
-    color: var(--champagne);
-
-    opacity: 0;
-
-    transform: translateY(7px);
-
-    transition:
-        opacity 0.7s ease,
-        transform 0.7s ease;
-}
-
-.look-again.show {
-    opacity: 0.95;
-
-    transform: translateY(0);
-}
-
-
-/* =========================================
-   CONTACT
-   ========================================= */
-
-.contact-link {
-    position: absolute;
-
-    top: 28px;
-    left: 42px;
-
-    z-index: 30;
-
-    display: block;
-
-    width: auto;
-    height: auto;
-
-    padding: 8px 0;
-
-    font-size: 10px;
-
-    letter-spacing: 0.16em;
-
-    color: var(--text);
-
-    opacity: 0.72;
-
-    pointer-events: auto;
-
-    transition:
-        opacity 0.4s ease,
-        letter-spacing 0.4s ease;
-}
-
-.contact-link:hover {
-    opacity: 1;
-
-    letter-spacing: 0.2em;
-}
-
-
-/* =========================================
-   GARDEN ARROW
-   ========================================= */
-
-.garden-portal {
-    position: absolute;
-
-    right: 30px;
-    bottom: 28px;
-
-    z-index: 30;
-
-    width: 48px;
-    height: 48px;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    padding: 0;
-
-    font-size: 18px;
-
-    color: var(--champagne);
-
-    opacity: 0;
-
-    pointer-events: none;
-
-    transition:
-        opacity 0.8s ease,
-        transform 0.6s ease;
-}
-
-.artwork-screen.settled
-.garden-portal {
-
-    opacity: 0.72;
-
-    pointer-events: auto;
-}
-
-.garden-portal:hover {
-    opacity: 1;
-
-    transform: translateX(5px);
-}
-
-
-/* =========================================
-   GARDEN SCREEN
-   ========================================= */
-
-.garden-screen {
-    position: fixed;
-    inset: 0;
-
-    width: 100vw;
-    height: 100vh;
-
-    background: #11110F;
-
-    z-index: 20;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    overflow: hidden;
-
-    opacity: 0;
-    visibility: hidden;
-
-    transform: scale(1.08);
-
-    transition:
-        opacity 1s ease,
-        transform 1.5s cubic-bezier(0.16, 1, 0.3, 1),
-        visibility 0s linear 1.5s;
-}
-
-.garden-screen.open {
-    opacity: 1;
-
-    visibility: visible;
-
-    transform: scale(1);
-
-    transition:
-        opacity 1s ease,
-        transform 1.5s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.garden-frame {
-    position: relative;
-
-    width: 100vw;
-    height: 100vh;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.garden-artwork {
-    position: relative;
-
-    z-index: 1;
-
-    width: 100vmin;
-    height: 100vmin;
-
-    object-fit: contain;
-
-    transform: scale(1);
-
-    transition:
-        transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.garden-screen.key-opening
-.garden-artwork {
-
-    transform:
-        scale(1.08)
-        rotate(2deg);
-}
-
-
-/* =========================================
-   GARDEN TITLE
-   ========================================= */
-
-.garden-title {
-    position: absolute;
-
-    left: 50%;
-    bottom: 28px;
-
-    transform: translateX(-50%);
-
-    z-index: 10;
-
-    width: max-content;
-
-    font-size: 12px;
-
-    letter-spacing: 0.22em;
-
-    color: var(--gold);
-
-    white-space: nowrap;
-
-    opacity: 0;
-
-    transition:
-        opacity 1s ease;
-}
-
-.garden-screen.open
-.garden-title {
-
-    opacity: 1;
-}
-
-
-/* =========================================
-   GARDEN MESSAGE
-   ========================================= */
-
-.garden-message {
-    position: absolute;
-
-    left: 50%;
-    top: 10%;
-
-    transform: translateX(-50%);
-
-    z-index: 10;
-
-    width: max-content;
-
-    font-family:
-        Georgia,
-        "Times New Roman",
-        serif;
-
-    font-size: 15px;
-
-    font-style: italic;
-
-    letter-spacing: 0.08em;
-
-    color: var(--champagne);
-
-    white-space: nowrap;
-
-    opacity: 0;
-
-    transition:
-        opacity 1s ease 1.2s;
-}
-
-.garden-screen.open
-.garden-message {
-
-    opacity: 0.92;
-}
-
-
-/* =========================================
-   KEYHOLE HOTSPOT
-   ========================================= */
-
-.garden-keyhole {
-    position: absolute;
-
-    z-index: 20;
-
-    width: 82px;
-    height: 110px;
-
-    left: 50%;
-
-    top: calc(50% - 6vmin);
-
-    transform: translate(-50%, -50%);
-
-    padding: 0;
-
-    border-radius:
-        50% 50% 45% 45%;
-
-    opacity: 0;
-
-    pointer-events: auto;
-}
-
-
-/* =========================================
-   GARDEN BACK
-   ========================================= */
-
-.garden-back {
-    position: absolute;
-
-    top: 28px;
-    left: 28px;
-
-    z-index: 30;
-
-    width: 44px;
-    height: 44px;
-
-    padding: 0;
-
-    font-size: 17px;
-
-    color: var(--champagne);
-
-    opacity: 0.6;
-
-    transition:
-        opacity 0.4s ease,
-        transform 0.4s ease;
-}
-
-.garden-back:hover {
-    opacity: 1;
-
-    transform: translateX(-4px);
-}
-
-
-/* =========================================
-   PORTAL TRANSITION
-   ========================================= */
-
-.garden-screen.portal {
-    transform: scale(1);
-
-    transition:
-        transform 1.7s cubic-bezier(0.7, 0, 0.2, 1),
-        opacity 1.2s ease;
-}
-
-.garden-screen.portal
-.garden-frame {
-
-    animation:
-        portalSpin
-        1.7s
-        cubic-bezier(0.7, 0, 0.2, 1)
-        forwards;
-}
-
-@keyframes portalSpin {
-
-    0% {
-        transform:
-            scale(1)
-            rotate(0deg);
-    }
-
-    100% {
-        transform:
-            scale(9)
-            rotate(18deg);
-    }
-}
-
-
-/* =========================================
-   CONTACT ROOM
-   ========================================= */
-
-.contact-screen {
-    position: fixed;
-    inset: 0;
-
-    width: 100vw;
-    height: 100vh;
-
-    z-index: 100;
-
-    background: #11110F;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    opacity: 0;
-    visibility: hidden;
-
-    transition:
-        opacity 1s ease;
-}
-
-.contact-screen.open {
-    opacity: 1;
-
-    visibility: visible;
-}
-
-.contact-content {
-    text-align: center;
-
-    position: relative;
-
-    z-index: 10;
-}
-
-.contact-label {
-    font-size: 10px;
-
-    letter-spacing: 0.2em;
-
-    color: var(--muted);
-
-    margin-bottom: 40px;
-}
-
-.contact-content h2 {
-    font-size:
-        clamp(
-            38px,
-            7vw,
-            88px
-        );
-
-    font-weight: 400;
-
-    letter-spacing: -0.04em;
-}
-
-.contact-email {
-    margin-top: 30px;
-
-    font-family:
-        Georgia,
-        "Times New Roman",
-        serif;
-
-    font-size: 16px;
-
-    font-style: italic;
-
-    color: var(--champagne);
-
-    text-decoration: underline;
-
-    text-decoration-color: transparent;
-
-    transition:
-        text-decoration-color 0.4s ease;
-}
-
-.contact-email:hover {
-    text-decoration-color: var(--champagne);
-}
-
-.dont-push {
-    margin-top: 100px;
-
-    padding: 16px 22px;
-
-    background: #8E2424;
-
-    color: #F2E7D5;
-
-    font-size: 10px;
-
-    letter-spacing: 0.14em;
-
-    transition:
-        transform 0.4s ease,
-        background 0.4s ease;
-}
-
-.dont-push:hover {
-    transform: translateY(-3px);
-
-    background: #A62D2D;
-}
-
-.push-message,
-.push-message-second {
-
-    margin-top: 25px;
-
-    font-family:
-        Georgia,
-        "Times New Roman",
-        serif;
-
-    font-style: italic;
-
-    color: var(--champagne);
-
-    opacity: 0;
-
-    transform: translateY(8px);
-
-    transition:
-        opacity 0.7s ease,
-        transform 0.7s ease;
-}
-
-.push-message.show,
-.push-message-second.show {
-
-    opacity: 1;
-
-    transform: translateY(0);
-}
-
-.contact-back {
-    position: absolute;
-
-    top: 28px;
-    left: 28px;
-
-    z-index: 20;
-
-    width: 44px;
-    height: 44px;
-
-    padding: 0;
-
-    color: var(--champagne);
-
-    font-size: 17px;
-
-    opacity: 0.6;
-}
-
-.contact-back:hover {
-    opacity: 1;
-}
-
-
-/* =========================================
-   MOBILE
-   ========================================= */
-
-@media (max-width: 600px) {
-
-    .top-bar {
-        height: 64px;
-
-        padding: 0 22px;
-    }
-
-    .realm-mark,
-    .enter-link {
-        font-size: 9px;
-
-        letter-spacing: 0.14em;
-    }
-
-    .realm-reaction {
-        font-size: 9px;
-    }
-
-    .oddity-symbol {
-        width: 65px;
-        height: 82px;
-
-        margin-bottom: 20px;
-    }
-
-    .realm-title {
-        font-size:
-            clamp(
-                54px,
-                18vw,
-                100px
-            );
-    }
-
-    .subtitle {
-        margin-top: 27px;
-
-        font-size: 8px;
-
-        letter-spacing: 0.18em;
-    }
-
-    .curious {
-        bottom: 28px;
-
-        font-size: 9px;
-    }
-
-
-    /* THE WAY IN */
-
-    .first-artwork {
-        transform: scale(1.9);
-    }
-
-    .artwork-screen.boom
-    .first-artwork {
-        transform: scale(1.9);
-    }
-
-    .artwork-screen.settled
-    .first-artwork {
-        transform: scale(0.82);
-    }
-
-    .artwork-info {
-        top: calc(50% + 42vmin);
-    }
-
-    .artwork-title {
-        font-size: 11px;
-    }
-
-    .artwork-details {
-        font-size: 8px;
-    }
-
-    .look-again {
-        font-size: 13px;
-    }
-
-
-    /* CONTACT */
-
-    .contact-link {
-        top: 18px;
-        left: 22px;
-
-        z-index: 30;
-
-        font-size: 9px;
-    }
-
-
-    /* GARDEN */
-
-    .garden-portal {
-        right: 14px;
-        bottom: 14px;
-
-        width: 48px;
-        height: 48px;
-    }
-
-    .garden-message {
-        top: 9%;
-
-        font-size: 13px;
-    }
-
-    .garden-title {
-        bottom: 22px;
-
-        font-size: 9px;
-    }
-
-    .garden-back {
-        top: 18px;
-        left: 18px;
-    }
-
-
-    /* CONTACT ROOM */
-
-    .contact-content h2 {
-        font-size: 42px;
-    }
-
-    .contact-email {
-        font-size: 14px;
-    }
-
-    .dont-push {
-        margin-top: 70px;
-    }
-:root {
-    --background: #11110F;
-    --text: #E8E4DA;
-    --muted: #8F8B82;
-    --accent: #C6A96B;
-    --champagne: #E3D4B2;
-    --gold: #C9B47A;
-}
-
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-html,
-body {
-    width: 100%;
-    min-height: 100%;
-    background: var(--background);
-    color: var(--text);
-    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-    overflow: hidden;
-}
-
-button {
-    appearance: none;
-    border: none;
-    background: none;
-    color: inherit;
-    font-family: inherit;
-    cursor: pointer;
-}
-
-
-/* =========================================
-   LANDING
-   ========================================= */
-
-.landing {
-    position: fixed;
-    inset: 0;
-
-    width: 100vw;
-    height: 100vh;
-
-    background: var(--background);
-
-    z-index: 10;
-
-    transition:
-        transform 1.7s cubic-bezier(0.76, 0, 0.24, 1),
-        opacity 1.2s ease;
-}
-
-.landing.opening {
-    transform: translateX(-100vw);
-    opacity: 0;
-}
-
-
-/* =========================================
-   TOP BAR
-   ========================================= */
-
-.top-bar {
-    position: absolute;
-
-    top: 0;
-    left: 0;
-
-    width: 100%;
-    height: 80px;
-
-    padding: 0 42px;
-
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-
-    z-index: 50;
-}
-
-.realm-mark-wrap {
-    position: relative;
-}
-
-.realm-mark {
-    color: var(--text);
-
-    font-size: 11px;
-    letter-spacing: 0.16em;
-
-    text-transform: uppercase;
-
-    padding: 8px 0;
-
-    opacity: 0.78;
-
-    transition:
-        opacity 0.4s ease,
-        letter-spacing 0.4s ease;
-}
-
-.realm-mark:hover {
-    opacity: 1;
-    letter-spacing: 0.19em;
-}
-
-.realm-reaction {
-    position: absolute;
-
-    top: calc(100% + 6px);
-    left: 0;
-
-    white-space: nowrap;
-
-    font-family: Georgia, "Times New Roman", serif;
-
-    font-size: 10px;
-    font-style: italic;
-    letter-spacing: 0.04em;
-
-    color: var(--accent);
-
-    opacity: 0;
-
-    transform: translateY(-4px);
-
-    pointer-events: none;
-
-    transition:
-        opacity 0.45s ease,
-        transform 0.45s ease;
-}
-
-.realm-reaction.show {
-    opacity: 0.9;
-    transform: translateY(0);
-}
-
-.enter-link {
-    font-size: 11px;
-    letter-spacing: 0.16em;
-
-    padding: 8px;
-
-    opacity: 0.62;
-
-    transition:
-        opacity 0.4s ease,
-        letter-spacing 0.4s ease;
-}
-
-.enter-link:hover {
-    opacity: 1;
-    letter-spacing: 0.2em;
-}
-
-.enter-link.waiting {
-    opacity: 0.35;
-}
-
-.enter-link.hidden-text {
-    opacity: 0;
-}
-
-.enter-link.hint {
-    opacity: 1;
-    letter-spacing: 0.12em;
-}
-
-
-/* =========================================
-   HERO
-   ========================================= */
-
-.hero {
-    position: absolute;
-
-    top: 50%;
-    left: 50%;
-
-    transform: translate(-50%, -50%);
-
-    width: max-content;
-
-    text-align: center;
-}
-
-.oddity-symbol {
-    display: block;
-
-    width: 92px;
-    height: 120px;
-
-    object-fit: contain;
-
-    margin: 0 auto 24px;
-
-    opacity: 0.88;
-}
-
-.realm-title {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-
-    font-size: clamp(64px, 11vw, 170px);
-
-    font-weight: 400;
-
-    line-height: 0.82;
-
-    letter-spacing: -0.055em;
-
-    user-select: none;
-}
-
-.realm-title span:first-child {
-    transform: translateX(-0.04em);
-}
-
-.realm-title span:last-child {
-    transform: translateX(0.035em);
-}
-
-.subtitle {
-    margin-top: 34px;
-
-    font-size: 10px;
-
-    letter-spacing: 0.22em;
-
-    color: var(--muted);
-
-    text-transform: lowercase;
-}
-
-
-/* =========================================
-   CURIOUS
-   ========================================= */
-
-.curious {
-    position: absolute;
-
-    left: 50%;
-    bottom: 42px;
-
-    transform: translateX(-50%);
-
-    font-size: 11px;
-
-    letter-spacing: 0.18em;
-
-    padding: 10px;
-
-    transition:
-        transform 0.5s ease,
-        letter-spacing 0.5s ease,
-        opacity 0.5s ease;
-
-    z-index: 50;
-}
-
-.curious::after {
-    content: "";
-
-    position: absolute;
-
-    left: 10px;
-    right: 10px;
-    bottom: 5px;
-
-    height: 1px;
-
-    background: var(--text);
-
-    transform: scaleX(0);
-
-    transform-origin: center;
-
-    transition:
-        transform 0.5s ease;
-}
-
-.curious:hover {
-    transform:
-        translateX(-50%)
-        translateY(-3px);
-}
-
-.curious:hover::after {
-    transform: scaleX(1);
-}
-
-.curious.answered {
-    letter-spacing: 0.28em;
-}
-
-.curious.answered::after {
-    transform: scaleX(1);
-}
-
-
-/* =========================================
-   THE WAY IN
-   ========================================= */
-
-.artwork-screen {
-    position: fixed;
-    inset: 0;
-
-    width: 100vw;
-    height: 100vh;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    background: var(--background);
-
-    overflow: hidden;
-
-    z-index: 1;
-
-    opacity: 0;
-    visibility: hidden;
-
-    transition:
-        opacity 0.8s ease,
-        visibility 0s linear 1s;
-}
-
-.artwork-screen.revealed {
-    opacity: 1;
-    visibility: visible;
-
-    transition:
-        opacity 0.8s ease;
-}
-
-.artwork-frame {
-    position: relative;
-
-    width: 100vw;
-    height: 100vh;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    overflow: hidden;
-}
-
-
-/* =========================================
-   FIRST ARTWORK
-   ========================================= */
-
-.first-artwork {
-    display: block;
-
-    width: 100vmin;
-    height: 100vmin;
-
-    object-fit: contain;
-
-    opacity: 0;
-
-    transform: scale(1.75);
-
-    will-change: transform, opacity;
-
-    cursor: crosshair;
-
-    position: relative;
-
-    z-index: 2;
-
-    transition:
-        opacity 0.45s ease,
-        transform 2.7s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.artwork-screen.boom .first-artwork {
-    opacity: 1;
-
-    transform: scale(1.75);
-}
-
-.artwork-screen.settled .first-artwork {
-    transform: scale(0.72);
-}
-
-
-/* =========================================
-   ARTWORK INFORMATION
-   ========================================= */
-
-.artwork-info {
-    position: absolute;
-
-    left: 50%;
-
-    top: calc(50% + 37vmin);
-
-    transform:
-        translateX(-50%)
-        translateY(8px);
-
-    width: max-content;
-
-    text-align: center;
-
-    pointer-events: none;
-
-    z-index: 10;
-
-    opacity: 0;
-
-    transition:
-        opacity 0.7s ease,
-        transform 0.7s ease;
-}
-
-.artwork-title {
-    font-size: 13px;
-
-    letter-spacing: 0.2em;
-
-    font-weight: 400;
-
-    color: var(--gold);
-
-    white-space: nowrap;
-}
-
-.artwork-details {
-    margin-top: 8px;
-
-    font-size: 9px;
-
-    letter-spacing: 0.15em;
-
-    color: var(--muted);
-
-    text-transform: lowercase;
-
-    opacity: 0;
-
-    transform: translateY(4px);
-
-    transition:
-        opacity 0.5s ease,
-        transform 0.5s ease;
-}
-
-.artwork-screen.settled .artwork-info {
-    opacity: 1;
-
-    transform:
-        translateX(-50%)
-        translateY(0);
-}
-
-.artwork-screen.settled
-.first-artwork:hover
-+ .artwork-info
-.artwork-details {
-
-    opacity: 1;
-
-    transform: translateY(0);
-}
-
-
-/* =========================================
-   LOOK AGAIN
-   ========================================= */
-
-.look-again {
-    margin-top: 15px;
-
-    font-size: 18px;
-
-    letter-spacing: 0.24em;
-
-    color: var(--champagne);
-
-    opacity: 0;
-
-    transform: translateY(7px);
-
-    transition:
-        opacity 0.7s ease,
-        transform 0.7s ease;
-}
-
-.look-again.show {
-    opacity: 0.95;
-
-    transform: translateY(0);
-}
-
-
-/* =========================================
-   CONTACT
-   ========================================= */
-
-.contact-link {
-    position: absolute;
-
-    top: 28px;
-    left: 42px;
-
-    z-index: 30;
-
-    display: block;
-
-    width: auto;
-    height: auto;
-
-    padding: 8px 0;
-
-    font-size: 10px;
-
-    letter-spacing: 0.16em;
-
-    color: var(--text);
-
-    opacity: 0.72;
-
-    pointer-events: auto;
-
-    transition:
-        opacity 0.4s ease,
-        letter-spacing 0.4s ease;
-}
-
-.contact-link:hover {
-    opacity: 1;
-
-    letter-spacing: 0.2em;
-}
-
-
-/* =========================================
-   GARDEN ARROW
-   ========================================= */
-
-.garden-portal {
-    position: absolute;
-
-    right: 30px;
-    bottom: 28px;
-
-    z-index: 30;
-
-    width: 48px;
-    height: 48px;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    padding: 0;
-
-    font-size: 18px;
-
-    color: var(--champagne);
-
-    opacity: 0;
-
-    pointer-events: none;
-
-    transition:
-        opacity 0.8s ease,
-        transform 0.6s ease;
-}
-
-.artwork-screen.settled
-.garden-portal {
-
-    opacity: 0.72;
-
-    pointer-events: auto;
-}
-
-.garden-portal:hover {
-    opacity: 1;
-
-    transform: translateX(5px);
-}
-
-
-/* =========================================
-   GARDEN SCREEN
-   ========================================= */
-
-.garden-screen {
-    position: fixed;
-    inset: 0;
-
-    width: 100vw;
-    height: 100vh;
-
-    background: #11110F;
-
-    z-index: 20;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    overflow: hidden;
-
-    opacity: 0;
-    visibility: hidden;
-
-    transform: scale(1.08);
-
-    transition:
-        opacity 1s ease,
-        transform 1.5s cubic-bezier(0.16, 1, 0.3, 1),
-        visibility 0s linear 1.5s;
-}
-
-.garden-screen.open {
-    opacity: 1;
-
-    visibility: visible;
-
-    transform: scale(1);
-
-    transition:
-        opacity 1s ease,
-        transform 1.5s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.garden-frame {
-    position: relative;
-
-    width: 100vw;
-    height: 100vh;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.garden-artwork {
-    position: relative;
-
-    z-index: 1;
-
-    width: 100vmin;
-    height: 100vmin;
-
-    object-fit: contain;
-
-    transform: scale(1);
-
-    transition:
-        transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.garden-screen.key-opening
-.garden-artwork {
-
-    transform:
-        scale(1.08)
-        rotate(2deg);
-}
-
-
-/* =========================================
-   GARDEN TITLE
-   ========================================= */
-
-.garden-title {
-    position: absolute;
-
-    left: 50%;
-    bottom: 28px;
-
-    transform: translateX(-50%);
-
-    z-index: 10;
-
-    width: max-content;
-
-    font-size: 12px;
-
-    letter-spacing: 0.22em;
-
-    color: var(--gold);
-
-    white-space: nowrap;
-
-    opacity: 0;
-
-    transition:
-        opacity 1s ease;
-}
-
-.garden-screen.open
-.garden-title {
-
-    opacity: 1;
-}
-
-
-/* =========================================
-   GARDEN MESSAGE
-   ========================================= */
-
-.garden-message {
-    position: absolute;
-
-    left: 50%;
-    top: 10%;
-
-    transform: translateX(-50%);
-
-    z-index: 10;
-
-    width: max-content;
-
-    font-family:
-        Georgia,
-        "Times New Roman",
-        serif;
-
-    font-size: 15px;
-
-    font-style: italic;
-
-    letter-spacing: 0.08em;
-
-    color: var(--champagne);
-
-    white-space: nowrap;
-
-    opacity: 0;
-
-    transition:
-        opacity 1s ease 1.2s;
-}
-
-.garden-screen.open
-.garden-message {
-
-    opacity: 0.92;
-}
-
-
-/* =========================================
-   KEYHOLE HOTSPOT
-   ========================================= */
-
-.garden-keyhole {
-    position: absolute;
-
-    z-index: 20;
-
-    width: 82px;
-    height: 110px;
-
-    left: 50%;
-
-    top: calc(50% - 6vmin);
-
-    transform: translate(-50%, -50%);
-
-    padding: 0;
-
-    border-radius:
-        50% 50% 45% 45%;
-
-    opacity: 0;
-
-    pointer-events: auto;
-}
-
-
-/* =========================================
-   GARDEN BACK
-   ========================================= */
-
-.garden-back {
-    position: absolute;
-
-    top: 28px;
-    left: 28px;
-
-    z-index: 30;
-
-    width: 44px;
-    height: 44px;
-
-    padding: 0;
-
-    font-size: 17px;
-
-    color: var(--champagne);
-
-    opacity: 0.6;
-
-    transition:
-        opacity 0.4s ease,
-        transform 0.4s ease;
-}
-
-.garden-back:hover {
-    opacity: 1;
-
-    transform: translateX(-4px);
-}
-
-
-/* =========================================
-   PORTAL TRANSITION
-   ========================================= */
-
-.garden-screen.portal {
-    transform: scale(1);
-
-    transition:
-        transform 1.7s cubic-bezier(0.7, 0, 0.2, 1),
-        opacity 1.2s ease;
-}
-
-.garden-screen.portal
-.garden-frame {
-
-    animation:
-        portalSpin
-        1.7s
-        cubic-bezier(0.7, 0, 0.2, 1)
-        forwards;
-}
-
-@keyframes portalSpin {
-
-    0% {
-        transform:
-            scale(1)
-            rotate(0deg);
-    }
-
-    100% {
-        transform:
-            scale(9)
-            rotate(18deg);
-    }
-}
-
-
-/* =========================================
-   CONTACT ROOM
-   ========================================= */
-
-.contact-screen {
-    position: fixed;
-    inset: 0;
-
-    width: 100vw;
-    height: 100vh;
-
-    z-index: 100;
-
-    background: #11110F;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    opacity: 0;
-    visibility: hidden;
-
-    transition:
-        opacity 1s ease;
-}
-
-.contact-screen.open {
-    opacity: 1;
-
-    visibility: visible;
-}
-
-.contact-content {
-    text-align: center;
-
-    position: relative;
-
-    z-index: 10;
-}
-
-.contact-label {
-    font-size: 10px;
-
-    letter-spacing: 0.2em;
-
-    color: var(--muted);
-
-    margin-bottom: 40px;
-}
-
-.contact-content h2 {
-    font-size:
-        clamp(
-            38px,
-            7vw,
-            88px
-        );
-
-    font-weight: 400;
-
-    letter-spacing: -0.04em;
-}
-
-.contact-email {
-    margin-top: 30px;
-
-    font-family:
-        Georgia,
-        "Times New Roman",
-        serif;
-
-    font-size: 16px;
-
-    font-style: italic;
-
-    color: var(--champagne);
-
-    text-decoration: underline;
-
-    text-decoration-color: transparent;
-
-    transition:
-        text-decoration-color 0.4s ease;
-}
-
-.contact-email:hover {
-    text-decoration-color: var(--champagne);
-}
-
-.dont-push {
-    margin-top: 100px;
-
-    padding: 16px 22px;
-
-    background: #8E2424;
-
-    color: #F2E7D5;
-
-    font-size: 10px;
-
-    letter-spacing: 0.14em;
-
-    transition:
-        transform 0.4s ease,
-        background 0.4s ease;
-}
-
-.dont-push:hover {
-    transform: translateY(-3px);
-
-    background: #A62D2D;
-}
-
-.push-message,
-.push-message-second {
-
-    margin-top: 25px;
-
-    font-family:
-        Georgia,
-        "Times New Roman",
-        serif;
-
-    font-style: italic;
-
-    color: var(--champagne);
-
-    opacity: 0;
-
-    transform: translateY(8px);
-
-    transition:
-        opacity 0.7s ease,
-        transform 0.7s ease;
-}
-
-.push-message.show,
-.push-message-second.show {
-
-    opacity: 1;
-
-    transform: translateY(0);
-}
-
-.contact-back {
-    position: absolute;
-
-    top: 28px;
-    left: 28px;
-
-    z-index: 20;
-
-    width: 44px;
-    height: 44px;
-
-    padding: 0;
-
-    color: var(--champagne);
-
-    font-size: 17px;
-
-    opacity: 0.6;
-}
-
-.contact-back:hover {
-    opacity: 1;
-}
-
-
-/* =========================================
-   MOBILE
-   ========================================= */
-
-@media (max-width: 600px) {
-
-    .top-bar {
-        height: 64px;
-
-        padding: 0 22px;
-    }
-
-    .realm-mark,
-    .enter-link {
-        font-size: 9px;
-
-        letter-spacing: 0.14em;
-    }
-
-    .realm-reaction {
-        font-size: 9px;
-    }
-
-    .oddity-symbol {
-        width: 65px;
-        height: 82px;
-
-        margin-bottom: 20px;
-    }
-
-    .realm-title {
-        font-size:
-            clamp(
-                54px,
-                18vw,
-                100px
-            );
-    }
-
-    .subtitle {
-        margin-top: 27px;
-
-        font-size: 8px;
-
-        letter-spacing: 0.18em;
-    }
-
-    .curious {
-        bottom: 28px;
-
-        font-size: 9px;
-    }
-
-
-    /* THE WAY IN */
-
-    .first-artwork {
-        transform: scale(1.9);
-    }
-
-    .artwork-screen.boom
-    .first-artwork {
-        transform: scale(1.9);
-    }
-
-    .artwork-screen.settled
-    .first-artwork {
-        transform: scale(0.82);
-    }
-
-    .artwork-info {
-        top: calc(50% + 42vmin);
-    }
-
-    .artwork-title {
-        font-size: 11px;
-    }
-
-    .artwork-details {
-        font-size: 8px;
-    }
-
-    .look-again {
-        font-size: 13px;
-    }
-
-
-    /* CONTACT */
-
-    .contact-link {
-        top: 18px;
-        left: 22px;
-
-        z-index: 30;
-
-        font-size: 9px;
-    }
-
-
-    /* GARDEN */
-
-    .garden-portal {
-        right: 14px;
-        bottom: 14px;
-
-        width: 48px;
-        height: 48px;
-    }
-
-    .garden-message {
-        top: 9%;
-
-        font-size: 13px;
-    }
-
-    .garden-title {
-        bottom: 22px;
-
-        font-size: 9px;
-    }
-
-    .garden-back {
-        top: 18px;
-        left: 18px;
-    }
-
-
-    /* CONTACT ROOM */
-
-    .contact-content h2 {
-        font-size: 42px;
-    }
-
-    .contact-email {
-        font-size: 14px;
-    }
-
-    .dont-push {
-        margin-top: 70px;
-    }
-/* =========================================
-   CONTACT - INDEPENDENT SCREEN POSITION
-   ========================================= */
-
-#contactLink {
-    position: fixed !important;
-
-    top: 28px !important;
-    left: 42px !important;
-
-    right: auto !important;
-    bottom: auto !important;
-
-    width: auto !important;
-    height: auto !important;
-
-    margin: 0 !important;
-    padding: 8px 0 !important;
-
-    transform: none !important;
-
-    z-index: 99999 !important;
-
-    display: none !important;
-
-    pointer-events: none !important;
-
-    border: 0 !important;
-    background: none !important;
-
-    color: #E8E4DA !important;
-
-    font-family:
-        "Helvetica Neue",
-        Helvetica,
-        Arial,
-        sans-serif !important;
-
-    font-size: 10px !important;
-
-    font-weight: 400 !important;
-
-    letter-spacing: 0.16em !important;
-
-    line-height: 1 !important;
-
-    opacity: 0 !important;
-
-    cursor: pointer !important;
-
-    transition:
-        opacity 0.4s ease,
-        letter-spacing 0.4s ease !important;
-}
-
-
-/* CONTACT appears only after THE WAY IN settles */
-
-#artworkScreen.settled ~ #contactLink {
-    display: block !important;
-    pointer-events: auto !important;
-    opacity: 0.72 !important;
-}
-
-
-/* subtle interaction */
-
-#artworkScreen.settled ~ #contactLink:hover {
-    opacity: 1 !important;
-    letter-spacing: 0.20em !important;
-}
-
-
-/* tablet / mobile */
-
-@media (max-width: 600px) {
-
-    #contactLink {
-        top: 18px !important;
-        left: 22px !important;
-        font-size: 9px !important;
-    }
-
-}
-    /* =========================================================
    ODDITY REALM
-   CURRENT WORLD / INTERACTION OVERRIDES
-   ========================================================= */
+   WORLD INTERACTION
+   ========================================= */
 
 
-/* =========================================================
-   CONTACT LINK
-   Only visible on THE WAY IN
-   ========================================================= */
+/* =========================================
+   ELEMENTS
+   ========================================= */
 
-#contactLink {
-    position: fixed !important;
+const curiousButton =
+    document.getElementById("curiousButton");
 
-    top: 28px !important;
-    left: 42px !important;
+const enterHint =
+    document.getElementById("enterHint");
 
-    right: auto !important;
-    bottom: auto !important;
+const realmMark =
+    document.getElementById("realmMark");
 
-    z-index: 9999 !important;
+const realmMarkWrap =
+    document.querySelector(".realm-mark-wrap");
 
-    display: block !important;
+const realmReaction =
+    document.getElementById("realmReaction");
 
-    margin: 0 !important;
-    padding: 8px 0 !important;
+const landing =
+    document.getElementById("landing");
 
-    width: auto !important;
-    height: auto !important;
+const artworkScreen =
+    document.getElementById("artworkScreen");
 
-    opacity: 0 !important;
-    visibility: hidden !important;
-    pointer-events: none !important;
+const firstArtwork =
+    document.getElementById("firstArtwork");
 
-    color: var(--text) !important;
+const lookAgain =
+    document.querySelector(".look-again");
 
-    font-size: 10px !important;
-    letter-spacing: 0.16em !important;
-    line-height: 1 !important;
+const gardenPortal =
+    document.getElementById("gardenPortal");
 
-    transition:
-        opacity 0.5s ease,
-        letter-spacing 0.4s ease,
-        visibility 0s linear 0.5s !important;
-}
+const gardenScreen =
+    document.getElementById("gardenScreen");
 
+const gardenKeyhole =
+    document.getElementById("gardenKeyhole");
 
-#contactLink.is-visible {
-    opacity: 0.72 !important;
-    visibility: visible !important;
-    pointer-events: auto !important;
+const gardenBack =
+    document.getElementById("gardenBack");
 
-    transition:
-        opacity 0.5s ease,
-        letter-spacing 0.4s ease !important;
-}
+const contactLink =
+    document.getElementById("contactLink");
 
+const contactWhisper =
+    document.getElementById("contactWhisper");
 
-#contactLink:hover {
-    opacity: 1 !important;
-    letter-spacing: 0.20em !important;
-}
+const contactScreen =
+    document.getElementById("contactScreen");
 
+const contactBack =
+    document.getElementById("contactBack");
 
-/* =========================================================
-   CONTACT WHISPER
-   ========================================================= */
+const dontPush =
+    document.getElementById("dontPush");
 
-.contact-whisper {
-    position: fixed;
+const pushMessage =
+    document.getElementById("pushMessage");
 
-    inset: 0;
+const pushMessageSecond =
+    document.getElementById("pushMessageSecond");
 
-    z-index: 10000;
+const growthScreen =
+    document.getElementById("growthScreen");
 
-    display: flex;
+const growthArtwork =
+    document.getElementById("growthArtwork");
 
-    align-items: center;
-    justify-content: center;
 
-    padding: 30px;
 
-    text-align: center;
+/* =========================================
+   CONTACT VISIBILITY
+   CONTACT exists only on THE WAY IN
+   ========================================= */
 
-    font-family:
-        Georgia,
-        "Times New Roman",
-        serif;
+function showContactLink() {
 
-    font-size: clamp(18px, 3vw, 28px);
-
-    font-style: italic;
-
-    letter-spacing: 0.03em;
-
-    color: var(--champagne);
-
-    background: var(--background);
-
-    opacity: 0;
-    visibility: hidden;
-    pointer-events: none;
-
-    transition:
-        opacity 0.9s ease,
-        visibility 0s linear 0.9s;
-}
-
-
-.contact-whisper.show {
-    opacity: 1;
-    visibility: visible;
-
-    transition:
-        opacity 0.9s ease;
-}
-
-
-/* =========================================================
-   GARDEN ARROW
-   ========================================================= */
-
-.garden-portal {
-    position: absolute !important;
-
-    left: 50% !important;
-    right: auto !important;
-
-    bottom: 12px !important;
-
-    transform:
-        translateX(-50%) !important;
-
-    width: 44px !important;
-    height: 36px !important;
-
-    z-index: 30 !important;
-
-    display: flex !important;
-
-    align-items: center;
-    justify-content: center;
-
-    padding: 0 !important;
-
-    font-size: 22px !important;
-
-    color: var(--champagne) !important;
-
-    opacity: 0 !important;
-
-    pointer-events: none !important;
-
-    transition:
-        opacity 0.8s ease,
-        transform 0.5s ease !important;
-}
-
-
-.artwork-screen.settled .garden-portal {
-    opacity: 0.72 !important;
-    pointer-events: auto !important;
-}
-
-
-.garden-portal:hover {
-    opacity: 1 !important;
-
-    transform:
-        translateX(-50%)
-        translateY(4px) !important;
-}
-
-
-/* =========================================================
-   GARDEN
-   Entrance is staged:
-   1. title in centre
-   2. title moves upward
-   3. artwork rises from below
-   4. message appears
-   5. key becomes active
-   ========================================================= */
-
-.garden-screen {
-    opacity: 0 !important;
-    visibility: hidden !important;
-
-    transform: none !important;
-
-    transition:
-        opacity 0.8s ease,
-        visibility 0s linear 1s !important;
-}
-
-
-.garden-screen.open {
-    opacity: 1 !important;
-    visibility: visible !important;
-
-    transition:
-        opacity 0.8s ease !important;
-}
-
-
-/* artwork starts below the screen */
-
-.garden-artwork {
-    opacity: 0 !important;
-
-    transform:
-        translateY(115vh)
-        scale(0.92) !important;
-
-    transition:
-        transform 1.5s cubic-bezier(0.16, 1, 0.3, 1),
-        opacity 0.9s ease !important;
-}
-
-
-/* title begins in centre */
-
-.garden-title {
-    left: 50% !important;
-
-    top: 50% !important;
-    bottom: auto !important;
-
-    transform:
-        translate(-50%, -50%)
-        scale(0.94) !important;
-
-    opacity: 0 !important;
-
-    font-size: clamp(16px, 2.5vw, 24px) !important;
-
-    letter-spacing: 0.22em !important;
-
-    transition:
-        top 1.15s cubic-bezier(0.16, 1, 0.3, 1),
-        transform 1.15s cubic-bezier(0.16, 1, 0.3, 1),
-        opacity 0.8s ease !important;
-}
-
-
-/* title appears in centre */
-
-.garden-screen.title-in .garden-title {
-    opacity: 1 !important;
-
-    transform:
-        translate(-50%, -50%)
-        scale(1) !important;
-}
-
-
-/* title travels upward */
-
-.garden-screen.title-up .garden-title {
-    top: 9% !important;
-
-    transform:
-        translate(-50%, -50%)
-        scale(0.78) !important;
-
-    opacity: 0.95 !important;
-}
-
-
-/* artwork enters from below */
-
-.garden-screen.art-in .garden-artwork {
-    opacity: 1 !important;
-
-    transform:
-        translateY(0)
-        scale(1) !important;
-}
-
-
-/* message waits until artwork has arrived */
-
-.garden-message {
-    top: auto !important;
-    bottom: 7% !important;
-
-    opacity: 0 !important;
-
-    transform:
-        translate(-50%, 8px) !important;
-
-    transition:
-        opacity 0.8s ease,
-        transform 0.8s ease !important;
-}
-
-
-.garden-screen.ready .garden-message {
-    opacity: 0.92 !important;
-
-    transform:
-        translate(-50%, 0) !important;
-}
-
-
-/* key is not active until the scene is ready */
-
-.garden-keyhole {
-    pointer-events: none !important;
-}
-
-
-.garden-screen.ready .garden-keyhole {
-    pointer-events: auto !important;
-}
-
-
-/* back arrow only appears once Garden has fully arrived */
-
-.garden-back {
-    opacity: 0 !important;
-    pointer-events: none !important;
-
-    transition:
-        opacity 0.6s ease !important;
-}
-
-
-.garden-screen.ready .garden-back {
-    opacity: 0.6 !important;
-    pointer-events: auto !important;
-}
-
-
-/* =========================================================
-   GARDEN PORTAL
-   The whole Garden is swallowed into the keyhole
-   ========================================================= */
-
-.garden-screen.portal .garden-frame {
-    animation:
-        portalSpin
-        1.65s
-        cubic-bezier(0.7, 0, 0.2, 1)
-        forwards;
-}
-
-
-@keyframes portalSpin {
-
-    0% {
-        transform:
-            scale(1)
-            rotate(0deg);
+    if (!contactLink) {
+        return;
     }
 
-    100% {
-        transform:
-            scale(12)
-            rotate(28deg);
+    contactLink.classList.add(
+        "is-visible"
+    );
+
+}
+
+
+function hideContactLink() {
+
+    if (!contactLink) {
+        return;
     }
 
+    contactLink.classList.remove(
+        "is-visible"
+    );
+
 }
 
 
-/* =========================================================
-   THE FIRST THING THAT GREW HERE
-   ========================================================= */
 
-.growth-screen {
-    position: fixed;
+/* =========================================
+   ENTER
+   ========================================= */
 
-    inset: 0;
+enterHint.addEventListener(
+    "click",
+    () => {
 
-    width: 100vw;
-    height: 100vh;
+        if (
+            enterHint.dataset.reacted === "true"
+        ) {
+            return;
+        }
 
-    z-index: 40;
 
-    display: flex;
+        enterHint.dataset.reacted =
+            "true";
 
-    align-items: center;
-    justify-content: center;
+        enterHint.classList.add(
+            "waiting"
+        );
 
-    overflow: hidden;
 
-    background: #11110F;
+        setTimeout(
+            () => {
 
-    opacity: 0;
-    visibility: hidden;
+                enterHint.classList.add(
+                    "hidden-text"
+                );
 
-    transition:
-        opacity 0.7s ease,
-        visibility 0s linear 0.7s;
+
+                setTimeout(
+                    () => {
+
+                        enterHint.textContent =
+                            "YOU SHOULD BE MORE CURIOUS.";
+
+                        enterHint.classList.remove(
+                            "waiting"
+                        );
+
+                        enterHint.classList.remove(
+                            "hidden-text"
+                        );
+
+                        enterHint.classList.add(
+                            "hint"
+                        );
+
+                    },
+                    350
+                );
+
+            },
+            1800
+        );
+
+    }
+);
+
+
+
+/* =========================================
+   ODDITY REALM
+   I FELT THAT.
+   ========================================= */
+
+realmMark.addEventListener(
+    "click",
+    () => {
+
+        realmReaction.classList.add(
+            "show"
+        );
+
+    }
+);
+
+
+realmMarkWrap.addEventListener(
+    "mouseleave",
+    () => {
+
+        realmReaction.classList.remove(
+            "show"
+        );
+
+    }
+);
+
+
+
+/* =========================================
+   CURIOUS?
+   LANDING → THE WAY IN
+   ========================================= */
+
+curiousButton.addEventListener(
+    "click",
+    () => {
+
+        if (
+            curiousButton.classList.contains(
+                "answered"
+            )
+        ) {
+            return;
+        }
+
+
+        curiousButton.textContent =
+            "GOOD.";
+
+        curiousButton.classList.add(
+            "answered"
+        );
+
+
+        hideContactLink();
+
+
+        setTimeout(
+            () => {
+
+                landing.classList.add(
+                    "opening"
+                );
+
+            },
+            950
+        );
+
+
+        setTimeout(
+            () => {
+
+                artworkScreen.classList.add(
+                    "revealed"
+                );
+
+            },
+            1050
+        );
+
+
+        setTimeout(
+            () => {
+
+                artworkScreen.classList.add(
+                    "boom"
+                );
+
+            },
+            1500
+        );
+
+
+        setTimeout(
+            () => {
+
+                artworkScreen.classList.add(
+                    "settled"
+                );
+
+                showContactLink();
+
+            },
+            3100
+        );
+
+    }
+);
+
+
+
+/* =========================================
+   LOOK AGAIN
+   ========================================= */
+
+let lookTimer;
+
+let hideLookTimer;
+
+
+function showLookAgain() {
+
+    clearTimeout(
+        lookTimer
+    );
+
+    clearTimeout(
+        hideLookTimer
+    );
+
+
+    lookTimer = setTimeout(
+        () => {
+
+            lookAgain.classList.add(
+                "show"
+            );
+
+
+            hideLookTimer =
+                setTimeout(
+                    () => {
+
+                        lookAgain.classList.remove(
+                            "show"
+                        );
+
+                    },
+                    1800
+                );
+
+        },
+        2500
+    );
+
 }
 
 
-.growth-screen.open {
-    opacity: 1;
-    visibility: visible;
+function hideLookAgain() {
 
-    transition:
-        opacity 0.7s ease;
+    clearTimeout(
+        lookTimer
+    );
+
+    clearTimeout(
+        hideLookTimer
+    );
+
+
+    lookAgain.classList.remove(
+        "show"
+    );
+
 }
 
 
-.growth-frame {
-    position: relative;
 
-    width: 100vw;
-    height: 100vh;
+/* Desktop */
 
-    display: flex;
+firstArtwork.addEventListener(
+    "mouseenter",
+    showLookAgain
+);
 
-    align-items: center;
-    justify-content: center;
 
-    overflow: hidden;
+firstArtwork.addEventListener(
+    "mouseleave",
+    hideLookAgain
+);
+
+
+
+/* Touch */
+
+firstArtwork.addEventListener(
+    "click",
+    () => {
+
+        if (
+            lookAgain.classList.contains(
+                "show"
+            )
+        ) {
+
+            hideLookAgain();
+
+            return;
+
+        }
+
+
+        showLookAgain();
+
+    }
+);
+
+
+
+/* =========================================
+   ENTER THE GARDEN
+   ========================================= */
+
+function enterGarden() {
+
+    if (
+        !artworkScreen.classList.contains(
+            "settled"
+        )
+    ) {
+        return;
+    }
+
+
+    hideContactLink();
+
+
+    gardenScreen.classList.remove(
+        "title-in",
+        "title-up",
+        "art-in",
+        "ready",
+        "portal"
+    );
+
+
+    gardenScreen.classList.add(
+        "open"
+    );
+
+
+    /*
+       Stage 1:
+       title appears in the centre.
+    */
+
+    setTimeout(
+        () => {
+
+            gardenScreen.classList.add(
+                "title-in"
+            );
+
+        },
+        100
+    );
+
+
+    /*
+       Stage 2:
+       title travels upward.
+    */
+
+    setTimeout(
+        () => {
+
+            gardenScreen.classList.add(
+                "title-up"
+            );
+
+        },
+        1200
+    );
+
+
+    /*
+       Stage 3:
+       artwork rises from below.
+    */
+
+    setTimeout(
+        () => {
+
+            gardenScreen.classList.add(
+                "art-in"
+            );
+
+        },
+        1500
+    );
+
+
+    /*
+       Stage 4:
+       everything is ready.
+    */
+
+    setTimeout(
+        () => {
+
+            gardenScreen.classList.add(
+                "ready"
+            );
+
+        },
+        3000
+    );
+
 }
 
 
-/* black nothingness first */
+gardenPortal.addEventListener(
+    "click",
+    enterGarden
+);
 
-.growth-artwork {
-    display: block;
 
-    width: 100vmin;
-    height: 100vmin;
 
-    object-fit: contain;
+/* =========================================
+   GARDEN KEYHOLE
+   ========================================= */
 
-    opacity: 0;
+gardenKeyhole.addEventListener(
+    "click",
+    () => {
 
-    transform:
-        scale(0.035);
+        if (
+            !gardenScreen.classList.contains(
+                "ready"
+            )
+        ) {
+            return;
+        }
 
-    transform-origin: center center;
 
-    transition:
-        transform 1.7s cubic-bezier(0.16, 1, 0.3, 1),
-        opacity 0.8s ease;
+        gardenScreen.classList.add(
+            "portal"
+        );
 
-    z-index: 2;
-}
 
+        /*
+           The Garden is swallowed
+           into the keyhole.
+        */
 
-/* the artwork grows out of nothing */
+        setTimeout(
+            () => {
 
-.growth-screen.growing .growth-artwork {
-    opacity: 1;
+                if (growthScreen) {
 
-    transform:
-        scale(1);
-}
+                    growthScreen.classList.add(
+                        "open"
+                    );
 
+                }
 
-/* title appears only after growth */
+            },
+            1250
+        );
 
-.growth-title {
-    position: absolute;
 
-    left: 50%;
-    top: 7%;
+        /*
+           Start the new world growing.
+        */
 
-    z-index: 10;
+        setTimeout(
+            () => {
 
-    width: max-content;
+                if (growthScreen) {
 
-    transform:
-        translate(-50%, -8px);
+                    growthScreen.classList.add(
+                        "growing"
+                    );
 
-    opacity: 0;
+                }
 
-    color: var(--gold);
+            },
+            1350
+        );
 
-    font-size: clamp(12px, 1.8vw, 18px);
 
-    letter-spacing: 0.22em;
+        /*
+           After the artwork reaches
+           its normal size, reveal title.
+        */
 
-    text-align: center;
+        setTimeout(
+            () => {
 
-    white-space: nowrap;
+                if (growthScreen) {
 
-    transition:
-        opacity 0.8s ease,
-        transform 0.8s ease;
-}
+                    growthScreen.classList.add(
+                        "ready"
+                    );
 
+                }
 
-.growth-screen.ready .growth-title {
-    opacity: 1;
+            },
+            3050
+        );
 
-    transform:
-        translate(-50%, 0);
-}
 
+        /*
+           Remove Garden after transition.
+        */
 
-/* =========================================================
-   CONTACT ROOM
-   ========================================================= */
+        setTimeout(
+            () => {
 
-.contact-screen {
-    z-index: 100 !important;
+                gardenScreen.classList.remove(
+                    "open",
+                    "title-in",
+                    "title-up",
+                    "art-in",
+                    "ready",
+                    "portal"
+                );
 
-    background: #11110F !important;
+            },
+            1800
+        );
 
-    opacity: 0 !important;
-    visibility: hidden !important;
+    }
+);
 
-    transition:
-        opacity 0.9s ease,
-        visibility 0s linear 0.9s !important;
-}
 
 
-.contact-screen.open {
-    opacity: 1 !important;
-    visibility: visible !important;
+/* =========================================
+   GARDEN BACK
+   ========================================= */
 
-    transition:
-        opacity 0.9s ease !important;
-}
+gardenBack.addEventListener(
+    "click",
+    () => {
 
+        gardenScreen.classList.remove(
+            "open",
+            "title-in",
+            "title-up",
+            "art-in",
+            "ready",
+            "portal"
+        );
 
-.contact-content {
-    position: absolute !important;
 
-    left: 50%;
-    top: 50%;
+        showContactLink();
 
-    transform:
-        translate(-50%, -50%) !important;
+    }
+);
 
-    width: min(90vw, 900px);
 
-    text-align: center !important;
 
-    z-index: 10;
-}
+/* =========================================
+   CONTACT
+   CONTACT → WHISPER → ROOM
+   ========================================= */
 
+contactLink.addEventListener(
+    "click",
+    () => {
 
-.contact-label {
-    margin: 0 0 28px !important;
+        hideContactLink();
 
-    font-size: 9px !important;
 
-    letter-spacing: 0.24em !important;
+        contactWhisper.classList.add(
+            "show"
+        );
 
-    color: var(--muted) !important;
-}
 
+        setTimeout(
+            () => {
 
-.contact-email {
-    display: inline-block;
+                contactWhisper.classList.remove(
+                    "show"
+                );
 
-    margin: 0 !important;
 
-    font-family:
-        Georgia,
-        "Times New Roman",
-        serif;
+                contactScreen.classList.add(
+                    "open"
+                );
 
-    font-size:
-        clamp(20px, 3.5vw, 38px);
+            },
+            2100
+        );
 
-    font-style: italic;
+    }
+);
 
-    letter-spacing: 0.02em;
 
-    color: var(--champagne);
 
-    text-decoration: none;
-
-    transition:
-        opacity 0.4s ease,
-        letter-spacing 0.4s ease;
-}
-
-
-.contact-email:hover {
-    opacity: 1;
-
-    letter-spacing: 0.04em;
-}
-
-
-/* =========================================================
-   DON'T PUSH
-   Bottom centre, completely independent of contact content
-   ========================================================= */
-
-.dont-push {
-    position: absolute !important;
-
-    left: 50% !important;
-    bottom: 34px !important;
-
-    transform:
-        translateX(-50%) rotate(-1deg) !important;
-
-    margin: 0 !important;
-
-    padding: 14px 25px !important;
-
-    min-width: 120px;
-
-    background: #8E2424 !important;
-
-    color: #F2E7D5 !important;
-
-    border-radius: 3px;
-
-    font-size: 10px !important;
-
-    letter-spacing: 0.16em !important;
-
-    z-index: 20 !important;
-
-    opacity: 1;
-
-    transition:
-        opacity 0.5s ease,
-        transform 0.4s ease;
-}
-
-
-.dont-push:hover {
-    transform:
-        translateX(-50%)
-        translateY(-3px)
-        rotate(-1deg) !important;
-
-    background: #A62D2D !important;
-}
-
-
-.dont-push.gone {
-    opacity: 0 !important;
-    pointer-events: none !important;
-
-    transform:
-        translateX(-50%)
-        scale(0.85) !important;
-}
-
-
-/* =========================================================
-   CONTACT MESSAGES
-   One message at a time
-   ========================================================= */
-
-.push-message,
-.push-message-second {
-    position: absolute;
-
-    left: 50%;
-    top: 50%;
-
-    margin: 0 !important;
-
-    transform:
-        translate(-50%, -50%)
-        translateY(8px) !important;
-
-    width: 90vw;
-
-    text-align: center;
-
-    font-family:
-        Georgia,
-        "Times New Roman",
-        serif;
-
-    font-size:
-        clamp(20px, 3.5vw, 34px);
-
-    font-style: italic;
-
-    letter-spacing: 0.03em;
-
-    color: var(--champagne);
-
-    opacity: 0 !important;
-
-    pointer-events: none;
-
-    transition:
-        opacity 0.7s ease,
-        transform 0.7s ease;
-}
-
-
-.push-message.show,
-.push-message-second.show {
-    opacity: 1 !important;
-
-    transform:
-        translate(-50%, -50%)
-        translateY(0) !important;
-}
-
-
-/* =========================================================
+/* =========================================
    CONTACT BACK
-   ========================================================= */
+   ========================================= */
 
-.contact-back {
-    position: absolute !important;
+contactBack.addEventListener(
+    "click",
+    () => {
 
-    top: 28px !important;
-    left: 28px !important;
+        resetContactRoom();
 
-    z-index: 30 !important;
 
-    width: 44px !important;
-    height: 44px !important;
+        contactScreen.classList.remove(
+            "open"
+        );
 
-    font-size: 17px !important;
 
-    color: var(--champagne) !important;
+        setTimeout(
+            () => {
 
-    opacity: 0.6;
+                showContactLink();
+
+            },
+            700
+        );
+
+    }
+);
+
+
+
+/* =========================================
+   DON'T PUSH
+   ========================================= */
+
+function resetContactRoom() {
+
+    dontPush.classList.remove(
+        "gone"
+    );
+
+
+    dontPush.dataset.pushed =
+        "false";
+
+
+    pushMessage.classList.remove(
+        "show"
+    );
+
+
+    pushMessageSecond.classList.remove(
+        "show"
+    );
+
 }
 
 
-.contact-back:hover {
-    opacity: 1;
-}
+
+dontPush.addEventListener(
+    "click",
+    () => {
+
+        if (
+            dontPush.dataset.pushed ===
+            "true"
+        ) {
+            return;
+        }
 
 
-/* =========================================================
-   MOBILE / TABLET
-   ========================================================= */
+        dontPush.dataset.pushed =
+            "true";
 
-@media (max-width: 600px) {
 
-    #contactLink {
-        top: 18px !important;
-        left: 22px !important;
+        /*
+           Button disappears.
+        */
 
-        font-size: 9px !important;
+        dontPush.classList.add(
+            "gone"
+        );
+
+
+        /*
+           First message.
+        */
+
+        setTimeout(
+            () => {
+
+                pushMessage.classList.add(
+                    "show"
+                );
+
+            },
+            450
+        );
+
+
+        /*
+           First message disappears.
+           Second one appears.
+        */
+
+        setTimeout(
+            () => {
+
+                pushMessage.classList.remove(
+                    "show"
+                );
+
+
+                pushMessageSecond.classList.add(
+                    "show"
+                );
+
+            },
+            1900
+        );
+
+
+        /*
+           Return to THE WAY IN.
+        */
+
+        setTimeout(
+            () => {
+
+                pushMessageSecond.classList.remove(
+                    "show"
+                );
+
+
+                contactScreen.classList.remove(
+                    "open"
+                );
+
+
+                resetContactRoom();
+
+
+                setTimeout(
+                    () => {
+
+                        showContactLink();
+
+                    },
+                    700
+                );
+
+            },
+            3900
+        );
+
     }
-
-
-    .garden-title {
-        font-size: 12px !important;
-
-        max-width: 90vw;
-
-        text-align: center;
-
-        white-space: normal;
-    }
-
-
-    .garden-screen.title-up .garden-title {
-        top: 8% !important;
-
-        transform:
-            translate(-50%, -50%)
-            scale(0.82) !important;
-    }
-
-
-    .garden-message {
-        bottom: 8% !important;
-
-        font-size: 13px !important;
-    }
-
-
-    .growth-title {
-        top: 8%;
-
-        width: 88vw;
-
-        white-space: normal;
-
-        font-size: 11px;
-
-        line-height: 1.5;
-    }
-
-
-    .contact-email {
-        font-size: 20px;
-    }
-
-
-    .dont-push {
-        bottom: 25px !important;
-    }
-
-
-    .contact-back {
-        top: 16px !important;
-        left: 18px !important;
-    }
-
-}
-}
+);
