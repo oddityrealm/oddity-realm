@@ -1,1179 +1,1044 @@
-/* =========================================
-   ODDITY REALM
-   WORLD INTERACTION
-   ========================================= */
 
+/* ODDITY REALM | clean stylesheet */
 
-/* =========================================
-   ELEMENTS
-   ========================================= */
+:root {
+  color-scheme: dark;
+  --ink: #11110f;
+  --paper: #e8e4da;
+  --gold: #c9b47a;
+  --champagne: #e3d4b2;
+  --ease: cubic-bezier(.22, .75, .25, 1);
+}
 
-const curiousButton =
-    document.getElementById("curiousButton");
+* {
+  box-sizing: border-box;
+}
 
-const enterHint =
-    document.getElementById("enterHint");
+html,
+body {
+  margin: 0;
+  width: 100%;
+  min-height: 100%;
+  background: var(--ink);
+}
 
-const realmMark =
-    document.getElementById("realmMark");
+body {
+  color: var(--paper);
+  font-family: Georgia, "Times New Roman", serif;
+  overflow: hidden;
+  -webkit-font-smoothing: antialiased;
+}
 
-const realmMarkWrap =
-    document.querySelector(".realm-mark-wrap");
+button,
+a {
+  -webkit-tap-highlight-color: transparent;
+}
 
-const realmReaction =
-    document.getElementById("realmReaction");
+button {
+  color: inherit;
+  font: inherit;
+  border: 0;
+  cursor: pointer;
+  background: none;
+}
 
-const landing =
-    document.getElementById("landing");
+button:focus-visible,
+a:focus-visible {
+  outline: 1px solid var(--champagne);
+  outline-offset: 6px;
+}
 
-const artworkScreen =
-    document.getElementById("artworkScreen");
+#world {
+  position: relative;
+  width: 100%;
+  height: 100svh;
+  min-height: 480px;
+  overflow: hidden;
+  background: var(--ink);
+}
 
-const firstArtwork =
-    document.getElementById("firstArtwork");
-
-const lookAgain =
-    document.querySelector(".look-again");
-
-const gardenPortal =
-    document.getElementById("gardenPortal");
-
-const gardenScreen =
-    document.getElementById("gardenScreen");
-
-const gardenKeyhole =
-    document.getElementById("gardenKeyhole");
-
-const gardenBack =
-    document.getElementById("gardenBack");
-
-const contactLink =
-    document.getElementById("contactLink");
-
-const contactWhisper =
-    document.getElementById("contactWhisper");
-
-const contactScreen =
-    document.getElementById("contactScreen");
-
-const contactBack =
-    document.getElementById("contactBack");
-
-const dontPush =
-    document.getElementById("dontPush");
-
-const pushMessage =
-    document.getElementById("pushMessage");
-
-const pushMessageSecond =
-    document.getElementById("pushMessageSecond");
-
-const growthScreen =
-    document.getElementById("growthScreen");
-
-const growthArtwork =
-    document.getElementById("growthArtwork");
-
-
-
-/* =========================================
-   CONTACT VISIBILITY
-   CONTACT exists only on THE WAY IN
-   ========================================= */
-
-function showContactLink() {
-
-    if (!contactLink) {
-        return;
-    }
-
-    contactLink.classList.add(
-        "is-visible"
-    );
-
+.landing-screen,
+.artwork-screen,
+.garden-screen,
+.growth-screen,
+.care-screen,
+.contact-screen {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
 }
 
 
-function hideContactLink() {
+/* LANDING */
 
-    if (!contactLink) {
-        return;
-    }
+.landing-screen {
+  z-index: 10;
+  background: var(--ink);
+  opacity: 1;
+  visibility: visible;
+  transition:
+    opacity 1.1s var(--ease),
+    transform 1.2s var(--ease),
+    visibility 1.2s;
+}
 
-    contactLink.classList.remove(
-        "is-visible"
-    );
+.landing-screen.leaving {
+  opacity: 0;
+  transform: translateY(-3vh) scale(1.025);
+  visibility: hidden;
+  pointer-events: none;
+}
 
+.wordmark,
+.enter-link,
+.curious-link,
+.contact-link {
+  position: absolute;
+  letter-spacing: .19em;
+  font: 400 10px Arial, sans-serif;
+}
+
+.wordmark {
+  top: 29px;
+  left: 34px;
+  color: rgba(232, 228, 218, .7);
+  z-index: 2;
+  padding: 8px 0;
+}
+
+.wordmark-whisper {
+  position: absolute;
+  top: 56px;
+  left: 34px;
+  color: var(--gold);
+  font-style: italic;
+  font-size: 15px;
+  opacity: 0;
+  transform: translateY(4px);
+  transition: opacity .35s, transform .35s;
+  pointer-events: none;
+}
+
+.wordmark-whisper.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.enter-link {
+  top: 29px;
+  right: 34px;
+  color: rgba(232, 228, 218, .7);
+  padding: 8px 0;
+}
+
+.enter-link.changed {
+  color: var(--champagne);
+}
+
+.landing-center {
+  position: absolute;
+  left: 50%;
+  top: 48%;
+  transform: translate(-50%, -50%);
+  width: min(88vw, 620px);
+  text-align: center;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+.realm-symbol {
+  width: 72px;
+  height: 94px;
+  object-fit: contain;
+  margin-bottom: 23px;
+  opacity: .85;
+}
+
+.landing-center h1 {
+  margin: 0;
+  font-size: clamp(44px, 8.2vw, 88px);
+  font-weight: 400;
+  letter-spacing: .17em;
+  line-height: .98;
+  padding-left: .17em;
+}
+
+.landing-center p {
+  margin: 22px 0 0;
+  font-size: 13px;
+  letter-spacing: .035em;
+  color: rgba(232, 228, 218, .58);
+}
+
+.curious-link {
+  left: 50%;
+  bottom: 36px;
+  transform: translateX(-50%);
+  padding: 14px 18px;
+  color: var(--champagne);
+  letter-spacing: .26em;
+  transition: opacity .4s, letter-spacing .4s;
+}
+
+.curious-link:hover {
+  letter-spacing: .34em;
+}
+
+.curious-link.good {
+  color: var(--gold);
 }
 
 
-
-/* =========================================
-   ENTER
-   ========================================= */
-
-enterHint.addEventListener(
-    "click",
-    () => {
-
-        if (
-            enterHint.dataset.reacted === "true"
-        ) {
-            return;
-        }
-
-
-        enterHint.dataset.reacted =
-            "true";
-
-        enterHint.classList.add(
-            "waiting"
-        );
-
-
-        setTimeout(
-            () => {
-
-                enterHint.classList.add(
-                    "hidden-text"
-                );
-
-
-                setTimeout(
-                    () => {
-
-                        enterHint.textContent =
-                            "YOU SHOULD BE MORE CURIOUS.";
-
-                        enterHint.classList.remove(
-                            "waiting"
-                        );
-
-                        enterHint.classList.remove(
-                            "hidden-text"
-                        );
-
-                        enterHint.classList.add(
-                            "hint"
-                        );
-
-                    },
-                    350
-                );
-
-            },
-            1800
-        );
-
-    }
-);
-
-
-
-/* =========================================
-   ODDITY REALM
-   I FELT THAT.
-   ========================================= */
-
-realmMark.addEventListener(
-    "click",
-    () => {
-
-        realmReaction.classList.add(
-            "show"
-        );
-
-    }
-);
-
-
-realmMarkWrap.addEventListener(
-    "mouseleave",
-    () => {
-
-        realmReaction.classList.remove(
-            "show"
-        );
-
-    }
-);
-
-
-
-/* =========================================
-   CURIOUS?
-   LANDING → THE WAY IN
-   ========================================= */
-
-curiousButton.addEventListener(
-    "click",
-    () => {
-
-        if (
-            curiousButton.classList.contains(
-                "answered"
-            )
-        ) {
-            return;
-        }
-
-
-        curiousButton.textContent =
-            "GOOD.";
-
-        curiousButton.classList.add(
-            "answered"
-        );
-
-
-        hideContactLink();
-
-
-        setTimeout(
-            () => {
-
-                landing.classList.add(
-                    "opening"
-                );
-
-            },
-            950
-        );
-
-
-        setTimeout(
-            () => {
-
-                artworkScreen.classList.add(
-                    "revealed"
-                );
-
-            },
-            1050
-        );
-
-
-        setTimeout(
-            () => {
-
-                artworkScreen.classList.add(
-                    "boom"
-                );
-
-            },
-            1500
-        );
-
-
-        setTimeout(
-            () => {
-
-                artworkScreen.classList.add(
-                    "settled"
-                );
-
-                showContactLink();
-
-            },
-            3100
-        );
-
-    }
-);
-
-
-
-/* =========================================
-   LOOK AGAIN
-   ========================================= */
-
-let lookTimer;
-
-let hideLookTimer;
-
-
-function showLookAgain() {
-
-    clearTimeout(
-        lookTimer
-    );
-
-    clearTimeout(
-        hideLookTimer
-    );
-
-
-    lookTimer = setTimeout(
-        () => {
-
-            lookAgain.classList.add(
-                "show"
-            );
-
-
-            hideLookTimer =
-                setTimeout(
-                    () => {
-
-                        lookAgain.classList.remove(
-                            "show"
-                        );
-
-                    },
-                    1800
-                );
-
-        },
-        2500
-    );
-
+/* THE WAY IN */
+
+.artwork-screen {
+  z-index: 1;
+  visibility: hidden;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .9s, visibility .9s;
+  background: var(--ink);
 }
 
-
-function hideLookAgain() {
-
-    clearTimeout(
-        lookTimer
-    );
-
-    clearTimeout(
-        hideLookTimer
-    );
-
-
-    lookAgain.classList.remove(
-        "show"
-    );
-
+.artwork-screen.revealed {
+  visibility: visible;
+  opacity: 1;
+  pointer-events: auto;
 }
 
-
-
-/* Desktop */
-
-firstArtwork.addEventListener(
-    "mouseenter",
-    showLookAgain
-);
-
-
-firstArtwork.addEventListener(
-    "mouseleave",
-    hideLookAgain
-);
-
-
-
-/* Touch */
-
-firstArtwork.addEventListener(
-    "click",
-    () => {
-
-        if (
-            lookAgain.classList.contains(
-                "show"
-            )
-        ) {
-
-            hideLookAgain();
-
-            return;
-
-        }
-
-
-        showLookAgain();
-
-    }
-);
-
-
-
-/* =========================================
-   ENTER THE GARDEN
-   ========================================= */
-
-function enterGarden() {
-
-    if (
-        !artworkScreen.classList.contains(
-            "settled"
-        )
-    ) {
-        return;
-    }
-
-
-    hideContactLink();
-
-
-    gardenScreen.classList.remove(
-        "title-in",
-        "title-up",
-        "art-in",
-        "ready",
-        "portal"
-    );
-
-
-    gardenScreen.classList.add(
-        "open"
-    );
-
-
-    /*
-       Stage 1:
-       title appears in the centre.
-    */
-
-    setTimeout(
-        () => {
-
-            gardenScreen.classList.add(
-                "title-in"
-            );
-
-        },
-        100
-    );
-
-
-    /*
-       Stage 2:
-       title travels upward.
-    */
-
-    setTimeout(
-        () => {
-
-            gardenScreen.classList.add(
-                "title-up"
-            );
-
-        },
-        1200
-    );
-
-
-    /*
-       Stage 3:
-       artwork rises from below.
-    */
-
-    setTimeout(
-        () => {
-
-            gardenScreen.classList.add(
-                "art-in"
-            );
-
-        },
-        1500
-    );
-
-
-    /*
-       Stage 4:
-       everything is ready.
-    */
-
-    setTimeout(
-        () => {
-
-            gardenScreen.classList.add(
-                "ready"
-            );
-
-        },
-        3000
-    );
-
+.artwork-stage {
+  position: absolute;
+  left: 50%;
+  top: 47%;
+  transform: translate(-50%, -50%);
+  width: min(90vw, 74vh);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
-
-gardenPortal.addEventListener(
-    "click",
-    enterGarden
-);
-
-
-
-/* =========================================
-   GARDEN KEYHOLE
-   ========================================= */
-
-gardenKeyhole.addEventListener(
-    "click",
-    () => {
-
-        if (
-            !gardenScreen.classList.contains(
-                "ready"
-            )
-        ) {
-            return;
-        }
-
-
-        gardenScreen.classList.add(
-            "portal"
-        );
-
-
-        /*
-           The Garden is swallowed
-           into the keyhole.
-        */
-
-        setTimeout(
-            () => {
-
-                if (growthScreen) {
-
-                    growthScreen.classList.add(
-                        "open"
-                    );
-
-                }
-
-            },
-            1250
-        );
-
-
-        /*
-           Start the new world growing.
-        */
-
-        setTimeout(
-            () => {
-
-                if (growthScreen) {
-
-                    growthScreen.classList.add(
-                        "growing"
-                    );
-
-                }
-
-            },
-            1350
-        );
-
-
-        /*
-           After the artwork reaches
-           its normal size, reveal title.
-        */
-
-        setTimeout(
-            () => {
-
-                if (growthScreen) {
-
-                    growthScreen.classList.add(
-                        "ready"
-                    );
-
-                }
-
-            },
-            3050
-        );
-
-
-        /*
-           Remove Garden after transition.
-        */
-
-        setTimeout(
-            () => {
-
-                gardenScreen.classList.remove(
-                    "open",
-                    "title-in",
-                    "title-up",
-                    "art-in",
-                    "ready",
-                    "portal"
-                );
-
-            },
-            1800
-        );
-
-    }
-);
-
-
-
-/* =========================================
-   GARDEN BACK
-   ========================================= */
-
-gardenBack.addEventListener(
-    "click",
-    () => {
-
-        gardenScreen.classList.remove(
-            "open",
-            "title-in",
-            "title-up",
-            "art-in",
-            "ready",
-            "portal"
-        );
-
-
-        showContactLink();
-
-    }
-);
-
-
-
-/* =========================================
-   CONTACT
-   CONTACT → WHISPER → ROOM
-   ========================================= */
-
-contactLink.addEventListener(
-    "click",
-    () => {
-
-        hideContactLink();
-
-
-        contactWhisper.classList.add(
-            "show"
-        );
-
-
-        setTimeout(
-            () => {
-
-                contactWhisper.classList.remove(
-                    "show"
-                );
-
-
-                contactScreen.classList.add(
-                    "open"
-                );
-
-            },
-            2100
-        );
-
-    }
-);
-
-
-
-/* =========================================
-   CONTACT BACK
-   ========================================= */
-
-contactBack.addEventListener(
-    "click",
-    () => {
-
-        resetContactRoom();
-
-
-        contactScreen.classList.remove(
-            "open"
-        );
-
-
-        setTimeout(
-            () => {
-
-                showContactLink();
-
-            },
-            700
-        );
-
-    }
-);
-
-
-
-/* =========================================
-   DON'T PUSH
-   ========================================= */
-
-function resetContactRoom() {
-
-    dontPush.classList.remove(
-        "gone"
-    );
-
-
-    dontPush.dataset.pushed =
-        "false";
-
-
-    pushMessage.classList.remove(
-        "show"
-    );
-
-
-    pushMessageSecond.classList.remove(
-        "show"
-    );
-
+.first-artwork {
+  display: block;
+  width: min(90vw, 74vh);
+  height: min(90vw, 74vh);
+  object-fit: contain;
+  transform: scale(1.45);
+  opacity: 0;
+  transition: transform 1.7s var(--ease), opacity 1.1s;
+  user-select: none;
+  -webkit-user-drag: none;
 }
 
-
-
-dontPush.addEventListener(
-    "click",
-    () => {
-
-        if (
-            dontPush.dataset.pushed ===
-            "true"
-        ) {
-            return;
-        }
-
-
-        dontPush.dataset.pushed =
-            "true";
-
-
-        /*
-           Button disappears.
-        */
-
-        dontPush.classList.add(
-            "gone"
-        );
-
-
-        /*
-           First message.
-        */
-
-        setTimeout(
-            () => {
-
-                pushMessage.classList.add(
-                    "show"
-                );
-
-            },
-            450
-        );
-
-
-        /*
-           First message disappears.
-           Second one appears.
-        */
-
-        setTimeout(
-            () => {
-
-                pushMessage.classList.remove(
-                    "show"
-                );
-
-
-                pushMessageSecond.classList.add(
-                    "show"
-                );
-
-            },
-            1900
-        );
-
-
-        /*
-           Return to THE WAY IN.
-        */
-
-        setTimeout(
-            () => {
-
-                pushMessageSecond.classList.remove(
-                    "show"
-                );
-
-
-                contactScreen.classList.remove(
-                    "open"
-                );
-
-
-                resetContactRoom();
-
-
-                setTimeout(
-                    () => {
-
-                        showContactLink();
-
-                    },
-                    700
-                );
-
-            },
-            3900
-        );
-
-    }
-);
-/* =========================================================
-   CONTACT ROOM
-   FOUR ODDITY SYMBOLS
-   ========================================================= */
-
-.contact-corner-logo {
-    position: absolute;
-
-    width: 64px;
-    height: 64px;
-
-    background-color: #E8E4DA;
-
-    background-image: none;
-
-    -webkit-mask-image: url("images/oddity-symbol.png");
-    mask-image: url("images/oddity-symbol.png");
-
-    -webkit-mask-repeat: no-repeat;
-    mask-repeat: no-repeat;
-
-    -webkit-mask-position: center;
-    mask-position: center;
-
-    -webkit-mask-size: contain;
-    mask-size: contain;
-
-    opacity: 0.18;
-
-    pointer-events: none;
-
-    z-index: 5;
+.artwork-screen.revealed .first-artwork {
+  transform: scale(1);
+  opacity: 1;
 }
 
-
-/* almost invisible */
-
-.contact-logo-top-left {
-    top: 24px;
-    left: 28px;
-
-    background-color: #E8E4DA;
-
-    opacity: 0.11;
+.artwork-screen.boom .first-artwork {
+  animation: boomIn 1.45s var(--ease) both;
 }
 
-
-/* muted violet */
-
-.contact-logo-top-right {
-    top: 24px;
-    right: 28px;
-
-    background-color: #81708F;
-
-    opacity: 0.22;
-}
-
-
-/* cool blue */
-
-.contact-logo-bottom-left {
-    bottom: 24px;
-    left: 28px;
-
-    background-color: #6D8A9D;
-
-    opacity: 0.22;
-}
-
-
-/* warm pink-gold */
-
-.contact-logo-bottom-right {
-    bottom: 24px;
-    right: 28px;
-
-    background-color: #B58A87;
-
-    opacity: 0.23;
-}
-
-
-/* =========================================================
-   THE FIRST THING THAT GREW HERE
-   CONTINUE
-   ========================================================= */
-
-.growth-portal {
-    position: absolute;
-
-    left: 50%;
-    bottom: 24px;
-
-    transform: translateX(-50%);
-
-    width: 48px;
-    height: 42px;
-
-    display: flex;
-
-    align-items: center;
-    justify-content: center;
-
-    padding: 0;
-
-    color: var(--champagne);
-
-    font-size: 20px;
-
+@keyframes boomIn {
+  0% {
+    transform: scale(1.65);
     opacity: 0;
-
-    pointer-events: none;
-
-    transition:
-        opacity 0.8s ease,
-        transform 0.5s ease;
-
-    z-index: 20;
+  }
+  25% {
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
 }
 
+.artwork-caption {
+  width: 100%;
+  text-align: center;
+  margin-top: 13px;
+}
+
+.artwork-title {
+  margin: 0;
+  color: var(--gold);
+  font-size: 15px;
+  font-weight: 400;
+  letter-spacing: .19em;
+}
+
+.artwork-details {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  margin-top: 9px;
+  font: 10px/1.5 Arial, sans-serif;
+  letter-spacing: .08em;
+  color: rgba(232, 228, 218, .62);
+  opacity: 0;
+  transform: translateY(4px);
+  transition: opacity .4s, transform .4s;
+}
+
+.artwork-screen.details-visible .artwork-details {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.look-again {
+  margin-top: 16px;
+  color: var(--champagne);
+  font: 18px/1.3 Arial, sans-serif;
+  letter-spacing: .17em;
+  opacity: 0;
+  transform: translateY(5px);
+  transition: opacity .4s, transform .4s;
+  pointer-events: none;
+}
+
+.look-again.show {
+  opacity: .94;
+  transform: translateY(0);
+}
+
+
+/* CONTACT LINK: hidden until THE WAY IN has settled */
+
+.contact-link {
+  z-index: 30;
+  position: fixed;
+  top: 28px;
+  left: 34px;
+  padding: 8px 0;
+  color: rgba(232, 228, 218, .72);
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity .5s, color .3s, visibility .5s;
+}
+
+.contact-link.is-visible {
+  opacity: .72;
+  visibility: visible;
+  pointer-events: auto;
+}
+
+.contact-link:hover {
+  color: var(--champagne);
+  opacity: 1;
+}
+
+.contact-whisper {
+  position: fixed;
+  z-index: 80;
+  left: 50%;
+  top: 50%;
+  width: min(88vw, 600px);
+  transform: translate(-50%, -45%);
+  text-align: center;
+  font-size: clamp(17px, 2.6vw, 24px);
+  font-style: italic;
+  color: var(--gold);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity .5s, transform .5s, visibility .5s;
+  pointer-events: none;
+}
+
+.contact-whisper.show {
+  opacity: 1;
+  visibility: visible;
+  transform: translate(-50%, -50%);
+}
+
+
+/* DOWNWARD PORTALS */
+
+.garden-portal,
+.growth-portal {
+  position: absolute;
+  left: 50%;
+  bottom: 19px;
+  transform: translateX(-50%);
+  z-index: 8;
+  color: rgba(227, 212, 178, .8);
+  font: 25px/1 Arial, sans-serif;
+  padding: 10px 20px;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity .6s, transform .6s, color .3s;
+}
+
+.artwork-screen.settled .garden-portal {
+  opacity: .8;
+  visibility: visible;
+  pointer-events: auto;
+}
+
+.garden-portal:hover,
+.growth-portal:hover {
+  color: #fff0cf;
+  transform: translate(-50%, 3px);
+}
+
+
+/* THE GARDEN BETWEEN */
+
+.garden-screen {
+  z-index: 20;
+  background: var(--ink);
+  visibility: hidden;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.garden-screen.open {
+  visibility: visible;
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.garden-title {
+  position: absolute;
+  z-index: 3;
+  top: 50%;
+  left: 50%;
+  width: 90%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  font-size: clamp(18px, 3vw, 28px);
+  font-weight: 400;
+  letter-spacing: .2em;
+  color: var(--gold);
+  opacity: 0;
+}
+
+.garden-screen.title-in .garden-title {
+  animation: titleBloom .8s var(--ease) forwards;
+}
+
+.garden-screen.title-up .garden-title {
+  top: 7.5%;
+  transform: translate(-50%, 0);
+  opacity: 1;
+  transition: top 1s var(--ease), transform 1s var(--ease);
+}
+
+@keyframes titleBloom {
+  from {
+    opacity: 0;
+    letter-spacing: .35em;
+    filter: blur(5px);
+  }
+  to {
+    opacity: 1;
+    letter-spacing: .2em;
+    filter: blur(0);
+  }
+}
+
+.garden-artwork {
+  position: absolute;
+  left: 50%;
+  top: 51%;
+  width: min(78vw, 69vh);
+  height: min(78vw, 69vh);
+  object-fit: contain;
+  transform: translate(-50%, 115vh);
+  opacity: 0;
+  transition: transform 1.35s var(--ease), opacity .7s;
+}
+
+.garden-screen.art-in .garden-artwork {
+  transform: translate(-50%, -50%);
+  opacity: 1;
+}
+
+.garden-message {
+  position: absolute;
+  left: 50%;
+  top: calc(51% + min(39vw, 34.5vh) + 13px);
+  width: 90%;
+  transform: translateX(-50%);
+  text-align: center;
+  font: 11px/1.4 Arial, sans-serif;
+  letter-spacing: .2em;
+  color: var(--champagne);
+  opacity: 0;
+  transition: opacity .8s;
+}
+
+.garden-screen.ready .garden-message {
+  opacity: .9;
+}
+
+.garden-keyhole {
+  position: absolute;
+  left: 50%;
+  top: 51%;
+  width: min(15vw, 105px);
+  height: min(22vw, 150px);
+  transform: translate(-50%, -50%);
+  opacity: 0;
+  pointer-events: none;
+  border-radius: 50% 50% 42% 42%;
+}
+
+.garden-screen.ready .garden-keyhole {
+  pointer-events: auto;
+}
+
+
+/* BACK ARROWS */
+
+.garden-back,
+.growth-back,
+.care-back,
+.contact-back {
+  position: absolute;
+  z-index: 12;
+  top: 24px;
+  left: 27px;
+  color: rgba(232, 228, 218, .42);
+  font: 23px/1 Arial, sans-serif;
+  padding: 8px;
+  opacity: .6;
+  transition: opacity .3s;
+}
+
+.garden-back:hover,
+.growth-back:hover,
+.care-back:hover,
+.contact-back:hover {
+  opacity: 1;
+}
+
+
+/* THE FIRST THING THAT GREW HERE */
+
+.growth-screen {
+  z-index: 30;
+  background: #050505;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.growth-screen.open {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+}
+
+.growth-screen.leaving {
+  opacity: 0;
+  transition: opacity .4s;
+}
+
+.growth-artwork {
+  position: absolute;
+  left: 50%;
+  top: 53%;
+  width: min(74vw, 68vh);
+  height: min(74vw, 68vh);
+  object-fit: contain;
+  transform: translate(-50%, -50%) scale(.015);
+  opacity: 0;
+}
+
+.growth-screen.growing .growth-artwork {
+  animation: sprout 1.8s var(--ease) forwards;
+}
+
+@keyframes sprout {
+  0% {
+    transform: translate(-50%, -50%) scale(.015);
+    opacity: 0;
+    filter: blur(8px);
+  }
+  30% {
+    opacity: 1;
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 1;
+    filter: blur(0);
+  }
+}
+
+.growth-title {
+  position: absolute;
+  top: 7%;
+  left: 50%;
+  width: 90%;
+  transform: translateX(-50%);
+  text-align: center;
+  margin: 0;
+  font-size: clamp(14px, 2.4vw, 22px);
+  line-height: 1.4;
+  font-weight: 400;
+  letter-spacing: .17em;
+  color: var(--gold);
+  opacity: 0;
+  transition: opacity .8s;
+}
+
+.growth-screen.ready .growth-title {
+  opacity: 1;
+}
 
 .growth-screen.ready .growth-portal {
-    opacity: 0.72;
-
-    pointer-events: auto;
+  opacity: .8;
+  visibility: visible;
+  pointer-events: auto;
 }
 
 
-.growth-portal:hover {
-    opacity: 1;
-
-    transform:
-        translateX(-50%)
-        translateY(4px);
-}
-
-
-/* =========================================================
-   HANDLE WITH CARE
-   ========================================================= */
+/* HANDLE WITH CARE */
 
 .care-screen {
-    position: fixed;
-
-    inset: 0;
-
-    width: 100vw;
-    height: 100vh;
-
-    z-index: 50;
-
-    display: flex;
-
-    align-items: center;
-    justify-content: center;
-
-    overflow: hidden;
-
-    background: #11110F;
-
-    opacity: 0;
-    visibility: hidden;
-
-    transition:
-        opacity 0.8s ease,
-        visibility 0s linear 0.8s;
+  z-index: 40;
+  background: #090a0d;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
 }
-
 
 .care-screen.open {
-    opacity: 1;
-    visibility: visible;
-
-    transition:
-        opacity 0.8s ease;
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
 }
-
-
-.care-frame {
-    position: relative;
-
-    width: 100vw;
-    height: 100vh;
-
-    display: flex;
-
-    align-items: center;
-    justify-content: center;
-
-    overflow: hidden;
-}
-
 
 .care-artwork {
-    width: 100vmin;
-    height: 100vmin;
-
-    object-fit: contain;
-
-    opacity: 0;
-
-    transform:
-        scale(0.025);
-
-    transform-origin: center;
-
-    transition:
-        opacity 0.8s ease,
-        transform 1.9s cubic-bezier(0.16, 1, 0.3, 1);
-
-    z-index: 2;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: min(76vw, 70vh);
+  height: min(76vw, 70vh);
+  object-fit: contain;
+  transform: translate(-50%, -50%) scale(.025);
+  opacity: 0;
 }
 
-
-.care-screen.growing .care-artwork {
-    opacity: 1;
-
-    transform:
-        scale(1);
+.care-screen.open .care-artwork {
+  animation: sprout 1.55s var(--ease) forwards;
 }
-
 
 .care-title {
-    position: absolute;
-
-    left: 50%;
-    top: 7%;
-
-    transform:
-        translate(-50%, -8px);
-
-    z-index: 10;
-
-    color: var(--gold);
-
-    font-size: clamp(12px, 1.8vw, 18px);
-
-    letter-spacing: 0.22em;
-
-    text-align: center;
-
-    white-space: nowrap;
-
-    opacity: 0;
-
-    transition:
-        opacity 0.8s ease,
-        transform 0.8s ease;
+  position: absolute;
+  left: 50%;
+  top: 7%;
+  transform: translateX(-50%);
+  width: 90%;
+  text-align: center;
+  margin: 0;
+  font-size: clamp(17px, 2.7vw, 26px);
+  font-weight: 400;
+  letter-spacing: .2em;
+  color: var(--gold);
+  opacity: 0;
+  transition: opacity .8s;
 }
-
 
 .care-screen.ready .care-title {
-    opacity: 1;
+  opacity: 1;
+}
 
-    transform:
-        translate(-50%, 0);
+.care-please {
+  position: absolute;
+  left: 50%;
+  top: calc(50% + min(38vw, 35vh) + 13px);
+  transform: translateX(-50%);
+  font-style: italic;
+  font-size: 18px;
+  color: var(--champagne);
+  opacity: 0;
+  transition: opacity .7s;
+}
+
+.care-screen.ready .care-please {
+  opacity: .9;
 }
 
 
-.care-message {
-    position: absolute;
+/* CONTACT ROOM */
 
-    left: 50%;
-    bottom: 8%;
+.contact-screen {
+  z-index: 100;
+  background: var(--ink);
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity .7s, visibility .7s;
+}
 
-    transform:
-        translate(-50%, 8px);
+.contact-screen.open {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+}
 
-    z-index: 10;
+.contact-content {
+  position: absolute;
+  left: 50%;
+  top: 48%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 22px;
+  width: min(90vw, 700px);
+  text-align: center;
+}
 
-    font-family:
-        Georgia,
-        "Times New Roman",
-        serif;
+.contact-label {
+  font: 10px/1.4 Arial, sans-serif;
+  letter-spacing: .3em;
+  color: rgba(232, 228, 218, .42);
+}
 
-    font-size: 16px;
+.contact-email {
+  color: var(--gold);
+  text-decoration: none;
+  font-size: clamp(17px, 3vw, 26px);
+  letter-spacing: .025em;
+  overflow-wrap: anywhere;
+}
 
-    font-style: italic;
+.contact-email:hover {
+  color: var(--champagne);
+}
 
-    letter-spacing: 0.06em;
+.copy-email {
+  color: rgba(232, 228, 218, .5);
+  font: 9px/1.4 Arial, sans-serif;
+  letter-spacing: .2em;
+  padding: 9px 12px;
+}
 
-    color: var(--champagne);
-
-    opacity: 0;
-
-    transition:
-        opacity 0.8s ease,
-        transform 0.8s ease;
+.copy-email:hover {
+  color: var(--champagne);
 }
 
 
-.care-screen.message .care-message {
-    opacity: 0.9;
+/* FOUR QUIET LOGO SYMBOLS */
 
-    transform:
-        translate(-50%, 0);
+.corner-symbol {
+  position: absolute;
+  width: 64px;
+  height: 64px;
+  background-color: #e8e4da;
+  -webkit-mask: url("images/oddity-symbol.png") center / contain no-repeat;
+  mask: url("images/oddity-symbol.png") center / contain no-repeat;
+  opacity: .13;
+  pointer-events: none;
+}
+
+.corner-one {
+  top: 25px;
+  left: 25px;
+  background-color: #e8e4da;
+  opacity: .12;
+}
+
+.corner-two {
+  top: 25px;
+  right: 25px;
+  background-color: #81708f;
+  opacity: .23;
+}
+
+.corner-three {
+  bottom: 25px;
+  left: 25px;
+  background-color: #6d8a9d;
+  opacity: .23;
+}
+
+.corner-four {
+  bottom: 25px;
+  right: 25px;
+  background-color: #b58a87;
+  opacity: .24;
 }
 
 
-/* =========================================================
-   CONTACT ROOM LOGO SCALE ON SMALL SCREENS
-   ========================================================= */
+/* DON'T PUSH SEQUENCE */
+
+.dont-push {
+  position: absolute;
+  left: 50%;
+  bottom: 31px;
+  transform: translateX(-50%);
+  background: #a83c37;
+  color: #f4dfd0;
+  border-radius: 3px;
+  padding: 12px 19px;
+  font: 10px/1 Arial, sans-serif;
+  letter-spacing: .17em;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, .2);
+  transition: opacity .35s, transform .35s;
+}
+
+.dont-push:hover {
+  background: #bd4941;
+  transform: translateX(-50%) translateY(-2px);
+}
+
+.dont-push.gone {
+  opacity: 0;
+  transform: translateX(-50%) scale(.7);
+  pointer-events: none;
+}
+
+.push-message,
+.push-message-second {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 90%;
+  text-align: center;
+  font-size: clamp(19px, 3vw, 28px);
+  letter-spacing: .08em;
+  color: var(--gold);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity .6s, visibility .6s;
+  pointer-events: none;
+}
+
+.push-message.show,
+.push-message-second.show {
+  opacity: 1;
+  visibility: visible;
+}
+
+.push-message-second {
+  font-size: clamp(18px, 2.6vw, 24px);
+  font-style: italic;
+  letter-spacing: .025em;
+  color: var(--champagne);
+}
+
+
+/* TABLET AND DESKTOP */
+
+@media (min-width: 900px) {
+  .artwork-stage {
+    top: 46%;
+  }
+
+  .first-artwork {
+    width: min(66vh, 54vw);
+    height: min(66vh, 54vw);
+  }
+
+  .garden-artwork {
+    width: min(65vh, 55vw);
+    height: min(65vh, 55vw);
+  }
+
+  .garden-message {
+    top: calc(51% + min(32.5vh, 27.5vw) + 13px);
+  }
+
+  .growth-artwork,
+  .care-artwork {
+    width: min(65vh, 55vw);
+    height: min(65vh, 55vw);
+  }
+
+  .care-please {
+    top: calc(50% + min(32.5vh, 27.5vw) + 13px);
+  }
+}
+
+
+/* PHONE */
 
 @media (max-width: 600px) {
+  .wordmark {
+    top: 18px;
+    left: 21px;
+    font-size: 9px;
+  }
 
-    .contact-corner-logo {
-        width: 54px;
-        height: 54px;
-    }
+  .wordmark-whisper {
+    left: 21px;
+    top: 43px;
+    font-size: 14px;
+  }
 
-    .contact-logo-top-left {
-        top: 18px;
-        left: 18px;
-    }
+  .enter-link {
+    top: 18px;
+    right: 21px;
+    font-size: 9px;
+  }
 
-    .contact-logo-top-right {
-        top: 18px;
-        right: 18px;
-    }
+  .realm-symbol {
+    width: 59px;
+    height: 78px;
+    margin-bottom: 19px;
+  }
 
-    .contact-logo-bottom-left {
-        bottom: 18px;
-        left: 18px;
-    }
+  .landing-center p {
+    font-size: 12px;
+  }
 
-    .contact-logo-bottom-right {
-        bottom: 18px;
-        right: 18px;
-    }
+  .curious-link {
+    bottom: 23px;
+    font-size: 9px;
+  }
 
-    .growth-portal {
-        bottom: 18px;
-    }
+  .artwork-stage {
+    top: 46%;
+    width: 88vw;
+  }
 
-    .care-title {
-        width: 88vw;
+  .first-artwork {
+    width: 88vw;
+    height: 88vw;
+  }
 
-        white-space: normal;
+  .artwork-title {
+    font-size: 12px;
+  }
 
-        line-height: 1.5;
+  .artwork-caption {
+    margin-top: 9px;
+  }
 
-        font-size: 11px;
-    }
+  .artwork-details {
+    gap: 10px;
+    font-size: 9px;
+  }
 
-    .care-message {
-        font-size: 14px;
-    }
+  .look-again {
+    font-size: 16px;
+    margin-top: 12px;
+  }
 
+  .contact-link {
+    top: 18px;
+    left: 21px;
+    font-size: 9px;
+  }
+
+  .garden-portal,
+  .growth-portal {
+    bottom: 9px;
+    font-size: 23px;
+  }
+
+  .garden-title {
+    font-size: 16px;
+  }
+
+  .garden-artwork {
+    top: 49%;
+    width: 88vw;
+    height: 88vw;
+  }
+
+  .garden-message {
+    top: calc(49% + 44vw + 8px);
+    font-size: 9px;
+  }
+
+  .garden-keyhole {
+    top: 49%;
+    width: 22vw;
+    height: 30vw;
+  }
+
+  .garden-back,
+  .growth-back,
+  .care-back,
+  .contact-back {
+    top: 13px;
+    left: 14px;
+  }
+
+  .growth-artwork {
+    top: 53%;
+    width: 88vw;
+    height: 88vw;
+  }
+
+  .growth-title {
+    top: 8%;
+    font-size: 12px;
+  }
+
+  .care-artwork {
+    width: 88vw;
+    height: 88vw;
+  }
+
+  .care-title {
+    top: 8%;
+    font-size: 16px;
+  }
+
+  .care-please {
+    top: calc(50% + 44vw + 9px);
+    font-size: 16px;
+  }
+
+  .contact-content {
+    top: 48%;
+    gap: 18px;
+  }
+
+  .contact-email {
+    font-size: 16px;
+  }
+
+  .corner-symbol {
+    width: 46px;
+    height: 46px;
+  }
+
+  .corner-one,
+  .corner-two {
+    top: 18px;
+  }
+
+  .corner-one,
+  .corner-three {
+    left: 17px;
+  }
+
+  .corner-two,
+  .corner-four {
+    right: 17px;
+  }
+
+  .corner-three,
+  .corner-four {
+    bottom: 18px;
+  }
+
+  .dont-push {
+    bottom: 22px;
+  }
+}
+
+
+/* RESPECT REDUCED-MOTION SETTINGS */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .01ms !important;
+    scroll-behavior: auto !important;
+  }
 }
