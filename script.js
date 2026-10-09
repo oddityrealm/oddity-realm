@@ -1,930 +1,356 @@
-/* =========================================
-   ODDITY REALM
-   WORLD INTERACTION
-   ========================================= */
+/* ODDITY REALM: staged interactions, designed for tap and click */
 
+(() => {
+  "use strict";
 
-/* =========================================
-   ELEMENTS
-   ========================================= */
+  const $ = (id) => document.getElementById(id);
 
-const curiousButton =
-    document.getElementById("curiousButton");
+  const landing = $("landingScreen");
+  const wordmark = $("wordmark");
+  const wordmarkWhisper = $("wordmarkWhisper");
+  const enterLink = $("enterLink");
+  const curiousLink = $("curiousLink");
 
-const enterHint =
-    document.getElementById("enterHint");
+  const artworkScreen = $("artworkScreen");
+  const firstArtwork = $("firstArtwork");
+  const lookAgain = $("lookAgain");
 
-const realmMark =
-    document.getElementById("realmMark");
+  const contactLink = $("contactLink");
+  const contactWhisper = $("contactWhisper");
+  const contactScreen = $("contactScreen");
+  const contactBack = $("contactBack");
+  const dontPush = $("dontPush");
+  const pushMessage = $("pushMessage");
+  const pushMessageSecond = $("pushMessageSecond");
+  const copyEmail = $("copyEmail");
 
-const realmMarkWrap =
-    document.querySelector(".realm-mark-wrap");
+  const gardenPortal = $("gardenPortal");
+  const gardenScreen = $("gardenScreen");
+  const gardenKeyhole = $("gardenKeyhole");
+  const gardenBack = $("gardenBack");
 
-const realmReaction =
-    document.getElementById("realmReaction");
+  const growthScreen = $("growthScreen");
+  const growthPortal = $("growthPortal");
+  const growthBack = $("growthBack");
 
-const landing =
-    document.getElementById("landing");
+  const careScreen = $("careScreen");
+  const careBack = $("careBack");
 
-const artworkScreen =
-    document.getElementById("artworkScreen");
+  let currentRoom = "landing";
+  let timers = [];
+  let lookTimer = null;
+  let hideLookTimer = null;
+  let contactFlowTimer = null;
 
-const firstArtwork =
-    document.getElementById("firstArtwork");
+  function later(callback, delay) {
+    const timer = window.setTimeout(callback, delay);
+    timers.push(timer);
+    return timer;
+  }
 
-const lookAgain =
-    document.querySelector(".look-again");
+  function clearTimers() {
+    timers.forEach(window.clearTimeout);
+    timers = [];
+    window.clearTimeout(lookTimer);
+    window.clearTimeout(hideLookTimer);
+    window.clearTimeout(contactFlowTimer);
+  }
 
-const gardenPortal =
-    document.getElementById("gardenPortal");
+  function showContactLink() {
+    contactLink.classList.add("is-visible");
+  }
 
-const gardenScreen =
-    document.getElementById("gardenScreen");
+  function hideContactLink() {
+    contactLink.classList.remove("is-visible");
+  }
 
-const gardenKeyhole =
-    document.getElementById("gardenKeyhole");
+  /* LANDING -> THE WAY IN */
 
-const gardenBack =
-    document.getElementById("gardenBack");
+  function enterArtwork() {
+    if (currentRoom !== "landing") return;
 
-const contactLink =
-    document.getElementById("contactLink");
+    currentRoom = "way-in";
+    clearTimers();
 
-const contactWhisper =
-    document.getElementById("contactWhisper");
+    landing.classList.add("leaving");
+    artworkScreen.classList.add("revealed", "boom");
 
-const contactScreen =
-    document.getElementById("contactScreen");
+    later(() => {
+      artworkScreen.classList.add("settled");
+    }, 1750);
 
-const contactBack =
-    document.getElementById("contactBack");
+    later(() => {
+      artworkScreen.classList.remove("boom");
+    }, 1800);
 
-const dontPush =
-    document.getElementById("dontPush");
+    later(showContactLink, 1400);
+  }
 
-const pushMessage =
-    document.getElementById("pushMessage");
+  wordmark.addEventListener("click", () => {
+    wordmarkWhisper.classList.add("show");
 
-const pushMessageSecond =
-    document.getElementById("pushMessageSecond");
+    later(() => {
+      wordmarkWhisper.classList.remove("show");
+    }, 1800);
+  });
 
-const growthScreen =
-    document.getElementById("growthScreen");
+  enterLink.addEventListener("click", () => {
+    if (currentRoom !== "landing") return;
 
-const growthArtwork =
-    document.getElementById("growthArtwork");
+    enterLink.textContent = "YOU SHOULD BE MORE CURIOUS.";
+    enterLink.classList.add("changed");
 
-const growthPortal =
-    document.getElementById("growthPortal");
+    later(enterArtwork, 900);
+  });
 
-const careScreen =
-    document.getElementById("careScreen");
+  curiousLink.addEventListener("click", () => {
+    if (currentRoom !== "landing") return;
 
-const careArtwork =
-    document.getElementById("careArtwork");
+    curiousLink.textContent = "GOOD.";
+    curiousLink.classList.add("good");
 
+    later(enterArtwork, 450);
+  });
 
+  /* THE WAY IN: details and LOOK AGAIN */
 
-/* =========================================
-   CONTACT LINK
-   ========================================= */
+  function showLookAgain() {
+    if (currentRoom !== "way-in") return;
 
-function showContactLink() {
+    artworkScreen.classList.add("details-visible");
+    lookAgain.classList.remove("show");
 
-    if (!contactLink) {
-        return;
+    window.clearTimeout(lookTimer);
+    window.clearTimeout(hideLookTimer);
+
+    lookTimer = window.setTimeout(() => {
+      lookAgain.classList.add("show");
+
+      hideLookTimer = window.setTimeout(() => {
+        lookAgain.classList.remove("show");
+      }, 1800);
+    }, 900);
+  }
+
+  function hideArtworkDetails() {
+    artworkScreen.classList.remove("details-visible");
+    lookAgain.classList.remove("show");
+
+    window.clearTimeout(lookTimer);
+    window.clearTimeout(hideLookTimer);
+  }
+
+  firstArtwork.addEventListener("click", () => {
+    if (artworkScreen.classList.contains("details-visible")) {
+      hideArtworkDetails();
+    } else {
+      showLookAgain();
     }
+  });
 
-    contactLink.classList.add(
-        "is-visible"
-    );
+  firstArtwork.addEventListener("mouseenter", showLookAgain);
+  firstArtwork.addEventListener("mouseleave", hideArtworkDetails);
 
-}
+  /* CONTACT: whisper first, room second */
 
+  function startContact() {
+    if (currentRoom !== "way-in") return;
 
-function hideContactLink() {
-
-    if (!contactLink) {
-        return;
-    }
-
-    contactLink.classList.remove(
-        "is-visible"
-    );
-
-}
-
-
-
-/* =========================================
-   ENTER
-   ========================================= */
-
-enterHint.addEventListener(
-    "click",
-    () => {
-
-        if (
-            enterHint.dataset.reacted ===
-            "true"
-        ) {
-            return;
-        }
-
-
-        enterHint.dataset.reacted =
-            "true";
-
-
-        enterHint.classList.add(
-            "waiting"
-        );
-
-
-        setTimeout(
-            () => {
-
-                enterHint.classList.add(
-                    "hidden-text"
-                );
-
-
-                setTimeout(
-                    () => {
-
-                        enterHint.textContent =
-                            "YOU SHOULD BE MORE CURIOUS.";
-
-
-                        enterHint.classList.remove(
-                            "waiting"
-                        );
-
-
-                        enterHint.classList.remove(
-                            "hidden-text"
-                        );
-
-
-                        enterHint.classList.add(
-                            "hint"
-                        );
-
-                    },
-                    350
-                );
-
-            },
-            1800
-        );
-
-    }
-);
-
-
-
-/* =========================================
-   ODDITY REALM
-   I FELT THAT.
-   ========================================= */
-
-realmMark.addEventListener(
-    "click",
-    () => {
-
-        realmReaction.classList.add(
-            "show"
-        );
-
-    }
-);
-
-
-realmMarkWrap.addEventListener(
-    "mouseleave",
-    () => {
-
-        realmReaction.classList.remove(
-            "show"
-        );
-
-    }
-);
-
-
-
-/* =========================================
-   CURIOUS?
-   ========================================= */
-
-curiousButton.addEventListener(
-    "click",
-    () => {
-
-        if (
-            curiousButton.classList.contains(
-                "answered"
-            )
-        ) {
-            return;
-        }
-
-
-        curiousButton.textContent =
-            "GOOD.";
-
-
-        curiousButton.classList.add(
-            "answered"
-        );
-
-
-        hideContactLink();
-
-
-        setTimeout(
-            () => {
-
-                landing.classList.add(
-                    "opening"
-                );
-
-            },
-            950
-        );
-
-
-        setTimeout(
-            () => {
-
-                artworkScreen.classList.add(
-                    "revealed"
-                );
-
-            },
-            1050
-        );
-
-
-        setTimeout(
-            () => {
-
-                artworkScreen.classList.add(
-                    "boom"
-                );
-
-            },
-            1500
-        );
-
-
-        setTimeout(
-            () => {
-
-                artworkScreen.classList.add(
-                    "settled"
-                );
-
-
-                showContactLink();
-
-            },
-            3100
-        );
-
-    }
-);
-
-
-
-/* =========================================
-   LOOK AGAIN
-   ========================================= */
-
-let lookTimer;
-let hideLookTimer;
-
-
-function showLookAgain() {
-
-    clearTimeout(
-        lookTimer
-    );
-
-    clearTimeout(
-        hideLookTimer
-    );
-
-
-    lookTimer =
-        setTimeout(
-            () => {
-
-                lookAgain.classList.add(
-                    "show"
-                );
-
-
-                hideLookTimer =
-                    setTimeout(
-                        () => {
-
-                            lookAgain.classList.remove(
-                                "show"
-                            );
-
-                        },
-                        1500
-                    );
-
-            },
-            3000
-        );
-
-}
-
-
-function hideLookAgain() {
-
-    clearTimeout(
-        lookTimer
-    );
-
-    clearTimeout(
-        hideLookTimer
-    );
-
-
-    lookAgain.classList.remove(
-        "show"
-    );
-
-}
-
-
-
-/* Desktop */
-
-firstArtwork.addEventListener(
-    "mouseenter",
-    showLookAgain
-);
-
-
-firstArtwork.addEventListener(
-    "mouseleave",
-    hideLookAgain
-);
-
-
-
-/* Touch */
-
-firstArtwork.addEventListener(
-    "click",
-    () => {
-
-        if (
-            lookAgain.classList.contains(
-                "show"
-            )
-        ) {
-
-            hideLookAgain();
-
-            return;
-
-        }
-
-
-        showLookAgain();
-
-    }
-);
-
-
-
-/* =========================================
-   ENTER THE GARDEN
-   ========================================= */
-
-function enterGarden() {
-
-    if (
-        !artworkScreen.classList.contains(
-            "settled"
-        )
-    ) {
-        return;
-    }
-
-
+    currentRoom = "contact-whisper";
     hideContactLink();
 
+    contactWhisper.classList.add("show");
+
+    contactFlowTimer = window.setTimeout(() => {
+      contactWhisper.classList.remove("show");
+      contactScreen.classList.add("open");
+      currentRoom = "contact";
+    }, 2100);
+  }
+
+  contactLink.addEventListener("click", startContact);
+
+  function backToWayIn() {
+    clearTimers();
+
+    currentRoom = "way-in";
+
+    contactScreen.classList.remove("open");
+    contactWhisper.classList.remove("show");
 
     gardenScreen.classList.remove(
-        "title-in",
-        "title-up",
-        "art-in",
-        "ready",
-        "portal"
+      "open", "title-in", "title-up", "art-in", "ready", "portal"
     );
 
+    growthScreen.classList.remove(
+      "open", "growing", "ready", "leaving"
+    );
+
+    careScreen.classList.remove("open", "ready");
+
+    landing.classList.add("leaving");
+    artworkScreen.classList.add("revealed", "settled");
+
+    pushMessage.classList.remove("show");
+    pushMessageSecond.classList.remove("show");
+    dontPush.classList.remove("gone");
+
+    showContactLink();
+  }
+
+  contactBack.addEventListener("click", backToWayIn);
+
+  /* DON'T PUSH */
+
+  function pushButton() {
+    if (currentRoom !== "contact") return;
+
+    dontPush.classList.add("gone");
+    pushMessage.classList.add("show");
+
+    later(() => {
+      pushMessage.classList.remove("show");
+
+      later(() => {
+        pushMessageSecond.classList.add("show");
+
+        later(() => {
+          pushMessageSecond.classList.remove("show");
+          backToWayIn();
+        }, 1700);
+      }, 450);
+    }, 1350);
+  }
+
+  dontPush.addEventListener("click", pushButton);
+
+  /* COPY EMAIL */
+
+  copyEmail.addEventListener("click", async () => {
+    const email = "oddityrealmstudio@gmail.com";
+
+    try {
+      await navigator.clipboard.writeText(email);
+      copyEmail.textContent = "COPIED.";
+    } catch (error) {
+      window.location.href = "mailto:" + email;
+      copyEmail.textContent = "OPENING EMAIL.";
+    }
+
+    later(() => {
+      copyEmail.textContent = "COPY ADDRESS";
+    }, 1600);
+  });
+
+  /* THE WAY IN -> THE GARDEN BETWEEN */
+
+  function openGarden() {
+    if (currentRoom !== "way-in") return;
+
+    currentRoom = "garden";
+    hideContactLink();
+
+    gardenScreen.classList.add("open");
+    gardenScreen.classList.remove(
+      "title-in", "title-up", "art-in", "ready", "portal"
+    );
+
+    // First: title appears in the centre.
+    later(() => {
+      gardenScreen.classList.add("title-in");
+    }, 100);
+
+    // Second: title travels upwards.
+    later(() => {
+      gardenScreen.classList.add("title-up");
+    }, 1150);
+
+    // Third: the artwork rises into view from below.
+    later(() => {
+      gardenScreen.classList.add("art-in");
+    }, 1950);
+
+    // Fourth: the invitation appears after the image settles.
+    later(() => {
+      gardenScreen.classList.add("ready");
+    }, 3400);
+  }
+
+  gardenPortal.addEventListener("click", openGarden);
+
+  /* KEYHOLE -> SPIRAL PORTAL -> GROWTH */
+
+  function openGrowth() {
+    if (currentRoom !== "garden") return;
+
+    currentRoom = "growth";
+    gardenScreen.classList.add("portal");
+
+    later(() => {
+      gardenScreen.classList.remove(
+        "open", "title-in", "title-up", "art-in", "ready", "portal"
+      );
+
+      growthScreen.classList.add("open");
+      growthScreen.classList.remove("growing", "ready");
+
+      later(() => {
+        growthScreen.classList.add("growing");
+      }, 150);
+
+      later(() => {
+        growthScreen.classList.add("ready");
+      }, 2100);
+    }, 600);
+  }
+
+  gardenKeyhole.addEventListener("click", openGrowth);
+
+  gardenBack.addEventListener("click", backToWayIn);
+
+  growthBack.addEventListener("click", () => {
+    if (currentRoom !== "growth") return;
+
+    currentRoom = "garden";
+
+    growthScreen.classList.remove("open", "growing", "ready");
 
     gardenScreen.classList.add(
-        "open"
+      "open", "title-in", "title-up", "art-in", "ready"
     );
+  });
 
+  /* GROWTH -> HANDLE WITH CARE */
 
-    /* Stage 1: title in centre */
+  function openCare() {
+    if (currentRoom !== "growth") return;
 
-    setTimeout(
-        () => {
+    currentRoom = "care";
+    growthScreen.classList.add("leaving");
 
-            gardenScreen.classList.add(
-                "title-in"
-            );
+    later(() => {
+      growthScreen.classList.remove(
+        "open", "growing", "ready", "leaving"
+      );
 
-        },
-        150
-    );
+      careScreen.classList.add("open");
+      careScreen.classList.remove("ready");
 
+      later(() => {
+        careScreen.classList.add("ready");
+      }, 1650);
+    }, 400);
+  }
 
-    /* Stage 2: title travels upward */
+  growthPortal.addEventListener("click", openCare);
 
-    setTimeout(
-        () => {
+  careBack.addEventListener("click", () => {
+    if (currentRoom !== "care") return;
 
-            gardenScreen.classList.add(
-                "title-up"
-            );
+    currentRoom = "growth";
 
-        },
-        1200
-    );
+    careScreen.classList.remove("open", "ready");
+    growthScreen.classList.add("open", "growing", "ready");
+  });
 
-
-    /* Stage 3: artwork rises from below */
-
-    setTimeout(
-        () => {
-
-            gardenScreen.classList.add(
-                "art-in"
-            );
-
-        },
-        1500
-    );
-
-
-    /* Stage 4: Garden becomes interactive */
-
-    setTimeout(
-        () => {
-
-            gardenScreen.classList.add(
-                "ready"
-            );
-
-        },
-        3000
-    );
-
-}
-
-
-gardenPortal.addEventListener(
-    "click",
-    enterGarden
-);
-
-
-
-/* =========================================
-   GARDEN KEYHOLE
-   GARDEN → GROWTH
-   ========================================= */
-
-gardenKeyhole.addEventListener(
-    "click",
-    () => {
-
-        if (
-            !gardenScreen.classList.contains(
-                "ready"
-            )
-        ) {
-            return;
-        }
-
-
-        gardenScreen.classList.add(
-            "portal"
-        );
-
-
-        /*
-           Spiral transition.
-        */
-
-        setTimeout(
-            () => {
-
-                growthScreen.classList.add(
-                    "open"
-                );
-
-            },
-            1100
-        );
-
-
-        /*
-           The first thing begins
-           growing from nothing.
-        */
-
-        setTimeout(
-            () => {
-
-                growthScreen.classList.add(
-                    "growing"
-                );
-
-            },
-            1250
-        );
-
-
-        /*
-           Title appears only after
-           the artwork has grown.
-        */
-
-        setTimeout(
-            () => {
-
-                growthScreen.classList.add(
-                    "ready"
-                );
-
-            },
-            3050
-        );
-
-
-        /*
-           Garden disappears completely.
-        */
-
-        setTimeout(
-            () => {
-
-                gardenScreen.classList.remove(
-                    "open",
-                    "title-in",
-                    "title-up",
-                    "art-in",
-                    "ready",
-                    "portal"
-                );
-
-            },
-            1900
-        );
-
-    }
-);
-
-
-
-/* =========================================
-   GARDEN BACK
-   ========================================= */
-
-gardenBack.addEventListener(
-    "click",
-    () => {
-
-        gardenScreen.classList.remove(
-            "open",
-            "title-in",
-            "title-up",
-            "art-in",
-            "ready",
-            "portal"
-        );
-
-
-        showContactLink();
-
-    }
-);
-
-
-
-/* =========================================
-   GROWTH → HANDLE WITH CARE
-   ========================================= */
-
-growthPortal.addEventListener(
-    "click",
-    () => {
-
-        growthScreen.classList.remove(
-            "ready"
-        );
-
-
-        growthScreen.classList.add(
-            "leaving"
-        );
-
-
-        /*
-           Open the fifth world.
-        */
-
-        setTimeout(
-            () => {
-
-                careScreen.classList.add(
-                    "open"
-                );
-
-            },
-            500
-        );
-
-
-        /*
-           Let the fifth painting
-           grow from the centre.
-        */
-
-        setTimeout(
-            () => {
-
-                careScreen.classList.add(
-                    "growing"
-                );
-
-            },
-            650
-        );
-
-
-        /*
-           Reveal title after growth.
-        */
-
-        setTimeout(
-            () => {
-
-                careScreen.classList.add(
-                    "ready"
-                );
-
-            },
-            2700
-        );
-
-
-        /*
-           Then whisper:
-           please.
-        */
-
-        setTimeout(
-            () => {
-
-                careScreen.classList.add(
-                    "message"
-                );
-
-            },
-            3800
-        );
-
-
-        /*
-           Remove previous room.
-        */
-
-        setTimeout(
-            () => {
-
-                growthScreen.classList.remove(
-                    "open",
-                    "growing",
-                    "ready",
-                    "leaving"
-                );
-
-            },
-            1200
-        );
-
-    }
-);
-
-
-
-/* =========================================
-   CONTACT
-   ========================================= */
-
-contactLink.addEventListener(
-    "click",
-    () => {
-
-        hideContactLink();
-
-
-        contactWhisper.classList.add(
-            "show"
-        );
-
-
-        /*
-           I can't stop thinking
-           about you either.
-        */
-
-        setTimeout(
-            () => {
-
-                contactWhisper.classList.remove(
-                    "show"
-                );
-
-
-                contactScreen.classList.add(
-                    "open"
-                );
-
-            },
-            2100
-        );
-
-    }
-);
-
-
-
-/* =========================================
-   CONTACT BACK
-   ========================================= */
-
-contactBack.addEventListener(
-    "click",
-    () => {
-
-        resetContactRoom();
-
-
-        contactScreen.classList.remove(
-            "open"
-        );
-
-
-        setTimeout(
-            () => {
-
-                showContactLink();
-
-            },
-            700
-        );
-
-    }
-);
-
-
-
-/* =========================================
-   DON'T PUSH
-   ========================================= */
-
-function resetContactRoom() {
-
-    dontPush.classList.remove(
-        "gone"
-    );
-
-
-    dontPush.dataset.pushed =
-        "false";
-
-
-    pushMessage.classList.remove(
-        "show"
-    );
-
-
-    pushMessageSecond.classList.remove(
-        "show"
-    );
-
-}
-
-
-dontPush.addEventListener(
-    "click",
-    () => {
-
-        if (
-            dontPush.dataset.pushed ===
-            "true"
-        ) {
-            return;
-        }
-
-
-        dontPush.dataset.pushed =
-            "true";
-
-
-        /*
-           Button disappears completely.
-        */
-
-        dontPush.classList.add(
-            "gone"
-        );
-
-
-        /*
-           First sentence.
-        */
-
-        setTimeout(
-            () => {
-
-                pushMessage.classList.add(
-                    "show"
-                );
-
-            },
-            450
-        );
-
-
-        /*
-           First sentence disappears.
-           Second one appears.
-        */
-
-        setTimeout(
-            () => {
-
-                pushMessage.classList.remove(
-                    "show"
-                );
-
-
-                pushMessageSecond.classList.add(
-                    "show"
-                );
-
-            },
-            1900
-        );
-
-
-        /*
-           Return to THE WAY IN.
-        */
-
-        setTimeout(
-            () => {
-
-                pushMessageSecond.classList.remove(
-                    "show"
-                );
-
-
-                contactScreen.classList.remove(
-                    "open"
-                );
-
-
-                resetContactRoom();
-
-
-                setTimeout(
-                    () => {
-
-                        showContactLink();
-
-                    },
-                    700
-                );
-
-            },
-            3900
-        );
-
-    }
-);
+})();
