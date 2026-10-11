@@ -28,7 +28,20 @@ contactBack.addEventListener("click",backToWayIn);
 dontPush.addEventListener("click",()=>{if(room!=="contact")return;dontPush.classList.add("gone");pushMessage.classList.add("show");later(()=>{pushMessage.classList.remove("show");later(()=>{pushMessageSecond.classList.add("show");later(()=>{pushMessageSecond.classList.remove("show");backToWayIn()},1900)},500)},1550)});
 function openGarden(){if(room!=="way-in")return;room="garden";hideContactLink();gardenScreen.classList.add("open");gardenScreen.classList.remove("title-in","title-up","art-in","ready","portal");later(()=>gardenScreen.classList.add("title-in"),100);later(()=>gardenScreen.classList.add("title-up"),1800);later(()=>gardenScreen.classList.add("art-in"),2550);later(()=>gardenScreen.classList.add("ready"),4000)}
 gardenPortal.addEventListener("click",openGarden);
-function openGrowth(){if(room!=="garden")return;room="growth";gardenScreen.classList.add("portal");later(()=>{gardenScreen.classList.remove("open","title-in","title-up","art-in","ready","portal");growthScreen.classList.add("open");growthScreen.classList.remove("title-sprout","title-rise","art-sprout","ready");later(()=>growthScreen.classList.add("title-sprout"),120);later(()=>growthScreen.classList.add("title-rise"),1900);later(()=>growthScreen.classList.add("art-sprout"),2900);later(()=>growthScreen.classList.add("ready"),4850)},720)}
+function openGrowth(){
+ if(room!=="garden")return;
+ room="growth";
+ clearTimers();
+ gardenScreen.classList.add("portal");
+ growthScreen.classList.remove("title-sprout","title-rise","art-sprout","ready","leaving");
+ growthScreen.classList.add("open");
+ /* Start the next room immediately, so there is no empty black-screen gap. */
+ later(()=>growthScreen.classList.add("title-sprout"),180);
+ later(()=>growthScreen.classList.add("title-rise"),1850);
+ later(()=>growthScreen.classList.add("art-sprout"),2650);
+ later(()=>growthScreen.classList.add("ready"),4500);
+ later(()=>gardenScreen.classList.remove("open","title-in","title-up","art-in","ready","portal"),720);
+}
 gardenKeyhole.addEventListener("click",openGrowth);gardenBack.addEventListener("click",backToWayIn);
 function openCare(){if(room!=="growth")return;room="care";growthScreen.classList.add("leaving");later(()=>{growthScreen.classList.remove("open","title-sprout","title-rise","art-sprout","ready","leaving");careScreen.classList.add("open");careScreen.classList.remove("reveal-eye","reveal-hand","ready");later(()=>careScreen.classList.add("reveal-eye"),250);later(()=>careScreen.classList.add("reveal-hand"),2050);later(()=>careScreen.classList.add("ready"),3200)},650)}
 growthArtworkHotspot.addEventListener("click",openCare);
