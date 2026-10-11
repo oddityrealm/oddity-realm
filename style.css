@@ -34,3 +34,20 @@
 /* Phone */
 @media(max-width:600px){.wordmark{top:18px;left:21px;font-size:9px}.wordmark-whisper{left:21px;top:43px;font-size:14px}.enter-link{top:18px;right:21px;font-size:9px}.enter-link.changed{font-size:8px;max-width:58vw}.realm-symbol{width:59px;height:78px;margin-bottom:19px}.landing-center p{font-size:12px}.curious-link{bottom:23px;font-size:9px}.artwork-stage{top:46%;width:88vw}.first-artwork{width:88vw;height:88vw}.artwork-title{font-size:12px}.artwork-caption{margin-top:9px}.artwork-details{gap:8px 10px;font-size:9px}.look-again{font-size:16px;margin-top:12px}.contact-link{top:18px;left:21px;font-size:9px}.contact-whisper{top:43px;left:21px;font-size:14px;width:78vw}.garden-portal{bottom:9px;font-size:37px}.garden-title{font-size:16px}.garden-artwork{top:49%;width:101.2vw;height:101.2vw}.garden-message{top:calc(49% + 50.6vw + 7px);font-size:9px}.garden-keyhole{top:49%;width:22vw;height:30vw}.garden-back,.growth-back,.care-back,.contact-back{top:13px;left:14px}.growth-artwork,.growth-artwork-hotspot{top:53%;width:99.2vw;height:99.2vw}.growth-title{top:8%;font-size:12px}.care-image-wrap{top:51%;width:94vw;height:94vw}.care-title{top:8%;font-size:16px}.care-please{top:calc(51% + 47vw + 8px);font-size:16px}.contact-content{top:45%;gap:18px}.contact-email{font-size:16px}.corner-symbol{width:46px;height:46px}.corner-one,.corner-two{top:18px}.corner-one,.corner-three{left:17px}.corner-two,.corner-four{right:17px}.corner-three,.corner-four{bottom:18px}.dont-push{width:100px;height:100px;bottom:25px;font-size:10px}.push-message,.push-message-second{bottom:143px}}
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;scroll-behavior:auto!important}}
+
+
+/* ODDITY REALM repair: stable Growth reveal and contact room alignment */
+.growth-screen.open .growth-artwork { will-change: transform, opacity; }
+.growth-screen.art-sprout .growth-artwork { opacity: 1; }
+.growth-artwork-hotspot { background: transparent; border: 0; padding: 0; cursor: pointer; }
+.contact-screen { isolation: isolate; }
+.contact-content { top: 40%; gap: 16px; z-index: 2; }
+.corner-symbol { z-index: 1; background-repeat: no-repeat; background-position: center; background-size: contain; }
+.dont-push { z-index: 4; }
+.push-message, .push-message-second { z-index: 5; }
+.contact-back { z-index: 6; }
+@media (max-height: 650px) {
+  .contact-content { top: 37%; gap: 12px; }
+  .dont-push { width: 92px; height: 92px; bottom: 18px; }
+  .push-message, .push-message-second { bottom: 120px; }
+}
