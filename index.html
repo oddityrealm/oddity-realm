@@ -9,9 +9,7 @@
   <meta name="robots" content="index,follow,max-image-preview:large">
 
   <title>Oddity Realm | Surreal Paintings &amp; Digital Art</title>
-
   <meta name="description" content="Oddity Realm is a surreal art world by Oddity, gathering strange paintings, digital works, mysterious places and curious things.">
-
   <link rel="canonical" href="https://oddityrealm.art/">
 
   <meta property="og:type" content="website">
@@ -29,8 +27,9 @@
 
   <link rel="icon" href="images/oddity-symbol.png" type="image/png">
   <link rel="preload" as="image" href="images/the-way-in.jpg">
-  <link rel="stylesheet" href="./style.css?v=2">
-  <script src="script.js" defer></script>
+
+  <link rel="stylesheet" href="./style.css?v=3">
+  <script src="./script.js?v=3" defer></script>
 
   <script type="application/ld+json">
   {
@@ -105,42 +104,23 @@
 
     <!-- LANDING -->
     <section class="landing-screen" id="landingScreen" aria-label="Oddity Realm entrance">
+      <button class="wordmark" id="wordmark" type="button">ODDITY REALM</button>
+      <div class="wordmark-whisper" id="wordmarkWhisper" aria-live="polite">I felt that.</div>
 
-      <button class="wordmark" id="wordmark" type="button">
-        ODDITY REALM
-      </button>
-
-      <div class="wordmark-whisper" id="wordmarkWhisper" aria-live="polite">
-        I felt that.
-      </div>
-
-      <button class="enter-link" id="enterLink" type="button">
-        ENTER ↗
-      </button>
+      <button class="enter-link" id="enterLink" type="button">ENTER</button>
 
       <div class="landing-center">
-        <img
-          class="realm-symbol"
-          src="images/oddity-symbol.png"
-          alt=""
-          aria-hidden="true"
-        >
-
+        <img class="realm-symbol" src="images/oddity-symbol.png" alt="" aria-hidden="true">
         <h1>ODDITY<br>REALM</h1>
         <p>a collection of strange things</p>
       </div>
 
-      <button class="curious-link" id="curiousLink" type="button">
-        CURIOUS?
-      </button>
+      <button class="curious-link" id="curiousLink" type="button">CURIOUS?</button>
     </section>
-
 
     <!-- THE WAY IN -->
     <section class="artwork-screen" id="artworkScreen" aria-label="The Way In">
-
       <div class="artwork-stage">
-
         <img
           class="first-artwork"
           id="firstArtwork"
@@ -157,138 +137,81 @@
             <span>50 × 50 cm</span>
           </div>
 
-          <div class="look-again" id="lookAgain" aria-live="polite">
-            LOOK AGAIN.
-          </div>
+          <div class="look-again" id="lookAgain" aria-live="polite">LOOK AGAIN.</div>
         </div>
-
       </div>
 
-      <button
-        class="garden-portal"
-        id="gardenPortal"
-        type="button"
-        aria-label="Continue down to The Garden Between"
-      >↓</button>
+      <button class="garden-portal" id="gardenPortal" type="button" aria-label="Enter The Garden Between">↑</button>
     </section>
 
-
-    <!-- CONTACT ENTRY -->
-    <button class="contact-link" id="contactLink" type="button">
-      CONTACT
-    </button>
-
-    <div class="contact-whisper" id="contactWhisper" aria-live="polite">
-      I can't stop thinking about you either.
-    </div>
-
+    <!-- CONTACT WHISPER -->
+    <button class="contact-link" id="contactLink" type="button">CONTACT</button>
+    <div class="contact-whisper" id="contactWhisper" aria-live="polite">I can't stop thinking about you either.</div>
 
     <!-- THE GARDEN BETWEEN -->
     <section class="garden-screen" id="gardenScreen" aria-label="The Garden Between">
-
-      <div class="garden-title" id="gardenTitle">
-        THE GARDEN BETWEEN
-      </div>
+      <div class="garden-title" id="gardenTitle">THE GARDEN BETWEEN</div>
 
       <img
         class="garden-artwork"
         id="gardenArtwork"
         src="images/the-garden-between.jpg"
-        alt="The Garden Between, surreal painting by Oddity with a giant eye, tree, moon, mushrooms, keyhole and stone steps"
+        alt="The Garden Between, surreal painting by Oddity"
         loading="lazy"
       >
 
-      <div class="garden-message" id="gardenMessage">
-        YOU HAVE THE KEY...
-      </div>
+      <div class="garden-message" id="gardenMessage">YOU HAVE THE KEY...</div>
 
-      <button
-        class="garden-keyhole"
-        id="gardenKeyhole"
-        type="button"
-        aria-label="Enter through the keyhole"
-      ><span></span></button>
+      <button class="garden-keyhole" id="gardenKeyhole" type="button" aria-label="Enter through the keyhole">
+        <span></span>
+      </button>
 
-      <button
-        class="garden-back"
-        id="gardenBack"
-        type="button"
-        aria-label="Return to The Way In"
-      >←</button>
-
+      <button class="garden-back" id="gardenBack" type="button" aria-label="Return to The Way In">←</button>
     </section>
-
 
     <!-- THE FIRST THING THAT GREW HERE -->
     <section class="growth-screen" id="growthScreen" aria-label="The First Thing That Grew Here">
-
-      <h2 class="growth-title" id="growthTitle">
-        THE FIRST THING THAT GREW HERE
-      </h2>
+      <h2 class="growth-title" id="growthTitle">THE FIRST THING THAT GREW HERE</h2>
 
       <img
         class="growth-artwork"
         id="growthArtwork"
         src="images/the-first-thing-that-grew-here.jpg"
-        alt="The First Thing That Grew Here, surreal mushroom painting by Oddity"
+        alt="The First Thing That Grew Here, surreal painting by Oddity"
         loading="lazy"
       >
 
       <button
-        class="growth-portal"
-        id="growthPortal"
+        class="growth-artwork-hotspot"
+        id="growthArtworkHotspot"
         type="button"
-        aria-label="Continue to Handle With Care"
-      >↓</button>
+        aria-label="Follow the image into Handle With Care"
+      ></button>
 
-      <button
-        class="growth-back"
-        id="growthBack"
-        type="button"
-        aria-label="Return to The Garden Between"
-      >←</button>
-
+      <button class="growth-back" id="growthBack" type="button" aria-label="Return to The Garden Between">←</button>
     </section>
-
 
     <!-- HANDLE WITH CARE -->
     <section class="care-screen" id="careScreen" aria-label="Handle With Care">
-
-      <img
-        class="care-artwork"
-        id="careArtwork"
-        src="images/handle-with-care.jpg"
-        alt="Handle With Care, surreal painting by Oddity of a blue hand holding an eyeball against a spiral background"
-        loading="lazy"
-      >
-
-      <h2 class="care-title" id="careTitle">
-        HANDLE WITH CARE
-      </h2>
-
-      <div class="care-please" id="carePlease">
-        please.
+      <div class="care-image-wrap" id="careImageWrap">
+        <img
+          class="care-artwork"
+          id="careArtwork"
+          src="images/handle-with-care.jpg"
+          alt="Handle With Care, surreal painting by Oddity of a blue hand holding an eyeball against a spiral background"
+          loading="lazy"
+        >
       </div>
 
-      <button
-        class="care-back"
-        id="careBack"
-        type="button"
-        aria-label="Return to The First Thing That Grew Here"
-      >←</button>
+      <h2 class="care-title" id="careTitle">HANDLE WITH CARE</h2>
+      <div class="care-please" id="carePlease">please.</div>
 
+      <button class="care-back" id="careBack" type="button" aria-label="Return to The First Thing That Grew Here">←</button>
     </section>
-
 
     <!-- CONTACT ROOM -->
     <section class="contact-screen" id="contactScreen" aria-label="Contact Oddity">
-
-      <button
-        class="contact-back"
-        id="contactBack"
-        type="button"
-        aria-label="Return to The Way In"
-      >←</button>
+      <button class="contact-back" id="contactBack" type="button" aria-label="Return to The Way In">←</button>
 
       <div class="corner-symbol corner-one" aria-hidden="true"></div>
       <div class="corner-symbol corner-two" aria-hidden="true"></div>
@@ -297,28 +220,13 @@
 
       <div class="contact-content">
         <div class="contact-label">ODDITY REALM</div>
-
-        <a class="contact-email" href="mailto:oddityrealmstudio@gmail.com">
-          oddityrealmstudio@gmail.com
-        </a>
-
-        <button class="copy-email" id="copyEmail" type="button">
-          COPY ADDRESS
-        </button>
+        <a class="contact-email" href="mailto:oddityrealmstudio@gmail.com">oddityrealmstudio@gmail.com</a>
       </div>
 
-      <button class="dont-push" id="dontPush" type="button">
-        DON'T PUSH
-      </button>
+      <button class="dont-push" id="dontPush" type="button">DON'T PUSH</button>
 
-      <div class="push-message" id="pushMessage" aria-live="polite">
-        I KNEW YOU'D PUSH.
-      </div>
-
-      <div class="push-message-second" id="pushMessageSecond" aria-live="polite">
-        you always do.
-      </div>
-
+      <div class="push-message" id="pushMessage" aria-live="polite">I KNEW YOU'D PUSH.</div>
+      <div class="push-message-second" id="pushMessageSecond" aria-live="polite">you always do.</div>
     </section>
 
   </main>
