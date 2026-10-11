@@ -6,7 +6,7 @@ const landing=$("landingScreen"),wordmark=$("wordmark"),wordmarkWhisper=$("wordm
 const artworkScreen=$("artworkScreen"),firstArtwork=$("firstArtwork"),lookAgain=$("lookAgain");
 const contactLink=$("contactLink"),contactWhisper=$("contactWhisper"),contactScreen=$("contactScreen"),contactBack=$("contactBack"),dontPush=$("dontPush"),pushMessage=$("pushMessage"),pushMessageSecond=$("pushMessageSecond");
 const gardenPortal=$("gardenPortal"),gardenScreen=$("gardenScreen"),gardenKeyhole=$("gardenKeyhole"),gardenBack=$("gardenBack");
-const growthScreen=$("growthScreen"),growthBack=$("growthBack"),growthArtworkHotspot=$("growthArtworkHotspot");
+const growthScreen=$("growthScreen"),growthBack=$("growthBack"),growthContinue=$("growthContinue");
 const careScreen=$("careScreen"),careBack=$("careBack");
 let room="landing",timers=[],lookTimer=null,hideLookTimer=null;
 function later(fn,ms){const t=setTimeout(fn,ms);timers.push(t);return t}
@@ -22,7 +22,7 @@ function showLookAgain(){if(room!=="way-in")return;artworkScreen.classList.add("
 function hideArtworkDetails(){artworkScreen.classList.remove("details-visible");lookAgain.classList.remove("show");clearTimeout(lookTimer);clearTimeout(hideLookTimer)}
 firstArtwork.addEventListener("click",()=>artworkScreen.classList.contains("details-visible")?hideArtworkDetails():showLookAgain());
 firstArtwork.addEventListener("mouseenter",showLookAgain);firstArtwork.addEventListener("mouseleave",hideArtworkDetails);
-function backToWayIn(){clearTimers();room="way-in";contactScreen.classList.remove("open");contactWhisper.classList.remove("show");gardenScreen.classList.remove("open","title-in","title-up","art-in","ready","portal");growthScreen.classList.remove("open","title-sprout","title-rise","art-sprout","ready","leaving");careScreen.classList.remove("open","reveal-eye","reveal-hand","ready");landing.classList.add("leaving");artworkScreen.classList.add("revealed","settled");pushMessage.classList.remove("show");pushMessageSecond.classList.remove("show");dontPush.classList.remove("gone");showContactLink()}
+function backToWayIn(){clearTimers();room="way-in";contactScreen.classList.remove("open");contactWhisper.classList.remove("show");gardenScreen.classList.remove("open","title-in","title-up","art-in","ready","portal");growthScreen.classList.remove("open","title-sprout","title-rise","art-sprout","ready","leaving");careScreen.classList.remove("open","reveal-eye","reveal-hand","reveal-title","reveal-please","ready");landing.classList.add("leaving");artworkScreen.classList.add("revealed","settled");pushMessage.classList.remove("show");pushMessageSecond.classList.remove("show");dontPush.classList.remove("gone");showContactLink()}
 contactLink.addEventListener("click",()=>{if(room!=="way-in")return;room="contact-whisper";hideContactLink();contactWhisper.classList.add("show");later(()=>{contactWhisper.classList.remove("show");contactScreen.classList.add("open");room="contact"},3000)});
 contactBack.addEventListener("click",backToWayIn);
 dontPush.addEventListener("click",()=>{if(room!=="contact")return;dontPush.classList.add("gone");pushMessage.classList.add("show");later(()=>{pushMessage.classList.remove("show");later(()=>{pushMessageSecond.classList.add("show");later(()=>{pushMessageSecond.classList.remove("show");backToWayIn()},1900)},500)},1550)});
@@ -36,15 +36,15 @@ function openGrowth(){
  growthScreen.classList.remove("title-sprout","title-rise","art-sprout","ready","leaving");
  growthScreen.classList.add("open");
  /* Start the next room immediately, so there is no empty black-screen gap. */
- later(()=>growthScreen.classList.add("title-sprout"),180);
- later(()=>growthScreen.classList.add("title-rise"),1850);
- later(()=>growthScreen.classList.add("art-sprout"),2650);
- later(()=>growthScreen.classList.add("ready"),4500);
- later(()=>gardenScreen.classList.remove("open","title-in","title-up","art-in","ready","portal"),720);
+ later(()=>growthScreen.classList.add("title-sprout"),520);
+ later(()=>growthScreen.classList.add("title-rise"),2250);
+ later(()=>growthScreen.classList.add("art-sprout"),3000);
+ later(()=>growthScreen.classList.add("ready"),5000);
+ later(()=>gardenScreen.classList.remove("open","title-in","title-up","art-in","ready","portal"),1500);
 }
 gardenKeyhole.addEventListener("click",openGrowth);gardenBack.addEventListener("click",backToWayIn);
-function openCare(){if(room!=="growth")return;room="care";growthScreen.classList.add("leaving");later(()=>{growthScreen.classList.remove("open","title-sprout","title-rise","art-sprout","ready","leaving");careScreen.classList.add("open");careScreen.classList.remove("reveal-eye","reveal-hand","ready");later(()=>careScreen.classList.add("reveal-eye"),250);later(()=>careScreen.classList.add("reveal-hand"),2050);later(()=>careScreen.classList.add("ready"),3200)},650)}
-growthArtworkHotspot.addEventListener("click",openCare);
+function openCare(){if(room!=="growth")return;room="care";growthScreen.classList.add("leaving");later(()=>{growthScreen.classList.remove("open","title-sprout","title-rise","art-sprout","ready","leaving");careScreen.classList.add("open");careScreen.classList.remove("reveal-eye","reveal-hand","reveal-title","reveal-please","ready");later(()=>careScreen.classList.add("reveal-eye"),350);later(()=>careScreen.classList.add("reveal-hand"),2650);later(()=>careScreen.classList.add("reveal-title"),4400);later(()=>careScreen.classList.add("reveal-please"),5700);later(()=>careScreen.classList.add("ready"),5700)},650)}
+growthContinue.addEventListener("click",openCare);
 growthBack.addEventListener("click",()=>{if(room!=="growth")return;clearTimers();room="garden";growthScreen.classList.remove("open","title-sprout","title-rise","art-sprout","ready");gardenScreen.classList.add("open","title-in","title-up","art-in","ready")});
-careBack.addEventListener("click",()=>{if(room!=="care")return;clearTimers();room="growth";careScreen.classList.remove("open","reveal-eye","reveal-hand","ready");growthScreen.classList.add("open","title-sprout","title-rise","art-sprout","ready")});
+careBack.addEventListener("click",()=>{if(room!=="care")return;clearTimers();room="growth";careScreen.classList.remove("open","reveal-eye","reveal-hand","reveal-title","reveal-please","ready");growthScreen.classList.add("open","title-sprout","title-rise","art-sprout","ready")});
 })();
