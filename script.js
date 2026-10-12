@@ -278,7 +278,7 @@ function openCare() {
     later(() => careScreen.classList.add("reveal-title"), 5000);
 
     /* 4. "please." arrives separately, as the final whisper. */
-    later(() => careScreen.classList.add("reveal-please"), 6400);
+    later(() => careScreen.classList.add("reveal-please"), 10400);
 
     later(() => careScreen.classList.add("ready"), 6600);
   }, 650);
