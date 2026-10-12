@@ -202,3 +202,33 @@
     width: 88vw;
   }
 }
+/* HANDLE WITH CARE: płynne odsłanianie od źrenicy */
+
+.care-screen .care-image-wrap {
+  clip-path: circle(0% at 47.2% 57.1%);
+  transition: clip-path 2.8s cubic-bezier(.4, 0, .2, 1);
+}
+
+/* Etap 1: sama źrenica */
+.care-screen.reveal-pupil .care-image-wrap {
+  clip-path: circle(3.5% at 47.2% 57.1%);
+  transition-duration: 1.2s;
+}
+
+/* Etap 2: cała tęczówka, białko i obramowanie oka */
+.care-screen.reveal-eye .care-image-wrap {
+  clip-path: circle(16.5% at 47.2% 57.1%);
+  transition-duration: 3.2s;
+}
+
+/* Etap 3: dłoń z okiem */
+.care-screen.reveal-hand .care-image-wrap {
+  clip-path: circle(38% at 47.2% 57.1%);
+  transition-duration: 3.4s;
+}
+
+/* Etap 4: cały obraz */
+.care-screen.reveal-full .care-image-wrap {
+  clip-path: circle(100% at 47.2% 57.1%);
+  transition-duration: 2.5s;
+}
