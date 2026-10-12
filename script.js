@@ -259,31 +259,64 @@ function openCare() {
 
   later(() => {
     growthScreen.classList.remove(
-      "open", "title-sprout", "title-rise", "art-sprout", "ready", "leaving"
+      "open",
+      "title-sprout",
+      "title-rise",
+      "art-sprout",
+      "ready",
+      "leaving"
     );
 
     careScreen.classList.add("open");
 
     careScreen.classList.remove(
-      "reveal-eye", "reveal-hand", "reveal-title", "reveal-please", "ready"
+      "reveal-pupil",
+      "reveal-eye",
+      "reveal-hand",
+      "reveal-full",
+      "reveal-title",
+      "reveal-please",
+      "ready"
     );
 
-    /* 1. Reveal the eye first. */
-    later(() => careScreen.classList.add("reveal-eye"), 350);
+    /* 1. 0-2 s: pojawia się maleńkie kółko
+       na samym środku źrenicy. */
+    later(() => {
+      careScreen.classList.add("reveal-pupil");
+    }, 350);
 
-    /* 2. Give the eye a quiet moment before revealing the full painting. */
-    later(() => careScreen.classList.add("reveal-hand"), 3400);
+    /* 2. 2-4 s: kółko rośnie i odsłania całe oko. */
+    later(() => {
+      careScreen.classList.add("reveal-eye");
+    }, 2350);
 
-    /* 3. The title appears only after the full artwork is revealed. */
-    later(() => careScreen.classList.add("reveal-title"), 5000);
+    /* 3. 4-6 s: odsłania się dłoń z okiem. */
+    later(() => {
+      careScreen.classList.add("reveal-hand");
+    }, 4350);
 
-    /* 4. "please." arrives separately, as the final whisper. */
-    later(() => careScreen.classList.add("reveal-please"), 16400);
+    /* 4. 6-8 s: koło rozlewa się na cały obraz. */
+    later(() => {
+      careScreen.classList.add("reveal-full");
+    }, 6350);
 
-    later(() => careScreen.classList.add("ready"), 6600);
+    /* 5. Po obrazie pojawia się tytuł. */
+    later(() => {
+      careScreen.classList.add("reveal-title");
+    }, 8350);
+
+    /* 6. „please.” przychodzi znacznie później. */
+    later(() => {
+      careScreen.classList.add("reveal-please");
+    }, 12350);
+
+    later(() => {
+      careScreen.classList.add("ready");
+    }, 12600);
   }, 650);
 }
 
+  
 growthContinue.addEventListener("click", openCare);
 
 growthBack.addEventListener("click", () => {
