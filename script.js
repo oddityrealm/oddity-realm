@@ -278,41 +278,25 @@ function openCare() {
       "reveal-please",
       "ready"
     );
-
-/* 1. Maleńkie kółko na źrenicy. */
+/* Jedna ciągła animacja od źrenicy do całego obrazu. */
 later(() => {
   careScreen.classList.add("reveal-pupil");
 }, 350);
 
-/* 2. Powolny rozrost aż do całego oka. */
-later(() => {
-  careScreen.classList.add("reveal-eye");
-}, 2200);
-
-/* 3. Kółko rośnie dalej i odsłania dłoń. */
-later(() => {
-  careScreen.classList.add("reveal-hand");
-}, 5700);
-
-/* 4. Dopiero teraz odsłania się cały obraz. */
-later(() => {
-  careScreen.classList.add("reveal-full");
-}, 9300);
-
-/* 5. Tytuł po zakończeniu odsłaniania. */
+/* Tytuł po zakończeniu odsłaniania. */
 later(() => {
   careScreen.classList.add("reveal-title");
-}, 12000);
+}, 12700);
 
-/* 6. „please.” z dodatkową pauzą. */
+/* „please.” pojawia się jeszcze później. */
 later(() => {
   careScreen.classList.add("reveal-please");
-}, 16000);
+}, 16700);
 
 later(() => {
   careScreen.classList.add("ready");
-}, 16300);
-  
+}, 17000);
+    
 growthContinue.addEventListener("click", openCare);
 
 growthBack.addEventListener("click", () => {
