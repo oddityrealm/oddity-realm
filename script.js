@@ -279,43 +279,39 @@ function openCare() {
       "ready"
     );
 
-    /* 1. 0-2 s: pojawia się maleńkie kółko
-       na samym środku źrenicy. */
-    later(() => {
-      careScreen.classList.add("reveal-pupil");
-    }, 350);
+/* 1. Maleńkie kółko na źrenicy. */
+later(() => {
+  careScreen.classList.add("reveal-pupil");
+}, 350);
 
-    /* 2. 2-4 s: kółko rośnie i odsłania całe oko. */
-    later(() => {
-      careScreen.classList.add("reveal-eye");
-    }, 2350);
+/* 2. Powolny rozrost aż do całego oka. */
+later(() => {
+  careScreen.classList.add("reveal-eye");
+}, 2200);
 
-    /* 3. 4-6 s: odsłania się dłoń z okiem. */
-    later(() => {
-      careScreen.classList.add("reveal-hand");
-    }, 4350);
+/* 3. Kółko rośnie dalej i odsłania dłoń. */
+later(() => {
+  careScreen.classList.add("reveal-hand");
+}, 5700);
 
-    /* 4. 6-8 s: koło rozlewa się na cały obraz. */
-    later(() => {
-      careScreen.classList.add("reveal-full");
-    }, 6350);
+/* 4. Dopiero teraz odsłania się cały obraz. */
+later(() => {
+  careScreen.classList.add("reveal-full");
+}, 9300);
 
-    /* 5. Po obrazie pojawia się tytuł. */
-    later(() => {
-      careScreen.classList.add("reveal-title");
-    }, 8350);
+/* 5. Tytuł po zakończeniu odsłaniania. */
+later(() => {
+  careScreen.classList.add("reveal-title");
+}, 12000);
 
-    /* 6. „please.” przychodzi znacznie później. */
-    later(() => {
-      careScreen.classList.add("reveal-please");
-    }, 12350);
+/* 6. „please.” z dodatkową pauzą. */
+later(() => {
+  careScreen.classList.add("reveal-please");
+}, 16000);
 
-    later(() => {
-      careScreen.classList.add("ready");
-    }, 12600);
-  }, 650);
-}
-
+later(() => {
+  careScreen.classList.add("ready");
+}, 16300);
   
 growthContinue.addEventListener("click", openCare);
 
