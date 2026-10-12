@@ -39,12 +39,30 @@ function openGrowth(){
  later(()=>growthScreen.classList.add("title-sprout"),520);
  later(()=>growthScreen.classList.add("title-rise"),2250);
  later(()=>growthScreen.classList.add("art-sprout"),3000);
- later(()=>growthScreen.classList.add("ready"),5000);
+ later(()=>growthScreen.classList.add("ready"),8000);
  later(()=>gardenScreen.classList.remove("open","title-in","title-up","art-in","ready","portal"),1500);
 }
 gardenKeyhole.addEventListener("click",openGrowth);gardenBack.addEventListener("click",backToWayIn);
-function openCare(){if(room!=="growth")return;room="care";growthScreen.classList.add("leaving");later(()=>{growthScreen.classList.remove("open","title-sprout","title-rise","art-sprout","ready","leaving");careScreen.classList.add("open");careScreen.classList.remove("reveal-eye","reveal-hand","reveal-title","reveal-please","ready");later(()=>careScreen.classList.add("reveal-eye"),350);later(()=>careScreen.classList.add("reveal-hand"),2650);later(()=>careScreen.classList.add("reveal-title"),4400);later(()=>careScreen.classList.add("reveal-please"),5700);later(()=>careScreen.classList.add("ready"),5700)},650)}
-growthContinue.addEventListener("click",openCare);
-growthBack.addEventListener("click",()=>{if(room!=="growth")return;clearTimers();room="garden";growthScreen.classList.remove("open","title-sprout","title-rise","art-sprout","ready");gardenScreen.classList.add("open","title-in","title-up","art-in","ready")});
-careBack.addEventListener("click",()=>{if(room!=="care")return;clearTimers();room="growth";careScreen.classList.remove("open","reveal-eye","reveal-hand","reveal-title","reveal-please","ready");growthScreen.classList.add("open","title-sprout","title-rise","art-sprout","ready")});
-})();
+
+function openCare(){
+  if(room!=="growth") return;
+  room="care";
+  growthScreen.classList.add("leaving");
+
+  later(()=>{
+    growthScreen.classList.remove(
+      "open","title-sprout","title-rise","art-sprout","ready","leaving"
+    );
+
+    careScreen.classList.add("open");
+    careScreen.classList.remove(
+      "reveal-eye","reveal-hand","reveal-title","reveal-please","ready"
+    );
+
+    later(()=>careScreen.classList.add("reveal-eye"),350);
+    later(()=>careScreen.classList.add("reveal-hand"),3000);
+    later(()=>careScreen.classList.add("reveal-title"),4700);
+    later(()=>careScreen.classList.add("reveal-please","ready"),6000);
+  },650);
+}
+
