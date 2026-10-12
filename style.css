@@ -232,3 +232,41 @@
   clip-path: circle(100% at 47.2% 57.1%);
   transition-duration: 2.5s;
 }
+/* HANDLE WITH CARE: one continuous reveal */
+
+.care-screen .care-image-wrap {
+  clip-path: circle(0% at 47.2% 55.5%);
+  transition: none !important;
+}
+
+/* Start the entire reveal with one class. */
+.care-screen.reveal-pupil .care-image-wrap {
+  animation: careContinuousReveal 12s
+    cubic-bezier(.42, 0, .22, 1) forwards;
+}
+
+@keyframes careContinuousReveal {
+  /* 0–12%: only the pupil */
+  0% {
+    clip-path: circle(1.8% at 47.2% 55.5%);
+  }
+
+  12% {
+    clip-path: circle(3.2% at 47.2% 55.5%);
+  }
+
+  /* 12–38%: reveal the whole iris and eyeball */
+  38% {
+    clip-path: circle(16% at 47.2% 55.5%);
+  }
+
+  /* 38–72%: reveal the hand */
+  72% {
+    clip-path: circle(39% at 47.2% 55.5%);
+  }
+
+  /* 72–100%: reveal the entire painting */
+  100% {
+    clip-path: circle(150% at 47.2% 55.5%);
+  }
+}
