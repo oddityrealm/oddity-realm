@@ -76,3 +76,55 @@
 .care-screen.reveal-please .care-please{opacity:.9}
 @media(min-width:900px){.growth-continue{top:calc(53% + min(37.4vh,31.625vw) + 8px)}}
 @media(max-width:600px){.corner-symbol{width:46px;height:46px}.growth-continue{top:calc(53% + 49.6vw + 7px);font-size:31px}.care-image-wrap{top:49%;width:88vw;height:88vw}.care-please{top:calc(49% + 44vw + 8px);font-size:16px}}
+
+
+/* HANDLE WITH CARE | eye focus and full-image reveal */
+
+/* Move the first reveal higher, toward the eye. */
+.care-image-wrap {
+  clip-path: circle(0% at 50% 35%);
+  overflow: hidden;
+}
+
+.care-artwork {
+  transform-origin: 50% 35%;
+}
+
+.care-screen.reveal-eye .care-image-wrap {
+  animation: careEyeRevealFixed 1.9s cubic-bezier(.22,.75,.25,1) forwards;
+}
+
+.care-screen.reveal-eye .care-artwork {
+  transform: scale(2.5) translateY(-12%);
+  opacity: 1;
+}
+
+@keyframes careEyeRevealFixed {
+  0% {
+    clip-path: circle(0% at 50% 35%);
+  }
+  100% {
+    clip-path: circle(17% at 50% 35%);
+  }
+}
+
+/* IMPORTANT: stop the circle animation so the whole painting can appear. */
+.care-screen.reveal-hand .care-image-wrap {
+  animation: none !important;
+  clip-path: inset(0 0 0 0) !important;
+  transition: clip-path 1.7s cubic-bezier(.22,.75,.25,1);
+}
+
+.care-screen.reveal-hand .care-artwork {
+  transform: scale(1) translateY(0);
+  opacity: 1;
+  transition: transform 1.7s cubic-bezier(.22,.75,.25,1);
+}
+
+/* Responsive sizing */
+@media (max-width: 600px) {
+  .care-image-wrap {
+    width: 88vw;
+    height: 88vw;
+  }
+}
