@@ -76,3 +76,57 @@
 .care-screen.reveal-please .care-please{opacity:.9}
 @media(min-width:900px){.growth-continue{top:calc(53% + min(37.4vh,31.625vw) + 8px)}}
 @media(max-width:600px){.corner-symbol{width:46px;height:46px}.growth-continue{top:calc(53% + 49.6vw + 7px);font-size:31px}.care-image-wrap{top:49%;width:88vw;height:88vw}.care-please{top:calc(49% + 44vw + 8px);font-size:16px}}
+
+/* ODDITY REALM: final transition fixes */
+
+/* The entire Garden collapses into the keyhole */
+.garden-screen.portal {
+  transform-origin: 50% 51%;
+  animation: gardenIntoKeyhole 1.45s cubic-bezier(.42, 0, .18, 1) forwards;
+  pointer-events: none;
+}
+
+@keyframes gardenIntoKeyhole {
+  0% {
+    transform: scale(1) rotate(0deg);
+    opacity: 1;
+  }
+  35% {
+    transform: scale(.88) rotate(8deg);
+    opacity: 1;
+  }
+  70% {
+    transform: scale(.35) rotate(95deg);
+    opacity: .8;
+  }
+  100% {
+    transform: scale(.015) rotate(180deg);
+    opacity: 0;
+  }
+}
+
+/* Let the eye reveal finish before showing the entire painting */
+.care-screen.reveal-hand .care-image-wrap {
+  animation: none !important;
+  clip-path: inset(0 0 0 0 round 0) !important;
+  transition: clip-path 1.8s cubic-bezier(.22, .75, .25, 1);
+}
+
+.care-screen.reveal-hand .care-artwork {
+  opacity: 1;
+  transform: scale(1) translateY(0);
+  transition:
+    transform 1.8s cubic-bezier(.22, .75, .25, 1),
+    opacity .8s ease;
+}
+
+/* Keep the next-room arrow hidden until the delayed reveal */
+.growth-continue {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.growth-screen.ready .growth-continue {
+  opacity: .9;
+  pointer-events: auto;
+}
