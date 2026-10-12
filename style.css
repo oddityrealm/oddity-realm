@@ -128,3 +128,77 @@
     height: 88vw;
   }
 }
+/* =========================================
+   ODDITY REALM
+   HANDLE WITH CARE: THE EYE OPENS FIRST
+   ========================================= */
+
+/* Zachowujemy proporcje oryginalnego obrazu. */
+.care-screen .care-image-wrap {
+  position: relative;
+  width: min(88vw, 560px);
+  height: auto;
+  aspect-ratio: 1088 / 1365;
+  overflow: hidden;
+  clip-path: circle(0% at 47.2% 57.1%);
+  animation: none;
+  transition: clip-path 1.8s cubic-bezier(.22, .72, .25, 1);
+}
+
+/* Obraz nie może być powiększony ani przesunięty
+   podczas kolejnych etapów odsłaniania. */
+.care-screen .care-artwork {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  transform: none;
+  opacity: 1;
+  transform-origin: 47.2% 57.1%;
+  transition: none;
+}
+
+/* ETAP 1: maleńki otwór na samej źrenicy. */
+.care-screen.reveal-pupil .care-image-wrap {
+  clip-path: circle(3.5% at 47.2% 57.1%);
+}
+
+/* ETAP 2: powiększenie dookoła całego oka. */
+.care-screen.reveal-eye .care-image-wrap {
+  clip-path: circle(13.5% at 47.2% 57.1%);
+}
+
+/* ETAP 3: odsłania się dłoń z okiem. */
+.care-screen.reveal-hand .care-image-wrap {
+  clip-path: circle(36% at 47.2% 57.1%);
+}
+
+/* ETAP 4: koło rozszerza się aż do krawędzi obrazu. */
+.care-screen.reveal-full .care-image-wrap {
+  clip-path: inset(0 0 0 0);
+}
+
+/* Tekst pojawia się dopiero po odsłonięciu obrazu. */
+.care-screen .care-title,
+.care-screen .care-please {
+  opacity: 0;
+}
+
+.care-screen.reveal-title .care-title {
+  opacity: 1;
+}
+
+.care-screen.reveal-please .care-please {
+  opacity: 1;
+}
+
+.care-screen .care-title,
+.care-screen .care-please {
+  transition: opacity 1.2s ease;
+}
+
+@media (max-width: 600px) {
+  .care-screen .care-image-wrap {
+    width: 88vw;
+  }
+}
