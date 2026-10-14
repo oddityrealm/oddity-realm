@@ -306,4 +306,75 @@
       "open", "title-sprout", "title-rise", "art-sprout", "ready"
     );
   });
+  
+/* THE WRONG ROOM + THE UNIVERSE IS SOUP */
+const wrongRoom = $("wrongRoom");
+const wrongNext = $("wrongNext");
+const wrongBackToSoup = $("soupBack");
+const soupRoom = $("soupRoom");
+
+let wrongTimers = [];
+
+function wrongLater(fn, ms) {
+  const timer = setTimeout(fn, ms);
+  wrongTimers.push(timer);
+  return timer;
+}
+
+function clearWrongTimers() {
+  wrongTimers.forEach(clearTimeout);
+  wrongTimers = [];
+}
+
+function openWrongRoom() {
+  if (room !== "care") return;
+
+  clearWrongTimers();
+  room = "wrong-room";
+
+  careScreen.classList.remove("open");
+  wrongRoom.classList.add("active");
+  wrongRoom.classList.remove(
+    "intro-start",
+    "whisper-start",
+    "whisper-complete",
+    "intro-out",
+    "uncomfortable-start",
+    "uncomfortable-out",
+    "title-start",
+    "artwork-start",
+    "next-ready"
+  );
+
+  wrongLater(() => wrongRoom.classList.add("intro-start"), 150);
+  wrongLater(() => wrongRoom.classList.add("whisper-start"), 2100);
+  wrongLater(() => wrongRoom.classList.add("whisper-complete"), 3000);
+  wrongLater(() => wrongRoom.classList.add("intro-out"), 5900);
+  wrongLater(() => wrongRoom.classList.add("uncomfortable-start"), 6900);
+  wrongLater(() => wrongRoom.classList.add("uncomfortable-out"), 10300);
+  wrongLater(() => wrongRoom.classList.add("title-start"), 11900);
+  wrongLater(() => wrongRoom.classList.add("artwork-start"), 13700);
+  wrongLater(() => wrongRoom.classList.add("next-ready"), 17200);
+}
+
+function openSoupRoom() {
+  if (room !== "wrong-room") return;
+
+  clearWrongTimers();
+  room = "soup";
+
+  wrongRoom.classList.remove("active");
+  soupRoom.classList.add("active");
+}
+
+wrongNext.addEventListener("click", openSoupRoom);
+
+wrongBackToSoup.addEventListener("click", () => {
+  if (room !== "soup") return;
+
+  soupRoom.classList.remove("active");
+  wrongRoom.classList.add("active");
+  room = "wrong-room";
+});
+
 })();
