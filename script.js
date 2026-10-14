@@ -301,7 +301,7 @@
       "open", "reveal-pupil", "reveal-eye", "reveal-hand",
       "reveal-full", "reveal-title", "reveal-please", "ready"
     );
-
+later(openWrongRoom, 18000);
     growthScreen.classList.add(
       "open", "title-sprout", "title-rise", "art-sprout", "ready"
     );
