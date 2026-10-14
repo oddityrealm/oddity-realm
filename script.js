@@ -1,4 +1,5 @@
-/* ODDITY REALM | fixed interactions + continuous eye reveal */
+
+/* ODDITY REALM | interactions + continuous eye reveal + new rooms */
 (() => {
   "use strict";
 
@@ -32,10 +33,16 @@
   const careScreen = $("careScreen");
   const careBack = $("careBack");
 
+  const wrongRoom = $("wrongRoom");
+  const wrongNext = $("wrongNext");
+  const soupBack = $("soupBack");
+  const soupRoom = $("soupRoom");
+
   let room = "landing";
   let timers = [];
   let lookTimer = null;
   let hideLookTimer = null;
+  let wrongTimers = [];
 
   function later(fn, ms) {
     const t = setTimeout(fn, ms);
@@ -48,6 +55,17 @@
     timers = [];
     clearTimeout(lookTimer);
     clearTimeout(hideLookTimer);
+  }
+
+  function wrongLater(fn, ms) {
+    const t = setTimeout(fn, ms);
+    wrongTimers.push(t);
+    return t;
+  }
+
+  function clearWrongTimers() {
+    wrongTimers.forEach(clearTimeout);
+    wrongTimers = [];
   }
 
   function showContactLink() {
@@ -129,6 +147,7 @@
 
   function backToWayIn() {
     clearTimers();
+    clearWrongTimers();
     room = "way-in";
 
     contactScreen.classList.remove("open");
@@ -146,6 +165,14 @@
       "open", "reveal-pupil", "reveal-eye", "reveal-hand",
       "reveal-full", "reveal-title", "reveal-please", "ready"
     );
+
+    wrongRoom.classList.remove(
+      "active", "intro-start", "whisper-start", "whisper-complete",
+      "intro-out", "uncomfortable-start", "uncomfortable-out",
+      "title-start", "artwork-start", "next-ready"
+    );
+
+    soupRoom.classList.remove("active");
 
     landing.classList.add("leaving");
     artworkScreen.classList.add("revealed", "settled");
@@ -196,6 +223,7 @@
   function openGarden() {
     if (room !== "way-in") return;
 
+    clearTimers();
     room = "garden";
     hideContactLink();
 
@@ -244,6 +272,7 @@
   function openCare() {
     if (room !== "growth") return;
 
+    clearTimers();
     room = "care";
     growthScreen.classList.add("leaving");
 
@@ -260,20 +289,16 @@
         "reveal-full", "reveal-title", "reveal-please", "ready"
       );
 
-      /* Start the continuous reveal at the pupil. */
       later(() => careScreen.classList.add("reveal-pupil"), 350);
-
-      /* Title after the 12-second reveal. */
       later(() => careScreen.classList.add("reveal-title"), 12700);
-
-      /* Final whisper. */
       later(() => careScreen.classList.add("reveal-please"), 16700);
-
       later(() => careScreen.classList.add("ready"), 17000);
+
+      /* Continue to The Wrong Room after the Care sequence. */
+      later(openWrongRoom, 18000);
     }, 650);
   }
 
-  /* IMPORTANT: listeners stay outside openCare(). */
   growthContinue.addEventListener("click", openCare);
 
   growthBack.addEventListener("click", () => {
@@ -301,80 +326,56 @@
       "open", "reveal-pupil", "reveal-eye", "reveal-hand",
       "reveal-full", "reveal-title", "reveal-please", "ready"
     );
-later(openWrongRoom, 18000);
+
     growthScreen.classList.add(
       "open", "title-sprout", "title-rise", "art-sprout", "ready"
     );
   });
-  
-/* THE WRONG ROOM + THE UNIVERSE IS SOUP */
-const wrongRoom = $("wrongRoom");
-const wrongNext = $("wrongNext");
-const wrongBackToSoup = $("soupBack");
-const soupRoom = $("soupRoom");
 
-let wrongTimers = [];
+  function openWrongRoom() {
+    if (room !== "care") return;
 
-function wrongLater(fn, ms) {
-  const timer = setTimeout(fn, ms);
-  wrongTimers.push(timer);
-  return timer;
-}
+    clearTimers();
+    clearWrongTimers();
+    room = "wrong-room";
 
-function clearWrongTimers() {
-  wrongTimers.forEach(clearTimeout);
-  wrongTimers = [];
-}
+    careScreen.classList.remove("open");
 
-function openWrongRoom() {
-  if (room !== "care") return;
+    wrongRoom.classList.add("active");
+    wrongRoom.classList.remove(
+      "intro-start", "whisper-start", "whisper-complete",
+      "intro-out", "uncomfortable-start", "uncomfortable-out",
+      "title-start", "artwork-start", "next-ready"
+    );
 
-  clearWrongTimers();
-  room = "wrong-room";
+    wrongLater(() => wrongRoom.classList.add("intro-start"), 150);
+    wrongLater(() => wrongRoom.classList.add("whisper-start"), 2100);
+    wrongLater(() => wrongRoom.classList.add("whisper-complete"), 3000);
+    wrongLater(() => wrongRoom.classList.add("intro-out"), 5900);
+    wrongLater(() => wrongRoom.classList.add("uncomfortable-start"), 6900);
+    wrongLater(() => wrongRoom.classList.add("uncomfortable-out"), 10300);
+    wrongLater(() => wrongRoom.classList.add("title-start"), 11900);
+    wrongLater(() => wrongRoom.classList.add("artwork-start"), 13700);
+    wrongLater(() => wrongRoom.classList.add("next-ready"), 17200);
+  }
 
-  careScreen.classList.remove("open");
-  wrongRoom.classList.add("active");
-  wrongRoom.classList.remove(
-    "intro-start",
-    "whisper-start",
-    "whisper-complete",
-    "intro-out",
-    "uncomfortable-start",
-    "uncomfortable-out",
-    "title-start",
-    "artwork-start",
-    "next-ready"
-  );
+  function openSoupRoom() {
+    if (room !== "wrong-room") return;
 
-  wrongLater(() => wrongRoom.classList.add("intro-start"), 150);
-  wrongLater(() => wrongRoom.classList.add("whisper-start"), 2100);
-  wrongLater(() => wrongRoom.classList.add("whisper-complete"), 3000);
-  wrongLater(() => wrongRoom.classList.add("intro-out"), 5900);
-  wrongLater(() => wrongRoom.classList.add("uncomfortable-start"), 6900);
-  wrongLater(() => wrongRoom.classList.add("uncomfortable-out"), 10300);
-  wrongLater(() => wrongRoom.classList.add("title-start"), 11900);
-  wrongLater(() => wrongRoom.classList.add("artwork-start"), 13700);
-  wrongLater(() => wrongRoom.classList.add("next-ready"), 17200);
-}
+    clearWrongTimers();
+    room = "soup";
 
-function openSoupRoom() {
-  if (room !== "wrong-room") return;
+    wrongRoom.classList.remove("active");
+    soupRoom.classList.add("active");
+  }
 
-  clearWrongTimers();
-  room = "soup";
+  wrongNext.addEventListener("click", openSoupRoom);
 
-  wrongRoom.classList.remove("active");
-  soupRoom.classList.add("active");
-}
+  soupBack.addEventListener("click", () => {
+    if (room !== "soup") return;
 
-wrongNext.addEventListener("click", openSoupRoom);
-
-wrongBackToSoup.addEventListener("click", () => {
-  if (room !== "soup") return;
-
-  soupRoom.classList.remove("active");
-  wrongRoom.classList.add("active");
-  room = "wrong-room";
-});
-
+    soupRoom.classList.remove("active");
+    wrongRoom.classList.add("active");
+    room = "wrong-room";
+  });
 })();
